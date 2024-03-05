@@ -1,15 +1,12 @@
 "use client";
 
-import Link from "next/link";
-import styles from "./page.module.scss";
-import { get, getDatabase, ref } from "firebase/database";
 import { useEffect, useState } from "react";
 import { db } from "./firebase/firebase";
-
-import { useCollection, useCollectionData } from "react-firebase-hooks/firestore";
 import { collection, getDocs } from "firebase/firestore";
 import { Card, CardContent } from "@/components/shadcn-ui/card";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { getProductImages } from "./utils/getProductImages";
 
 async function getProducts() {
   const productsRef = collection(db, "items");
@@ -25,38 +22,77 @@ async function getProducts() {
 
 export default function ProductsView() {
   const [products, setProducts] = useState<any[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const router = useRouter();
 
   useEffect(() => {
     const fetchProducts = async () => {
       const productIds = await getProducts();
-      console.log("🚀 ~ fetchProducts ~ productIds:", productIds);
-      setProducts(productIds);
+      const productPromises = productIds.map(async (productId) => {
+        const images = await getProductImages(productId.id);
+        return { ...productId, images };
+      });
+
+      try {
+        const productsWithImages = await Promise.all(productPromises);
+        setProducts(productsWithImages);
+        setIsLoading(false);
+      } catch (error) {
+        console.error("Error fetching product images:", error);
+        setIsLoading(false);
+      }
     };
 
     fetchProducts();
   }, []);
 
-  console.log("🚀 ~ products", products);
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  function Images({ images }: { images: { url: string }[] }) {
+    return (
+      <>
+        {images?.map((image, index) => (
+          <div className="p-1">
+            <Card>
+              <CardContent className="flex aspect-square items-center justify-center p-6">
+                <Image
+                  style={{ objectFit: "contain" }}
+                  key={index}
+                  src={image.url}
+                  alt={`Product Image ${index + 1}`}
+                  width={500}
+                  height={500}
+                />
+              </CardContent>
+            </Card>
+          </div>
+        ))}
+      </>
+    );
+  }
+
+  const handleClick = (id: string) => () => {
+    router.push(`/details/${id}`);
+  };
 
   return (
     <main>
       <h1>Products</h1>
-      {products.map((product, index) => (
-        <Card>
-          <CardContent className="flex aspect-square items-center justify-center p-6">
-            {/* <Image
-              style={{ objectFit: "contain" }}
-              key={index}
-              src={product.}
-              alt={`Product Image ${index + 1}`}
-              width={500}
-              height={500}
-            /> */}
+      {products?.map(({ id, name, width, length, price, images }) => (
+        <Card key={id} onClick={handleClick(id)}>
+          <CardContent className="flex items-center justify-center p-2">
+            <div>
+              <h2>{name}</h2>
+              <p>{width}</p>
+              <p>{length}</p>
+              <p>{price}</p>
+            </div>
+            <Images images={images} />
           </CardContent>
         </Card>
-        // <div key={product.id}>
-        //   <p>{product.name}</p>
-        // </div>
       ))}
     </main>
   );
