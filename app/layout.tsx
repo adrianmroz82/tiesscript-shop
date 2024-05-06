@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Header } from "@/components/header";
 import { Toaster } from "@/components/shadcn-ui/toaster";
 import { ReactNode } from "react";
+import { Button } from "@mui/material";
 
 const inter = Inter({ subsets: ["latin"] });
 

@@ -4,16 +4,14 @@ import { ChangeEvent, useState } from "react";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../firebase/firebase";
 
-import { Input } from "@/components/shadcn-ui/input";
-import { Card, CardContent, CardFooter } from "@/components/shadcn-ui/card";
-import { Label } from "@/components/shadcn-ui/label";
-import { Button } from "@/components/shadcn-ui/button";
+// import { Card, CardContent, CardFooter } from "@/components/shadcn-ui/card";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
-import { useToast } from "@/components/shadcn-ui/use-toast";
+// import { useToast } from "@/components/shadcn-ui/use-toast";
 import { Product } from "../models/product.model";
+import { Button, InputLabel, TextField } from "@mui/material";
 
 export default function ProductForm() {
-  const { toast } = useToast();
+  // const { toast } = useToast();
 
   const [imagesUpload, setImageUpload] = useState<FileList | null>(null);
   const [formData, setFormData] = useState<Product>({
@@ -71,12 +69,18 @@ export default function ProductForm() {
           <form className="flex flex-col items-center">
             <div className="grid w-full items-center gap-4">
               <div className="flex flex-col space-y-1.5">
-                <Label htmlFor="name">Name</Label>
-                <Input type="text" name="name" placeholder="Name" value={formData.name} onChange={handleInputChange} />
+                <InputLabel htmlFor="name">Name</InputLabel>
+                <TextField
+                  type="text"
+                  name="name"
+                  placeholder="Name"
+                  value={formData.name}
+                  onChange={handleInputChange}
+                />
               </div>
               <div className="flex flex-col space-y-1.5">
-                <Label htmlFor="length">Length</Label>
-                <Input
+                <InputLabel htmlFor="length">Length</InputLabel>
+                <TextField
                   type="text"
                   name="length"
                   placeholder="Length"
@@ -85,8 +89,8 @@ export default function ProductForm() {
                 />
               </div>
               <div className="flex flex-col space-y-1.5">
-                <Label htmlFor="width">Width</Label>
-                <Input
+                <InputLabel htmlFor="width">Width</InputLabel>
+                <TextField
                   type="text"
                   name="width"
                   placeholder="Width"
@@ -95,8 +99,8 @@ export default function ProductForm() {
                 />
               </div>
               <div className="flex flex-col space-y-1.5">
-                <Label htmlFor="price">Price</Label>
-                <Input
+                <InputLabel htmlFor="price">Price</InputLabel>
+                <TextField
                   type="text"
                   name="price"
                   placeholder="Price"
@@ -105,12 +109,19 @@ export default function ProductForm() {
                 />
               </div>
               <div className="space-y-1.5 ">
-                <Label htmlFor="image">Image</Label>
-                <Input id="image" type="file" name="image" multiple onChange={(e) => setImageUpload(e.target.files)} />
+                <InputLabel htmlFor="image">Image</InputLabel>
+                <TextField
+                  id="image"
+                  type="file"
+                  name="image"
+                  // todo add multiple attribute to allow multiple file upload
+                  // multiple
+                  // onChange={(e) => setImageUpload(e.target.files)}
+                />
               </div>
               <CardFooter className="flex gap-4 px-0 py-4">
                 <Button onClick={handleAddDoc}>Add item</Button>
-                <Button variant="secondary">Save as draft</Button>
+                <Button variant="outlined">Save as draft</Button>
               </CardFooter>
             </div>
           </form>
