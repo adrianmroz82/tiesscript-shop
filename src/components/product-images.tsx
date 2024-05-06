@@ -14,7 +14,7 @@ export function ProductImages({ productId }: Props) {
   return (
     <Carousel className="w-full max-w-xl">
       <CarouselContent>
-        {productImages?.map((image, index) => (
+        {productImages?.map(({ url }, index) => (
           <CarouselItem key={index}>
             <div className="p-1">
               <Card>
@@ -22,7 +22,7 @@ export function ProductImages({ productId }: Props) {
                   <Image
                     style={{ objectFit: "contain" }}
                     key={index}
-                    src={image.url}
+                    src={url}
                     alt={`Product Image ${index + 1}`}
                     width={500}
                     height={500}

@@ -5,13 +5,11 @@ import { ThemeSwitcher } from "./theme-switcher";
 
 export function Header() {
   return (
-    <header className={`bg-dark-500 p-6 shadow-lg rounded-lg`}>
+    <header className="bg-dark-500 p-6 shadow-lg rounded-lg">
       <nav className="flex items-center justify-between ">
-        <div className="">
-          <Link className="font-bold text-m" href="/">
-            Logo
-          </Link>
-        </div>
+        <Link className="font-bold text-m" href="/">
+          Logo
+        </Link>
         <div className="flex space-x-12 text-l font-bold justify-between">
           <Link className="hover:underline" href="/">
             Home
@@ -23,9 +21,7 @@ export function Header() {
             Contact
           </Link>
         </div>
-        <div>
-          <ThemeSwitcher />
-        </div>
+        <ThemeSwitcher />
       </nav>
     </header>
   );
