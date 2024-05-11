@@ -1,17 +1,18 @@
+"use client";
+
 import { ReactNode } from "react";
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 
 import { ThemeProvider } from "@/components/theme-provider";
 import { Header } from "@/components/header";
 import { Toaster } from "@/components/shadcn-ui/toaster";
+import { AuthProvider } from "./context/auth-provider";
 
 import "./globals.css";
 
-export const metadata: Metadata = {
-  title: "Tiesscript",
-  description: "Vintage ties shop",
-};
+// export const metadata: Metadata = {
+//   title: "Tiesscript",
+//   description: "Vintage ties shop",
+// };
 
 export default function RootLayout({
   children,
@@ -23,9 +24,11 @@ export default function RootLayout({
       <head />
       <body>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-          <Header />
-          {children}
-          <Toaster />
+          <AuthProvider>
+            <Header />
+            {children}
+            <Toaster />
+          </AuthProvider>
         </ThemeProvider>
       </body>
     </html>

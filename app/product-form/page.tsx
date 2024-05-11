@@ -46,7 +46,8 @@ export default function ProductForm() {
     }
   }
 
-  async function handleAddDoc(e) {
+  async function handleAddDoc(e: any) { // TODO adjust type
+    
     try {
       e.preventDefault();
       const docRef = await addDoc(collection(db, "items"), formData);
