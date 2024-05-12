@@ -1,6 +1,6 @@
 "use client";
 
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useRef, useState } from "react";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../firebase/firebase";
 
@@ -8,9 +8,10 @@ import { Input } from "@/components/shadcn-ui/input";
 import { Card, CardContent, CardFooter } from "@/components/shadcn-ui/card";
 import { Label } from "@/components/shadcn-ui/label";
 import { Button } from "@/components/shadcn-ui/button";
-import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
+import { getDownloadURL, getStorage, ref, uploadBytes, uploadBytesResumable } from "firebase/storage";
 import { useToast } from "@/components/shadcn-ui/use-toast";
 import { Product } from "../models/product.model";
+import Image from "next/image";
 
 export default function ProductForm() {
   const { toast } = useToast();
@@ -46,8 +47,9 @@ export default function ProductForm() {
     }
   }
 
-  async function handleAddDoc(e: any) { // TODO adjust type
-    
+  async function handleAddDoc(e: any) {
+    // TODO adjust type
+
     try {
       e.preventDefault();
       const docRef = await addDoc(collection(db, "items"), formData);
@@ -67,7 +69,7 @@ export default function ProductForm() {
 
   return (
     <main className="flex items-center justify-center h-screen">
-      <Card className="w-[32rem] pt-8 px-2">
+      <Card className="w-[64rem] pt-8 px-2">
         <CardContent>
           <form className="flex flex-col items-center">
             <div className="grid w-full items-center gap-4">
@@ -108,10 +110,18 @@ export default function ProductForm() {
               <div className="space-y-1.5 ">
                 <Label htmlFor="image">Image</Label>
                 <Input id="image" type="file" name="image" multiple onChange={(e) => setImageUpload(e.target.files)} />
+                {formData.images.length > 0 &&
+                  formData.images?.map((image) => (
+                    <Image width={128} height={500} key={image} src={image} alt="product" />
+                  ))}
               </div>
               <CardFooter className="flex gap-4 px-0 py-4">
-                <Button onClick={handleAddDoc}>Add item</Button>
-                <Button variant="secondary">Save as draft</Button>
+                <Button className="w-full" onClick={handleAddDoc}>
+                  Add item
+                </Button>
+                <Button className="w-full" size="lg" variant="secondary">
+                  Save as draft
+                </Button>
               </CardFooter>
             </div>
           </form>
