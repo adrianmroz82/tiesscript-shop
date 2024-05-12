@@ -1,16 +1,24 @@
 import Image from "next/image";
-import { Card, CardContent } from "./shadcn-ui/card";
 
-export function ProductThumbnail({ productImage }: { productImage: any }) {
-  console.log(productImage);
+interface Props {
+  productImage: { url: string };
+  api: any | undefined;
+  currentIndex: number | undefined;
+  index: number;
+}
 
-  const IMG_SRC = "/no-image-placeholder.svg";
-
+export function ProductThumbnail({ productImage, api, currentIndex, index }: Props) {
   return (
-    <Card className="w-32 flex">
-      <CardContent>
-        <Image style={{ objectFit: "contain" }} src={productImage.url} alt="Product Image" width={500} height={500} />
-      </CardContent>
-    </Card>
+    <div className="w-32 flex p-2">
+      <Image
+        src={productImage.url}
+        alt="Product Image Thumbnail"
+        style={{ objectFit: "contain" }}
+        width={500}
+        height={500}
+        onClick={() => api && api.scrollTo(index)}
+        className={`${index + 1 === currentIndex && "border-2 border-blue-500"}`}
+      />
+    </div>
   );
 }
