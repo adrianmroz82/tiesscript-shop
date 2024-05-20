@@ -2,11 +2,7 @@ import { useEffect, useState } from "react";
 import { getProduct } from "../utils/getProduct";
 import { Product } from "../models/product.model";
 
-interface Props {
-  productId: string;
-}
-
-export function useFetchProduct({ productId }: Props) {
+export function useFetchProduct(productId: string) {
   // TODO check loadign state
   const [isLoading, setIsLoading] = useState(true);
   const [product, setProduct] = useState<Product>({

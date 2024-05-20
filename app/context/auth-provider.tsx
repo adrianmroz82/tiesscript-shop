@@ -1,4 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+// https://colinhacks.com/essays/nextjs-firebase-authentication adjust auth
+// TODO: revisit this
 
 import { User, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { createContext, ReactNode, useContext, useEffect, useMemo, useState } from "react";

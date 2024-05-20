@@ -10,12 +10,13 @@ import {
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { ProductThumbnail } from "./thumbnail";
+import { AspectRatio } from "./shadcn-ui/aspect-ratio";
 
 interface Props {
   productImages: { url: string }[]; // TODO: extract here and in Thumbnail
 }
 
-export function ProductImages({ productImages }: Props) {
+export function ProductImagesCarousel({ productImages }: Props) {
   const [api, setApi] = useState<CarouselApi>();
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -35,11 +36,8 @@ export function ProductImages({ productImages }: Props) {
   return (
     <>
       <div className="flex p-5 flex-col">
-        {productImages?.map(
-          (
-            productImage,
-            index // TODO: extract to ProductThumbnails
-          ) => (
+        {productImages?.map((productImage, index) => (
+          <div key={index} className="h-[150px] w-auto ">
             <ProductThumbnail
               key={index}
               productImage={productImage}
@@ -47,8 +45,8 @@ export function ProductImages({ productImages }: Props) {
               currentIndex={currentIndex}
               index={index}
             />
-          )
-        )}
+          </div>
+        ))}
       </div>
 
       <Carousel className="w-full max-w-xl" setApi={setApi}>

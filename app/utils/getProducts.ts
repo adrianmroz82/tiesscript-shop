@@ -9,7 +9,6 @@ export async function getProducts() {
   // const products = productsSnapshot.docs.map((doc) => ({
   // const q = query(collection(db, "items"), orderBy("date", "desc"));
 
-
   const products = productsSnapshot.docs.map((doc) => ({
     ...doc.data(),
     id: doc.id,
