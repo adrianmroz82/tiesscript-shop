@@ -12,7 +12,8 @@ export function Images({ images }: Props) {
         <Card className="p-2" key={url}>
           <CardContent className="flex aspect-square items-center justify-center p-6">
             <Image
-              style={{ objectFit: "contain" }}
+              className="object-contain cursor-pointer"
+              // style={{ objectFit: "contain" }}
               key={index}
               src={url}
               alt={`Product Image ${index + 1}`}

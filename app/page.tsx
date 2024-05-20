@@ -1,14 +1,23 @@
 "use client";
 
+import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 
-import { Card, CardContent } from "@/components/shadcn-ui/card";
 import { useFetchProducts } from "./hooks/useFetchProducts";
 import { ImageCard } from "@/components/image";
 import { ImagePlaceholder } from "@/components/image-placeholder";
+import { getPaginatedProducts } from "./utils/getPaginatedProducts";
 
 export default function ProductsView() {
   const { products, isLoading } = useFetchProducts();
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      const products = await getPaginatedProducts();
+      console.log(products);
+    };
+    fetchProducts();
+  }, []);
 
   const router = useRouter();
 

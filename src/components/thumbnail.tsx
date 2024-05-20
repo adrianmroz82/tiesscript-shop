@@ -17,7 +17,7 @@ export function ProductThumbnail({ productImage, api, currentIndex, index }: Pro
         width={500}
         height={500}
         onClick={() => api && api.scrollTo(index)}
-        className={`${index + 1 === currentIndex && "border-2 border-blue-500"}`}
+        className={`${index + 1 === currentIndex && "border-2 border-slate-500"}`}
       />
     </div>
   );

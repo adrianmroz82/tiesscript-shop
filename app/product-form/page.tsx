@@ -31,6 +31,14 @@ export default function ProductForm() {
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
+  const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      setImageUpload(e.target.files);
+      const imageUrls = Array.from(e.target.files).map((file) => URL.createObjectURL(file));
+      setFormData((prevData) => ({ ...prevData, images: imageUrls }));
+    }
+  };
+
   async function uploadImages(productId: string) {
     if (imagesUpload) {
       const storage = getStorage();
@@ -38,7 +46,8 @@ export default function ProductForm() {
       const imageUrls = await Promise.all(
         Array.from(imagesUpload).map(async (file) => {
           const storageRef = ref(storage, `products/${productId}/${file.name}`);
-          await uploadBytes(storageRef, file);
+          console.log("gowno", productId);
+          await uploadBytes(storageRef, file, { customMetadata: { order: "0" } });
           return getDownloadURL(storageRef);
         })
       );
@@ -109,7 +118,7 @@ export default function ProductForm() {
               </div>
               <div className="space-y-1.5 ">
                 <Label htmlFor="image">Image</Label>
-                <Input id="image" type="file" name="image" multiple onChange={(e) => setImageUpload(e.target.files)} />
+                <Input id="image" type="file" name="image" multiple onChange={handleImageChange} />
                 {formData.images.length > 0 &&
                   formData.images?.map((image) => (
                     <Image width={128} height={500} key={image} src={image} alt="product" />
