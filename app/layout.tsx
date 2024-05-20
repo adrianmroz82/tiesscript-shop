@@ -1,17 +1,17 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import "./globals.css";
+"use client";
+
+import { ReactNode } from "react";
+import localFont from "next/font/local";
+
 import { ThemeProvider } from "@/components/theme-provider";
 import { Header } from "@/components/header";
 import { Toaster } from "@/components/shadcn-ui/toaster";
-import { ReactNode } from "react";
+import { AuthProvider } from "./context/auth-provider";
+import { Sidebar } from "@/components/sidebar";
 
-const inter = Inter({ subsets: ["latin"] });
+import "./globals.css";
 
-export const metadata: Metadata = {
-  title: "Tiesscript",
-  description: "Vintage ties shop",
-};
+const satoshiFont = localFont({ src: "../public/fonts/satoshi-light.otf" });
 
 export default function RootLayout({
   children,
@@ -19,14 +19,20 @@ export default function RootLayout({
   children: ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning className={`${satoshiFont.className}`}>
       <head />
-      <body>
+      <body className="flex">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-          <Header />
-          {children}
-          {/* <Footer /> */}
-          <Toaster />
+          <AuthProvider>
+            <div className="flex flex-col w-full h-full">
+              <Header />
+              <div className="flex flex-row w-full h-full">
+                <Sidebar />
+                <main className="w-full h-full">{children}</main>
+              </div>
+            </div>
+            <Toaster />
+          </AuthProvider>
         </ThemeProvider>
       </body>
     </html>
