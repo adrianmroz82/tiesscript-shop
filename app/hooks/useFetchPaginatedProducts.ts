@@ -3,7 +3,7 @@ import { getProductImages } from "../utils/getProductImages";
 import { getPaginatedProducts } from "../utils/getPaginatedProducts";
 import { DocumentData, QueryDocumentSnapshot } from "firebase/firestore";
 
-export function useFetchPaginatedProducts(currentPage: number) {
+export function useFetchPaginatedProducts(currentPage: number, category: string) {
   const [products, setProducts] = useState<any[]>([]); // TODO adjust type
   const [isLoading, setIsLoading] = useState(true);
   const [lastVisibleDocs, setLastVisibleDocs] = useState<QueryDocumentSnapshot<DocumentData, DocumentData>[]>([]); // To track lastVisible for each page
@@ -16,7 +16,12 @@ export function useFetchPaginatedProducts(currentPage: number) {
         // Get the last visible document for the current page
         const lastVisible = currentPage > 1 ? lastVisibleDocs[currentPage - 2] : null;
 
-        const { products, lastVisible: newLastVisible } = await getPaginatedProducts(currentPage, lastVisible);
+        const { products, lastVisible: newLastVisible } = await getPaginatedProducts(
+          currentPage,
+          lastVisible,
+          category
+        );
+
         const productPromises = products.map(async (product) => {
           const images = await getProductImages(product.id);
           return { ...product, images };
@@ -38,7 +43,7 @@ export function useFetchPaginatedProducts(currentPage: number) {
     };
 
     fetchProducts();
-  }, [currentPage, lastVisibleDocs]);
+  }, [category, currentPage, lastVisibleDocs]);
 
   return { products, isLoading };
 }

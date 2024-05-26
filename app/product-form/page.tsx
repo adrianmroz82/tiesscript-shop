@@ -52,7 +52,6 @@ export default function ProductForm() {
       const imageUrls = await Promise.all(
         Array.from(imagesUpload).map(async (file) => {
           const storageRef = ref(storage, `products/${productId}/${file.name}`);
-          console.log("gowno", productId);
           await uploadBytes(storageRef, file, { customMetadata: { order: "0" } });
           return getDownloadURL(storageRef);
         })
