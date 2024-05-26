@@ -1,3 +1,5 @@
+export type Category = "ties" | "blazers";
+
 export interface Product {
   id: string;
   name: string;
@@ -5,6 +7,7 @@ export interface Product {
   length: number;
   width: number;
   images: string[];
+  category: Category;
 
   // TODO fields that need to be added
   // description: string;
@@ -18,14 +21,13 @@ export interface Product {
 
   // isDiscounted: boolean;
 
-  
   // sku: string;
   // brand: string;
   // color: string;
   // material: string;
   // tags: string[];
   // pattern: string;
-  
+
   // similarProducts: string[];
   // reviews: string[];
 

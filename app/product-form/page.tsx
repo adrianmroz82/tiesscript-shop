@@ -1,17 +1,18 @@
 "use client";
 
-import { ChangeEvent, useRef, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "../firebase/firebase";
+import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
+import Image from "next/image";
 
 import { Input } from "@/components/shadcn-ui/input";
 import { Card, CardContent, CardFooter } from "@/components/shadcn-ui/card";
 import { Label } from "@/components/shadcn-ui/label";
 import { Button } from "@/components/shadcn-ui/button";
-import { getDownloadURL, getStorage, ref, uploadBytes, uploadBytesResumable } from "firebase/storage";
 import { useToast } from "@/components/shadcn-ui/use-toast";
-import { Product } from "../models/product.model";
-import Image from "next/image";
+import { Category, Product } from "../models/product.model";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/shadcn-ui/select";
 
 export default function ProductForm() {
   const { toast } = useToast();
@@ -24,6 +25,7 @@ export default function ProductForm() {
     length: 0,
     width: 0,
     images: [],
+    category: "" as Category,
   });
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -37,6 +39,10 @@ export default function ProductForm() {
       const imageUrls = Array.from(e.target.files).map((file) => URL.createObjectURL(file));
       setFormData((prevData) => ({ ...prevData, images: imageUrls }));
     }
+  };
+
+  const handleSelectChange = (value: string) => {
+    setFormData((prevData) => ({ ...prevData, category: value as Category })); // TODO adjust type
   };
 
   async function uploadImages(productId: string) {
@@ -85,6 +91,17 @@ export default function ProductForm() {
               <div className="flex flex-col space-y-1.5">
                 <Label htmlFor="name">Name</Label>
                 <Input type="text" name="name" placeholder="Name" value={formData.name} onChange={handleInputChange} />
+              </div>
+              <div className="flex flex-col space-y-1.5">
+                <Select value={formData.category} onValueChange={handleSelectChange}>
+                  <SelectTrigger className="w-[180px]">
+                    <SelectValue placeholder="Category" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="ties">Ties</SelectItem>
+                    <SelectItem value="blazers">Blazers</SelectItem>
+                  </SelectContent>
+                </Select>
               </div>
               <div className="flex flex-col space-y-1.5">
                 <Label htmlFor="length">Length</Label>
