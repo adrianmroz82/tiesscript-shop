@@ -1,28 +1,30 @@
 "use client";
 
-import { useEffect } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-import { useFetchProducts } from "./hooks/useFetchProducts";
 import { ImageCard } from "@/components/image";
 import { ImagePlaceholder } from "@/components/image-placeholder";
-import { getPaginatedProducts } from "./utils/getPaginatedProducts";
+import { QueryPagination } from "@/components/query-pagination";
+import { LoadingSpinner } from "@/components/loading-spinner";
+import { useCollectionCount } from "./hooks/useCollectionCount";
+import { useFetchPaginatedProducts } from "./hooks/useFetchPaginatedProducts";
 
 export default function ProductsView() {
-  const { products, isLoading } = useFetchProducts();
-
-  useEffect(() => {
-    const fetchProducts = async () => {
-      const products = await getPaginatedProducts();
-      console.log(products);
-    };
-    fetchProducts();
-  }, []);
-
   const router = useRouter();
+  const [currentPage, setCurrentPage] = useState(1);
+  const { products, isLoading } = useFetchPaginatedProducts(currentPage);
+
+  const { count } = useCollectionCount();
+
+  const TOTAL_PAGES = Math.ceil(count / 10);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <LoadingSpinner />;
   }
 
   const goToDetailsPage = (id: string) => () => {
@@ -40,6 +42,7 @@ export default function ProductsView() {
           </div>
         ))}
       </div>
+      <QueryPagination currentPage={currentPage} onPageChange={handlePageChange} totalPages={TOTAL_PAGES} />
     </main>
   );
 }
