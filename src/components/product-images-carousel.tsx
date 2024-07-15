@@ -10,7 +10,6 @@ import {
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { ProductThumbnail } from "./thumbnail";
-import { AspectRatio } from "./shadcn-ui/aspect-ratio";
 
 interface Props {
   productImages: { url: string }[]; // TODO: extract here and in Thumbnail

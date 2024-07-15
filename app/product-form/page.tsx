@@ -18,6 +18,7 @@ export default function ProductForm() {
   const { toast } = useToast();
 
   const [imagesUpload, setImageUpload] = useState<FileList | null>(null);
+  const [isUploading, setIsUploading] = useState(false);
   const [formData, setFormData] = useState<Product>({
     id: "",
     name: "",
@@ -78,6 +79,8 @@ export default function ProductForm() {
         description: `Error adding document: ${error}`,
         variant: "destructive",
       });
+    } finally {
+      setIsUploading(false);
     }
   }
 
@@ -135,10 +138,12 @@ export default function ProductForm() {
               <div className="space-y-1.5 ">
                 <Label htmlFor="image">Image</Label>
                 <Input id="image" type="file" name="image" multiple onChange={handleImageChange} />
-                {formData.images.length > 0 &&
-                  formData.images?.map((image) => (
-                    <Image width={128} height={500} key={image} src={image} alt="product" />
-                  ))}
+                <div className="flex space-x-1.5 flex-wrap">
+                  {formData.images.length > 0 &&
+                    formData.images.map((image) => (
+                      <Image width={128} height={500} key={image} src={image} alt="product" />
+                    ))}
+                </div>
               </div>
               <CardFooter className="flex gap-4 px-0 py-4">
                 <Button className="w-full" onClick={handleAddDoc}>
@@ -147,6 +152,7 @@ export default function ProductForm() {
                 <Button className="w-full" size="lg" variant="secondary">
                   Save as draft
                 </Button>
+                {isUploading && <p>Data is uploading...</p>}
               </CardFooter>
             </div>
           </form>

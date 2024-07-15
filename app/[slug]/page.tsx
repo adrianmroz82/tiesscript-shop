@@ -20,8 +20,6 @@ export default function ProductsView({ params }: Props) {
   const category = params.slug;
 
   const { products, isLoading } = useFetchPaginatedProducts(currentPage, category);
-
-
   const { count } = useCollectionCount();
 
   const TOTAL_PAGES = Math.ceil(count / 10);

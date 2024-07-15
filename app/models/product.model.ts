@@ -1,12 +1,14 @@
 export type Category = "ties" | "blazers";
 
+// export type ProductWithImages = Product & { images: { url: string }[] };
+
 export interface Product {
   id: string;
   name: string;
   price: number;
   length: number;
   width: number;
-  images: string[];
+  images: string[]; // TODO: check { url: string }[];
   category: Category;
 
   // TODO fields that need to be added

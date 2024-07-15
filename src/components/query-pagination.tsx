@@ -27,6 +27,7 @@ export function QueryPagination({ currentPage, onPageChange, totalPages }: Props
             href="#"
             onClick={goToPage(currentPage - 1)}
             // disabled={currentPage === 1}
+            className={currentPage === 1 ? "cursor-not-allowed" : ""}
           />
         </PaginationItem>
         {[...Array(totalPages)].map((_, index) => {
@@ -46,7 +47,7 @@ export function QueryPagination({ currentPage, onPageChange, totalPages }: Props
           <PaginationNext
             href="#"
             onClick={goToPage(currentPage + 1)}
-            // disabled={currentPage === totalPages}
+            className={currentPage === totalPages ? "cursor-not-allowed" : ""}
           />
         </PaginationItem>
       </PaginationContent>
