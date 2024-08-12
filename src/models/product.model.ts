@@ -9,9 +9,10 @@ export interface Product {
   length: number;
   width: number;
   images: string[]; // TODO: check { url: string }[];
+  createdAt: Date;
   category: Category;
 
-  // TODO fields that need to be added
+  // TODO: fields to be considered
   // description: string;
   // category: string;
 
@@ -20,7 +21,6 @@ export interface Product {
   // deletedAt: Date;
 
   // isActive: boolean; or published
-
   // isDiscounted: boolean;
 
   // sku: string;

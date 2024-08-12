@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { getProductImages } from "../utils/getProductImages";
-import { getPaginatedProducts } from "../utils/getPaginatedProducts";
+import { getProductImages } from "../lib/api/getProductImages";
+import { getPaginatedProducts } from "../lib/api/getPaginatedProducts";
 import { DocumentData, QueryDocumentSnapshot } from "firebase/firestore";
 
 export function useFetchPaginatedProducts(currentPage: number, category: string) {

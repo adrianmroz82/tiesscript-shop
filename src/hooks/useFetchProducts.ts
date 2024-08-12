@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { getProducts } from "../utils/getProducts";
-import { getProductImages } from "../utils/getProductImages";
+import { getProducts } from "../lib/api/getProducts";
+import { getProductImages } from "../lib/api/getProductImages";
 
 export function useFetchProducts() {
   const [products, setProducts] = useState<any[]>([]); // TODO: adjust interface once its known

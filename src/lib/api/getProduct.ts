@@ -1,7 +1,7 @@
 import { doc, getDoc } from "firebase/firestore";
-import { db } from "../firebase/firebase";
+import { db } from "../../firebase/firebase";
 
-import { Product } from "../models/product.model";
+import { Product } from "../../models/product.model";
 
 export async function getProduct(productId: string): Promise<Product | null> {
   const productRef = doc(db, "items", productId);

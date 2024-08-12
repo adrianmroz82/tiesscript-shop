@@ -1,5 +1,5 @@
 import { collection, query, orderBy, startAfter, limit, getDocs, where } from "firebase/firestore";
-import { db } from "../firebase/firebase";
+import { db } from "../../firebase/firebase";
 
 export async function getPaginatedProducts(currentPage: number, lastVisible: any, category: string) {
   const pageSize = 8;

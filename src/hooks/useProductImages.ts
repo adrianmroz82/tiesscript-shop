@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-import { getProductImages } from "../utils/getProductImages";
+import { getProductImages } from "../lib/api/getProductImages";
 
 interface ProductImages {
   url: string;

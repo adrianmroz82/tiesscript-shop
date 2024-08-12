@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getProduct } from "../utils/getProduct";
+import { getProduct } from "../lib/api/getProduct";
 import { Product } from "../models/product.model";
 
 export function useFetchProduct(productId: string) {
@@ -11,6 +11,8 @@ export function useFetchProduct(productId: string) {
     price: 0,
     length: 0,
     width: 0,
+    createdAt: new Date(),
+    category: "ties",
     images: [],
   });
 

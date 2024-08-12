@@ -7,8 +7,8 @@ import { ImageCard } from "@/components/image";
 import { ImagePlaceholder } from "@/components/image-placeholder";
 import { QueryPagination } from "@/components/query-pagination";
 import { LoadingSpinner } from "@/components/loading-spinner";
-import { useCollectionCount } from "../hooks/useCollectionCount";
-import { useFetchPaginatedProducts } from "../hooks/useFetchPaginatedProducts";
+import { useCollectionCount } from "../../hooks/useCollectionCount";
+import { useFetchPaginatedProducts } from "../../hooks/useFetchPaginatedProducts";
 
 interface Props {
   params: { slug: string };

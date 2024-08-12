@@ -1,5 +1,5 @@
 import { collection, getDocs, orderBy, query } from "firebase/firestore";
-import { db } from "../firebase/firebase";
+import { db } from "../../firebase/firebase";
 
 export async function getProducts() {
   const productsRef = collection(db, "items");

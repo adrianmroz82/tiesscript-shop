@@ -2,7 +2,7 @@
 
 import { ChangeEvent, useState } from "react";
 import { collection, addDoc } from "firebase/firestore";
-import { db } from "../firebase/firebase";
+import { db } from "@/firebase/firebase";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import Image from "next/image";
 
@@ -11,7 +11,7 @@ import { Card, CardContent, CardFooter } from "@/components/shadcn-ui/card";
 import { Label } from "@/components/shadcn-ui/label";
 import { Button } from "@/components/shadcn-ui/button";
 import { useToast } from "@/components/shadcn-ui/use-toast";
-import { Category, Product } from "../models/product.model";
+import { Category, Product } from "@/models/product.model";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/shadcn-ui/select";
 
 export default function ProductForm() {
@@ -26,6 +26,7 @@ export default function ProductForm() {
     length: 0,
     width: 0,
     images: [],
+    createdAt: new Date(),
     category: "" as Category,
   });
 

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Product } from "../../app/models/product.model";
+import { Product } from "../models/product.model";
 import { Button } from "./shadcn-ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./shadcn-ui/card";
 import ShoppingCartIcon from "../assets/cart-icon.svg";

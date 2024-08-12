@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { Card, CardContent } from "./shadcn-ui/card";
+import { Card, CardContent } from "@/components/shadcn-ui/card";
 
 interface Props {
   images: { url: string }[];
