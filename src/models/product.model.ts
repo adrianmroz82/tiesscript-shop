@@ -1,6 +1,7 @@
 export type Category = "ties" | "blazers";
 
-// export type ProductWithImages = Product & { images: { url: string }[] };
+export type ProductImage = { url: string };
+export type ProductWithImages = Product & { images: ProductImage[] };
 
 export interface Product {
   id: string;
@@ -8,32 +9,7 @@ export interface Product {
   price: number;
   length: number;
   width: number;
-  images: string[]; // TODO: check { url: string }[];
+  // images: string[]; // TODO: check { url: string }[];
   createdAt: Date;
   category: Category;
-
-  // TODO: fields to be considered
-  // description: string;
-  // category: string;
-
-  // createdAt: Date;
-  // updatedAt: Date;
-  // deletedAt: Date;
-
-  // isActive: boolean; or published
-  // isDiscounted: boolean;
-
-  // sku: string;
-  // brand: string;
-  // color: string;
-  // material: string;
-  // tags: string[];
-  // pattern: string;
-
-  // similarProducts: string[];
-  // reviews: string[];
-
-  // discountValue: number;
-  // discountStart: Date;
-  // discountEnd: Date;
 }

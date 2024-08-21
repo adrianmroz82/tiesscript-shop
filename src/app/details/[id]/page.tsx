@@ -1,27 +1,23 @@
-"use client";
-
-import { useParams } from "next/navigation";
 import { ProductImagesCarousel } from "@/components/product-images-carousel";
-import { useProductImages } from "@/hooks/useProductImages";
 import { CardContent } from "@/components/shadcn-ui/card";
 import { ProductDetailsInfo } from "@/components/product-details-info";
-import { LoadingSpinner } from "@/components/loading-spinner";
-import { useFetchProduct } from "@/hooks/useFetchProduct";
+import { getProduct } from "@/lib/api/getProduct";
+import { getProductImages } from "@/lib/api/getProductImages";
 
-export default function DetailsPage() {
-  const params = useParams<{ id: string }>();
-  const productImages = useProductImages(params!.id);
-  const { product, isLoading } = useFetchProduct(params!.id);
+interface Props {
+  params: { id: string };
+}
 
-  if (isLoading) {
-    return <LoadingSpinner />;
-  }
+export default async function DetailsPage({ params }: Props) {
+  const { id } = params;
+  const product = await getProduct(id);
+  const productImages = await getProductImages(id);
 
   return (
     <CardContent className="shadow-lg">
       <div className="flex" style={{ border: "1px solid red" }}>
         <ProductImagesCarousel productImages={productImages!} />
-        <ProductDetailsInfo product={product} />
+        <ProductDetailsInfo product={product!} />
       </div>
     </CardContent>
   );

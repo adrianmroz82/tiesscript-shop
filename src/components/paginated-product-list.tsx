@@ -1,27 +1,22 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { useParams, useRouter } from "next/navigation";
 
 import { ImageCard } from "@/components/image";
 import { ImagePlaceholder } from "@/components/image-placeholder";
 import { QueryPagination } from "@/components/query-pagination";
-import { LoadingSpinner } from "@/components/loading-spinner";
-import { useCollectionCount } from "../../hooks/useCollectionCount";
-import { useFetchPaginatedProducts } from "../../hooks/useFetchPaginatedProducts";
+import { ProductWithImages } from "@/models/product.model";
 
 interface Props {
-  params: { slug: string };
+  products: ProductWithImages[];
+  count: number;
 }
 
-export default function ProductsView({ params }: Props) {
+export function PaginatedProductList({ products, count }: Props) {
   const [currentPage, setCurrentPage] = useState(1);
+
   const router = useRouter();
-  const category = params.slug;
-
-  const { products, isLoading } = useFetchPaginatedProducts(currentPage, category);
-  const { count } = useCollectionCount();
-
   const TOTAL_PAGES = Math.ceil(count / 10);
 
   const handlePageChange = (page: number) => {
@@ -32,12 +27,8 @@ export default function ProductsView({ params }: Props) {
     router.push(`/details/${id}`);
   };
 
-  if (isLoading) {
-    return <LoadingSpinner />;
-  }
-
   return (
-    <main>
+    <>
       <div className="flex flex-wrap">
         {products?.map(({ id, images }) => (
           <div key={id} onClick={goToDetailsPage(id)} className="w-1/4 p-4 flex items-center justify-center">
@@ -48,6 +39,6 @@ export default function ProductsView({ params }: Props) {
         ))}
       </div>
       <QueryPagination currentPage={currentPage} onPageChange={handlePageChange} totalPages={TOTAL_PAGES} />
-    </main>
+    </>
   );
 }
