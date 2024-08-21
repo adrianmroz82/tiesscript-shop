@@ -1,8 +1,9 @@
 import Image from "next/image";
-import { Card, CardContent } from "./shadcn-ui/card";
+import { Card, CardContent } from "@/components/shadcn-ui/card";
+import { ProductImage } from "@/models/product.model";
 
 interface Props {
-  images: { url: string }[];
+  images: ProductImage[];
 }
 
 export function Images({ images }: Props) {
@@ -13,7 +14,6 @@ export function Images({ images }: Props) {
           <CardContent className="flex aspect-square items-center justify-center p-6">
             <Image
               className="object-contain cursor-pointer"
-              // style={{ objectFit: "contain" }}
               key={index}
               src={url}
               alt={`Product Image ${index + 1}`}
