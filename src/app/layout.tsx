@@ -18,9 +18,9 @@ export default function RootLayout({ children }: Props) {
       <head />
       <body className="flex">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-          <div className="flex flex-col w-full h-full">
+          <div className="flex flex-col w-full">
             <Header />
-            <main className="w-full h-full">{children}</main>
+            <main className="w-full min-h-full">{children}</main>
           </div>
           <Toaster />
         </ThemeProvider>
