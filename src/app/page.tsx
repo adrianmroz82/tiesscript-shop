@@ -1,19 +1,14 @@
-"use client";
+import { getAllCategories } from "@/lib/api/getAllCategories";
+import { CategoryCard } from "@/components/category-card";
 
-import { useRouter } from "next/navigation";
-
-export default function DashboardView() {
-  const router = useRouter();
-
-  const goToCategory = (category: string) => () => {
-    router.push(`/${category}`);
-  };
+export default async function DashboardView() {
+  const categories = await getAllCategories();
 
   return (
-    <div>
-      <h1>Dashboard</h1>
-      <button onClick={goToCategory("ties")}>ties</button>
-      <button onClick={goToCategory("blazers")}>blazers</button>
+    <div className="flex flex-wrap items-center justify-center min-h-[50vh] gap-2 m-16">
+      {categories.map((category) => (
+        <CategoryCard key={category} category={category} />
+      ))}
     </div>
   );
 }

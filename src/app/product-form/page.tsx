@@ -11,7 +11,7 @@ import { Card, CardContent, CardFooter } from "@/components/shadcn-ui/card";
 import { Label } from "@/components/shadcn-ui/label";
 import { Button } from "@/components/shadcn-ui/button";
 import { useToast } from "@/components/shadcn-ui/use-toast";
-import { Category, Product } from "@/models/product.model";
+import { Category, ProductWithImages } from "@/models/product.model";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/shadcn-ui/select";
 
 export default function ProductForm() {
@@ -19,14 +19,14 @@ export default function ProductForm() {
 
   const [imagesUpload, setImageUpload] = useState<FileList | null>(null);
   const [isUploading, setIsUploading] = useState(false);
-  const [formData, setFormData] = useState<Product>({
+  const [formData, setFormData] = useState<ProductWithImages>({
     id: "",
     name: "",
     price: 0,
     length: 0,
     width: 0,
     images: [],
-    createdAt: new Date(),
+    createdAt: new Date().toISOString(),
     category: "" as Category,
   });
 
@@ -68,7 +68,7 @@ export default function ProductForm() {
 
     try {
       e.preventDefault();
-      const docRef = await addDoc(collection(db, "items"), formData);
+      const docRef = await addDoc(collection(db, formData.category), formData);
       await uploadImages(docRef.id);
       toast({
         title: "Success",

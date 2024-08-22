@@ -6,7 +6,7 @@ import { getProductImages } from "@/lib/api/getProductImages";
 export async function getPaginatedProducts(currentPage: number, category: Category, lastVisibleDoc = null) {
   const PAGE_SIZE = 4;
 
-  const productsRef = collection(db, "items");
+  const productsRef = collection(db, category);
 
   let productsQuery;
 
