@@ -1,7 +1,8 @@
+import { ProductImage } from "@/models/product.model";
 import Image from "next/image";
 
 interface Props {
-  productImage: { url: string };
+  productImage: ProductImage;
   api: any | undefined;
   currentIndex: number | undefined;
   index: number;

@@ -1,6 +1,6 @@
 "use client";
 
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "@/firebase/firebase";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
@@ -13,6 +13,7 @@ import { Button } from "@/components/shadcn-ui/button";
 import { useToast } from "@/components/shadcn-ui/use-toast";
 import { Category, ProductWithImages } from "@/models/product.model";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/shadcn-ui/select";
+import { getAllCategories } from "@/lib/api/getAllCategories";
 
 export default function ProductForm() {
   const { toast } = useToast();
@@ -29,6 +30,16 @@ export default function ProductForm() {
     createdAt: new Date().toISOString(),
     category: "" as Category,
   });
+  const [categories, setCategories] = useState<Category[]>([]);
+
+  useEffect(() => {
+    async function fetchCategories() {
+      const categoriesData = await getAllCategories();
+      setCategories(categoriesData);
+    }
+
+    fetchCategories();
+  }, []);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -101,8 +112,11 @@ export default function ProductForm() {
                     <SelectValue placeholder="Category" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="ties">Ties</SelectItem>
-                    <SelectItem value="blazers">Blazers</SelectItem>
+                    {categories.map((category) => (
+                      <SelectItem key={category} value={category}>
+                        {category}
+                      </SelectItem>
+                    ))}
                   </SelectContent>
                 </Select>
               </div>

@@ -8,15 +8,15 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/shadcn-ui/drawer";
-import { Button } from "./shadcn-ui/button";
+import { Button } from "@/components/shadcn-ui/button";
 
-// ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-import * as React from "react";
 import { Menu, X } from "lucide-react";
-import Image from "next/image";
+import { getAllCategories } from "@/lib/api/getAllCategories";
+import { CategoryMenuItems } from "@/components/category-menu-items";
 
-export function CategoryMenuDrawer() {
+export async function CategoryMenuDrawer() {
+  const categories = await getAllCategories();
+
   return (
     <Drawer direction="left">
       <DrawerTrigger>
@@ -28,37 +28,19 @@ export function CategoryMenuDrawer() {
         </DrawerClose>
         <div className="mx-auto w-full py-5">
           <DrawerHeader>
-            <DrawerTitle>Theme Color Options</DrawerTitle>
-            <DrawerDescription>
-              * Selected option will be applied to all layout elements (navbar, toolbar, etc.). You can also create your
-              own theme options and color schemes.
-            </DrawerDescription>
+            <DrawerTitle>Categories</DrawerTitle>
           </DrawerHeader>
-
           <div className="flex flex-col gap-2 py-2 pb-2 mb-2">
-            <div className="hover:bg-muted cursor-pointer flex items-center justify-center rounded-lg h-16">
-              <Image src="/sidebar-menu-ties.svg" alt="Ties" width={32} height={32} />
-              <p>Image 1</p>
-            </div>
-            <div className="hover:bg-muted cursor-pointer flex items-center justify-center rounded-lg h-16">
-              <Image src="/sidebar-menu-blazer.svg" alt="Ties" width={32} height={32} />
-              <p>Image 2</p>
-            </div>
-            <div className="hover:bg-muted cursor-pointer flex items-center justify-center rounded-lg h-16">
-              <p>Image 3</p>
-            </div>
-
-            <div className="hover:bg-muted cursor-pointer flex items-center justify-center rounded-lg h-16">
-              <p>FAQ</p>
-            </div>
+            <CategoryMenuItems categories={categories} />
           </div>
         </div>
 
         <DrawerFooter>
           <Button>Log in</Button>
           <DrawerDescription>
-            Selected option will be applied to all layout elements (navbar, toolbar, etc.). You can also create your own
-            theme options and color schemes.
+            <span>
+              {`Don't have an account?`} <a href="/sign-up">Sign up</a>
+            </span>
           </DrawerDescription>
         </DrawerFooter>
       </DrawerContent>
