@@ -1,10 +1,13 @@
 "use client";
 
-import { capitalize } from "@/lib/utils/capitalize";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 
-export function CategoryMenuItems({ categories }: { categories: string[] }) {
+import { capitalize } from "@/lib/utils/capitalize";
+import { useRouter } from "next/navigation";
+import { DrawerClose } from "@/components/shadcn-ui/drawer";
+import { Category } from "@/models/product.model";
+
+export function CategoryMenuItems({ categories }: { categories: Category[] }) {
   const router = useRouter();
 
   const handleCategoryClick = (category: string) => {
@@ -14,13 +17,14 @@ export function CategoryMenuItems({ categories }: { categories: string[] }) {
   return (
     <>
       {categories.map((category) => (
-        <div
-          onClick={() => handleCategoryClick(category)}
-          key={category}
-          className="hover:bg-muted cursor-pointer flex items-center rounded-lg h-12">
-          <Image src={`/sidebar-menu-${category}.svg`} className="mx-4" alt={category} width={32} height={32} />
-          <p>{capitalize(category)}</p>
-        </div>
+        <DrawerClose key={category}>
+          <div
+            onClick={() => handleCategoryClick(category)}
+            className="hover:bg-muted cursor-pointer flex items-center rounded-lg h-12">
+            <Image src={`/sidebar-menu-${category}.svg`} className="mx-4" alt={category} width={32} height={32} />
+            <p>{capitalize(category)}</p>
+          </div>
+        </DrawerClose>
       ))}
     </>
   );
