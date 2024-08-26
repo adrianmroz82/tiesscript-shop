@@ -3,14 +3,15 @@ import { CardContent } from "@/components/shadcn-ui/card";
 import { ProductDetailsInfo } from "@/components/product-details-info";
 import { getProduct } from "@/lib/api/getProduct";
 import { getProductImages } from "@/lib/api/getProductImages";
+import { Category } from "@/models/product.model";
 
 interface Props {
-  params: { id: string };
+  params: { category: Category; id: string };
 }
 
 export default async function DetailsPage({ params }: Props) {
-  const { id } = params;
-  const product = await getProduct(id);
+  const { category, id } = params;
+  const product = await getProduct(id, category);
   const productImages = await getProductImages(id);
 
   return (

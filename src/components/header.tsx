@@ -1,18 +1,21 @@
 "use client";
 
+import localFont from "next/font/local";
 import Link from "next/link";
+
 import { ThemeSwitcher } from "./theme-switcher";
 import { ShoppingCart } from "lucide-react";
+import { CategoryMenuDrawer } from "./category-drawer";
+
+const spaceGroteskFont = localFont({ src: "../../public/fonts/space-grotesk-medium.ttf" });
 
 export function Header() {
   return (
     <header className="bg-dark-500 p-6 shadow-lg rounded-lg h-[6rem]">
       <nav>
         <div className="flex items-center justify-between">
-          <Link className="font-bold text-xl" href="/">
-            Logo
-          </Link>
-          <div className="flex space-x-16 text-xl font-bold justify-between">
+          <CategoryMenuDrawer />
+          <div className={`${spaceGroteskFont.className} flex space-x-16 text-xl justify-between`}>
             <Link className="hover:underline" href="/">
               Home
             </Link>

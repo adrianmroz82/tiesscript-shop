@@ -12,9 +12,10 @@ import {
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { ProductThumbnail } from "./thumbnail";
+import { ProductImageUrl } from "@/models/product.model";
 
 interface Props {
-  productImages: { url: string }[]; // TODO: extract here and in Thumbnail
+  productImages: ProductImageUrl[];
 }
 
 export function ProductImagesCarousel({ productImages }: Props) {
@@ -22,7 +23,6 @@ export function ProductImagesCarousel({ productImages }: Props) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
-    // TODO: extract to custom hook
     if (!api) {
       return;
     }
@@ -52,13 +52,13 @@ export function ProductImagesCarousel({ productImages }: Props) {
 
       <Carousel className="w-full max-w-xl" setApi={setApi}>
         <CarouselContent>
-          {productImages?.map(({ url }, index) => (
+          {productImages?.map((productImage, index) => (
             <CarouselItem key={index} tabIndex={2}>
               <div className="p-1">
                 <div className="flex aspect-square items-center justify-center p-6">
                   <Image
                     style={{ objectFit: "contain" }}
-                    src={url}
+                    src={productImage}
                     alt={`Product Image ${index + 1}`}
                     width={500}
                     height={500}

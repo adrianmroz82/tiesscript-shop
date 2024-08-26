@@ -1,7 +1,8 @@
+import { ProductImageUrl } from "@/models/product.model";
 import Image from "next/image";
 
 interface Props {
-  productImage: { url: string };
+  productImage: ProductImageUrl;
   api: any | undefined;
   currentIndex: number | undefined;
   index: number;
@@ -11,7 +12,7 @@ export function ProductThumbnail({ productImage, api, currentIndex, index }: Pro
   return (
     <div className="w-32 flex p-2">
       <Image
-        src={productImage.url}
+        src={productImage}
         alt="Product Image Thumbnail"
         style={{ objectFit: "contain" }}
         width={500}

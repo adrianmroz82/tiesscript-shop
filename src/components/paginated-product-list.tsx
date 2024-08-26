@@ -6,14 +6,15 @@ import { useState } from "react";
 import { ImageCard } from "@/components/image";
 import { ImagePlaceholder } from "@/components/image-placeholder";
 import { QueryPagination } from "@/components/query-pagination";
-import { ProductWithImages } from "@/models/product.model";
+import { Category, ProductWithImages } from "@/models/product.model";
 
 interface Props {
   products: ProductWithImages[];
   count: number;
+  category: Category;
 }
 
-export function PaginatedProductList({ products, count }: Props) {
+export function PaginatedProductList({ products, count, category }: Props) {
   const [currentPage, setCurrentPage] = useState(1);
 
   const router = useRouter();
@@ -24,7 +25,7 @@ export function PaginatedProductList({ products, count }: Props) {
   };
 
   const goToDetailsPage = (id: string) => () => {
-    router.push(`/details/${id}`);
+    router.push(`/${category}/${id}`);
   };
 
   return (

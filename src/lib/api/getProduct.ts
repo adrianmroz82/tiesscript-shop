@@ -1,10 +1,10 @@
 import { doc, getDoc } from "firebase/firestore";
-import { db } from "../../firebase/firebase";
+import { db } from "@/firebase/firebase";
 
-import { Product } from "../../models/product.model";
+import { Category, Product } from "@/models/product.model";
 
-export async function getProduct(productId: string): Promise<Product | null> {
-  const productRef = doc(db, "items", productId);
+export async function getProduct(productId: string, category: Category): Promise<Product | null> {
+  const productRef = doc(db, category, productId);
   const productSnapshot = await getDoc(productRef);
 
   if (productSnapshot.exists()) {

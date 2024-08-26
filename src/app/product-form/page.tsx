@@ -1,6 +1,6 @@
 "use client";
 
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { collection, addDoc } from "firebase/firestore";
 import { db } from "@/firebase/firebase";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
@@ -11,24 +11,35 @@ import { Card, CardContent, CardFooter } from "@/components/shadcn-ui/card";
 import { Label } from "@/components/shadcn-ui/label";
 import { Button } from "@/components/shadcn-ui/button";
 import { useToast } from "@/components/shadcn-ui/use-toast";
-import { Category, Product } from "@/models/product.model";
+import { Category, ProductWithImages } from "@/models/product.model";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/shadcn-ui/select";
+import { getAllCategories } from "@/lib/api/getAllCategories";
 
 export default function ProductForm() {
   const { toast } = useToast();
 
   const [imagesUpload, setImageUpload] = useState<FileList | null>(null);
   const [isUploading, setIsUploading] = useState(false);
-  const [formData, setFormData] = useState<Product>({
+  const [formData, setFormData] = useState<ProductWithImages>({
     id: "",
     name: "",
     price: 0,
     length: 0,
     width: 0,
     images: [],
-    createdAt: new Date(),
-    category: "" as Category,
+    createdAt: new Date().toISOString(),
   });
+  const [category, setCategory] = useState<Category>("" as Category);
+  const [categories, setCategories] = useState<Category[]>([]);
+
+  useEffect(() => {
+    async function fetchCategories() {
+      const categoriesData = await getAllCategories();
+      setCategories(categoriesData);
+    }
+
+    fetchCategories();
+  }, []);
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -43,8 +54,8 @@ export default function ProductForm() {
     }
   };
 
-  const handleSelectChange = (value: string) => {
-    setFormData((prevData) => ({ ...prevData, category: value as Category })); // TODO adjust type
+  const handleSelectChange = (value: Category) => {
+    setCategory(value);
   };
 
   async function uploadImages(productId: string) {
@@ -64,11 +75,19 @@ export default function ProductForm() {
   }
 
   async function handleAddDoc(e: any) {
-    // TODO adjust type
+    e.preventDefault();
+    if (!category) {
+      toast({
+        title: "Error",
+        description: "Please select a category.",
+        variant: "destructive",
+      });
+      return;
+    }
 
     try {
-      e.preventDefault();
-      const docRef = await addDoc(collection(db, "items"), formData);
+      setIsUploading(true);
+      const docRef = await addDoc(collection(db, category), formData); // Use category to choose collection
       await uploadImages(docRef.id);
       toast({
         title: "Success",
@@ -96,13 +115,16 @@ export default function ProductForm() {
                 <Input type="text" name="name" placeholder="Name" value={formData.name} onChange={handleInputChange} />
               </div>
               <div className="flex flex-col space-y-1.5">
-                <Select value={formData.category} onValueChange={handleSelectChange}>
+                <Select value={category} onValueChange={handleSelectChange}>
                   <SelectTrigger className="w-[180px]">
                     <SelectValue placeholder="Category" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="ties">Ties</SelectItem>
-                    <SelectItem value="blazers">Blazers</SelectItem>
+                    {categories.map((category) => (
+                      <SelectItem key={category} value={category}>
+                        {category}
+                      </SelectItem>
+                    ))}
                   </SelectContent>
                 </Select>
               </div>

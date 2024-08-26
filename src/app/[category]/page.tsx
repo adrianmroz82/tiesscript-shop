@@ -15,5 +15,5 @@ export default async function CategoryProducts({ params, searchParams }: Props) 
   const products = await getPaginatedProducts(page, category);
   const count = await getCollectionCount();
 
-  return <PaginatedProductList products={products} count={count} />;
+  return <PaginatedProductList products={products} count={count} category={category} />;
 }

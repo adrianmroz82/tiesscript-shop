@@ -1,7 +1,7 @@
-export type Category = "ties" | "blazers";
+export type Category = "ties" | "blazers" | "shirts" | "pants" | "shoes" | "accessories";
 
-export type ProductImage = { url: string };
-export type ProductWithImages = Product & { images: ProductImage[] };
+export type ProductImageUrl = string;
+export type ProductWithImages = Product & { images: ProductImageUrl[] };
 
 export interface Product {
   id: string;
@@ -9,7 +9,5 @@ export interface Product {
   price: number;
   length: number;
   width: number;
-  // images: string[]; // TODO: check { url: string }[];
-  createdAt: Date;
-  category: Category;
+  createdAt: string;
 }
