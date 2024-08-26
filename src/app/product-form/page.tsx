@@ -28,8 +28,8 @@ export default function ProductForm() {
     width: 0,
     images: [],
     createdAt: new Date().toISOString(),
-    category: "" as Category,
   });
+  const [category, setCategory] = useState<Category>("" as Category);
   const [categories, setCategories] = useState<Category[]>([]);
 
   useEffect(() => {
@@ -54,8 +54,8 @@ export default function ProductForm() {
     }
   };
 
-  const handleSelectChange = (value: string) => {
-    setFormData((prevData) => ({ ...prevData, category: value as Category })); // TODO adjust type
+  const handleSelectChange = (value: Category) => {
+    setCategory(value);
   };
 
   async function uploadImages(productId: string) {
@@ -75,11 +75,19 @@ export default function ProductForm() {
   }
 
   async function handleAddDoc(e: any) {
-    // TODO adjust type
+    e.preventDefault();
+    if (!category) {
+      toast({
+        title: "Error",
+        description: "Please select a category.",
+        variant: "destructive",
+      });
+      return;
+    }
 
     try {
-      e.preventDefault();
-      const docRef = await addDoc(collection(db, formData.category), formData);
+      setIsUploading(true);
+      const docRef = await addDoc(collection(db, category), formData); // Use category to choose collection
       await uploadImages(docRef.id);
       toast({
         title: "Success",
@@ -107,7 +115,7 @@ export default function ProductForm() {
                 <Input type="text" name="name" placeholder="Name" value={formData.name} onChange={handleInputChange} />
               </div>
               <div className="flex flex-col space-y-1.5">
-                <Select value={formData.category} onValueChange={handleSelectChange}>
+                <Select value={category} onValueChange={handleSelectChange}>
                   <SelectTrigger className="w-[180px]">
                     <SelectValue placeholder="Category" />
                   </SelectTrigger>
