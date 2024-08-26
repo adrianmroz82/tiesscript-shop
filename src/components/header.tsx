@@ -11,7 +11,7 @@ const spaceGroteskFont = localFont({ src: "../../public/fonts/space-grotesk-medi
 
 export function Header() {
   return (
-    <header className="bg-dark-500 p-6 shadow-lg rounded-lg h-[6rem]">
+    <header className="bg-dark-500 p-6 shadow-lg rounded-lg h-[5rem]">
       <nav>
         <div className="flex items-center justify-between">
           <CategoryMenuDrawer />

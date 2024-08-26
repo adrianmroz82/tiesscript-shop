@@ -20,7 +20,7 @@ export default function RootLayout({ children }: Props) {
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <div className="flex flex-col w-full">
             <Header />
-            <main className="w-full min-h-full">{children}</main>
+            <main className="w-full h-[calc(100vh-6rem)]">{children}</main>
           </div>
           <Toaster />
         </ThemeProvider>
