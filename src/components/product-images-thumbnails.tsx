@@ -1,18 +1,11 @@
-import {
-  Carousel,
-  CarouselApi,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "./shadcn-ui/carousel";
-
-import Image from "next/image";
 import { useEffect, useState } from "react";
-import { ProductThumbnail } from "./thumbnail";
+
+import { CarouselApi } from "@/components/shadcn-ui/carousel";
+import { ProductThumbnail } from "@/components/thumbnail";
+import { ProductImageUrl } from "@/models/product.model";
 
 interface Props {
-  productImages: { url: string }[]; // TODO: extract here and in Thumbnail
+  productImages: ProductImageUrl[];
 }
 
 export function ProductImagesThumbnails({ productImages }: Props) {
