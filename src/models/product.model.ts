@@ -1,7 +1,7 @@
 export type Category = "ties" | "blazers" | "shirts" | "pants" | "shoes" | "accessories";
 
-export type ProductImage = { url: string };
-export type ProductWithImages = Product & { images: ProductImage[] };
+export type ProductImageUrl = string;
+export type ProductWithImages = Product & { images: ProductImageUrl[] };
 
 export interface Product {
   id: string;
@@ -10,5 +10,4 @@ export interface Product {
   length: number;
   width: number;
   createdAt: string;
-  category: Category;
 }
