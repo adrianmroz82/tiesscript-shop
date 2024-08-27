@@ -76,18 +76,18 @@ export default function ProductForm() {
 
   async function handleAddDoc(e: any) {
     e.preventDefault();
-    if (!category) {
-      toast({
-        title: "Error",
-        description: "Please select a category.",
-        variant: "destructive",
-      });
-      return;
-    }
+    
+    const convertedData = {
+      ...formData,
+      price: Number(formData.price),
+      length: Number(formData.length),
+      width: Number(formData.width),
+      createdAt: new Date().toISOString(),
+    };
 
     try {
       setIsUploading(true);
-      const docRef = await addDoc(collection(db, category), formData); // Use category to choose collection
+      const docRef = await addDoc(collection(db, category), convertedData);
       await uploadImages(docRef.id);
       toast({
         title: "Success",
