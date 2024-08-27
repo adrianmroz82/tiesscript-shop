@@ -35,7 +35,7 @@ export function OrderBySelect() {
 
   return (
     <>
-      <Select onValueChange={orderChange}>
+      <Select onValueChange={orderChange} defaultValue={searchParams.get('orderBy') ?? 'createdAtDesc'}>
         <SelectTrigger className="w-[180px]">
           <SelectValue placeholder="Order By" />
         </SelectTrigger>
