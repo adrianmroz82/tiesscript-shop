@@ -9,7 +9,7 @@
     "unused-imports/no-unused-vars": [
       "error",
       {
-        "argsIgnorePattern": "params",
+        "argsIgnorePattern": "^_",
         "varsIgnorePattern": "^_"
       }
     ]

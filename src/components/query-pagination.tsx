@@ -12,7 +12,7 @@ import {
 
 interface Props {
   currentPage: number;
-  onPageChange: (page: number) => void;
+  onPageChange: (_page: number) => void;
   totalPages: number;
 }
 
