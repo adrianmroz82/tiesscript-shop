@@ -75,11 +75,18 @@ export default function ProductForm() {
   }
 
   async function handleAddDoc(e: any) {
+    const convertedData = {
+      ...formData,
+      price: Number(formData.price),
+      length: Number(formData.length),
+      width: Number(formData.width),
+      createdAt: new Date().toISOString(),
+    };
     // TODO adjust type
 
     try {
       e.preventDefault();
-      const docRef = await addDoc(collection(db, formData.category), formData);
+      const docRef = await addDoc(collection(db, formData.category), convertedData);
       await uploadImages(docRef.id);
       toast({
         title: "Success",

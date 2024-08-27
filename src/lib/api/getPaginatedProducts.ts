@@ -2,7 +2,7 @@ import { collection, getDocs, query, limit, where, orderBy, startAfter, Document
 import { db } from "@/firebase/firebase";
 import { Category, Product } from "@/models/product.model";
 import { getProductImages } from "@/lib/api/getProductImages";
-import { OrderByField } from "@/models/orderByField.model";
+import { OrderByField } from "@/models/order-by-field.model";
 
 export async function getPaginatedProducts(currentPage: number, category: Category, order: OrderByField) {
   const PAGE_SIZE = 4;
@@ -13,7 +13,12 @@ export async function getPaginatedProducts(currentPage: number, category: Catego
 
   if (currentPage === 1) {
     // First page query
-    productsQuery = query(productsRef, where("category", "==", category), orderBy(order.field, order.direction), limit(PAGE_SIZE));
+    productsQuery = query(
+      productsRef,
+      where("category", "==", category),
+      orderBy(order.field, order.direction),
+      limit(PAGE_SIZE)
+    );
   } else {
     // For pages greater than 1, calculate the starting point by fetching all previous pages
     let previousSnapshot = null;
@@ -22,13 +27,18 @@ export async function getPaginatedProducts(currentPage: number, category: Catego
     for (let i = 1; i < currentPage; i++) {
       const tempQuery: Query<DocumentData> = lastVisible
         ? query(
-          productsRef,
-          where("category", "==", category),
-          orderBy(order.field, order.direction),
-          startAfter(lastVisible),
-          limit(PAGE_SIZE)
-        )
-        : query(productsRef, where("category", "==", category), orderBy(order.field, order.direction), limit(PAGE_SIZE));
+            productsRef,
+            where("category", "==", category),
+            orderBy(order.field, order.direction),
+            startAfter(lastVisible),
+            limit(PAGE_SIZE)
+          )
+        : query(
+            productsRef,
+            where("category", "==", category),
+            orderBy(order.field, order.direction),
+            limit(PAGE_SIZE)
+          );
 
       previousSnapshot = await getDocs(tempQuery);
       lastVisible = previousSnapshot.docs[previousSnapshot.docs.length - 1];
@@ -56,6 +66,8 @@ export async function getPaginatedProducts(currentPage: number, category: Catego
   });
 
   const productsWithImages = await Promise.all(productPromises);
+
+  console.log("productsWithImages", productsWithImages);
 
   return productsWithImages;
 }
