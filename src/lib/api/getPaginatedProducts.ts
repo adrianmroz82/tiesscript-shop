@@ -68,7 +68,5 @@ export async function getPaginatedProducts(currentPage: number, category: Catego
 
   const productsWithImages = await Promise.all(productPromises);
 
-  console.log("productsWithImages", productsWithImages);
-
   return productsWithImages;
 }

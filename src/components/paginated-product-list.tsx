@@ -5,9 +5,9 @@ import { useState } from "react";
 
 import { ImageCard } from "@/components/image";
 import { ImagePlaceholder } from "@/components/image-placeholder";
+import { OrderBySelect } from "@/components/order-by-select";
 import { QueryPagination } from "@/components/query-pagination";
 import { Category, ProductWithImages } from "@/models/product.model";
-import { OrderBySelect } from "./order-by-select";
 
 interface Props {
   products: ProductWithImages[];
@@ -32,7 +32,7 @@ export function PaginatedProductList({ products, count, category }: Props) {
   return (
     <div className="flex flex-col h-[calc(100vh-6rem)]">
       <div className="flex-grow">
-      <OrderBySelect />
+        <OrderBySelect />
         <div className="flex flex-wrap">
           {products?.map(({ id, images }) => (
             <div key={id} onClick={() => goToDetailsPage(id)} className="w-1/4 p-4 flex items-center justify-center">

@@ -1,20 +1,11 @@
 {
-  "extends": [
-    "next/core-web-vitals",
-    "plugin:import/typescript",
-    "plugin:@typescript-eslint/recommended"
-    // "eslint:recommended",
-    // "plugin:@typescript-eslint/eslint-recommended",
-    // "prettier",
-    // "plugin:prettier/recommended"
-  ],
-  "plugins": ["@typescript-eslint", "simple-import-sort", "unused-imports"],
+  "extends": ["next/core-web-vitals"],
+  "plugins": ["simple-import-sort", "unused-imports"],
   "rules": {
     "simple-import-sort/imports": "error",
     "simple-import-sort/exports": "error",
     "unused-imports/no-unused-imports": "error",
     "no-unused-vars": "off",
-    // "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_", "varsIgnorePattern": "^_" }],
     "unused-imports/no-unused-vars": [
       "error",
       {
@@ -22,24 +13,5 @@
         "varsIgnorePattern": "^_"
       }
     ]
-    // "import/no-relative-packages": "error"
   }
-  // "settings": {
-  //   "import/resolver": {
-  //     "node": {
-  //       "extensions": [".js", ".jsx", ".ts", ".tsx"],
-  //       "paths": ["src"]
-  //     },
-  //     "typescript": {
-  //       "project": "./tsconfig.json"
-  //     }
-  //   }
-  // }
-  // "settings": {
-  //   "import/resolver": {
-  //     "typescript": {
-  //       "project": "./tsconfig.json"
-  //     }
-  //   }
-  // }
 }
