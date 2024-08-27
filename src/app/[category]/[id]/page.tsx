@@ -1,6 +1,6 @@
+import { ProductDetailsInfo } from "@/components/product-details-info";
 import { ProductImagesCarousel } from "@/components/product-images-carousel";
 import { CardContent } from "@/components/shadcn-ui/card";
-import { ProductDetailsInfo } from "@/components/product-details-info";
 import { getProduct } from "@/lib/api/getProduct";
 import { getProductImages } from "@/lib/api/getProductImages";
 import { Category } from "@/models/product.model";

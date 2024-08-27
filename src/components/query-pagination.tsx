@@ -1,3 +1,5 @@
+import { useRouter } from "next/navigation";
+
 import {
   Pagination,
   PaginationContent,
@@ -7,7 +9,6 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/shadcn-ui/pagination";
-import { useRouter } from "next/navigation";
 
 interface Props {
   currentPage: number;

@@ -1,5 +1,5 @@
-import { getAllCategories } from "@/lib/api/getAllCategories";
 import { CategoryCard } from "@/components/category-card";
+import { getAllCategories } from "@/lib/api/getAllCategories";
 
 export default async function DashboardView() {
   const categories = await getAllCategories();

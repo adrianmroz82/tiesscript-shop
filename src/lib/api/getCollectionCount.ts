@@ -1,4 +1,5 @@
 import { collection, getCountFromServer } from "firebase/firestore";
+
 import { db } from "@/firebase/firebase";
 
 export async function getCollectionCount() {

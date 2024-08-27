@@ -1,6 +1,6 @@
 import { doc, getDoc } from "firebase/firestore";
-import { db } from "@/firebase/firebase";
 
+import { db } from "@/firebase/firebase";
 import { Category, Product } from "@/models/product.model";
 
 export async function getProduct(productId: string, category: Category): Promise<Product | null> {

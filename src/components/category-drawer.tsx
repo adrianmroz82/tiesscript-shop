@@ -1,3 +1,7 @@
+import { Menu, X } from "lucide-react";
+
+import { CategoryMenuItems } from "@/components/category-menu-items";
+import { Button } from "@/components/shadcn-ui/button";
 import {
   Drawer,
   DrawerClose,
@@ -8,11 +12,7 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/shadcn-ui/drawer";
-import { Button } from "@/components/shadcn-ui/button";
-
-import { Menu, X } from "lucide-react";
 import { getAllCategories } from "@/lib/api/getAllCategories";
-import { CategoryMenuItems } from "@/components/category-menu-items";
 
 export async function CategoryMenuDrawer() {
   const categories = await getAllCategories();

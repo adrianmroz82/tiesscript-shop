@@ -1,11 +1,11 @@
-import { ReactNode } from "react";
-import localFont from "next/font/local";
+import "@/styles/globals.css";
 
-import { ThemeProvider } from "@/components/theme-provider";
+import localFont from "next/font/local";
+import { ReactNode } from "react";
+
 import { Header } from "@/components/header";
 import { Toaster } from "@/components/shadcn-ui/toaster";
-
-import "@/styles/globals.css";
+import { ThemeProvider } from "@/components/theme-provider";
 
 const satoshiFont = localFont({ src: "../../public/fonts/satoshi-light.otf" });
 

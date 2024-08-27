@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import type { ToastActionElement, ToastProps } from "@/components/shadcn-ui/toast";
 
@@ -186,4 +186,4 @@ function useToast() {
   };
 }
 
-export { useToast, toast };
+export { toast, useToast };

@@ -1,19 +1,19 @@
 "use client";
 
-import { ChangeEvent, useEffect, useState } from "react";
-import { collection, addDoc } from "firebase/firestore";
-import { db } from "@/firebase/firebase";
+import { addDoc,collection } from "firebase/firestore";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import Image from "next/image";
+import { ChangeEvent, useEffect, useState } from "react";
 
-import { Input } from "@/components/shadcn-ui/input";
-import { Card, CardContent, CardFooter } from "@/components/shadcn-ui/card";
-import { Label } from "@/components/shadcn-ui/label";
 import { Button } from "@/components/shadcn-ui/button";
-import { useToast } from "@/components/shadcn-ui/use-toast";
-import { Category, ProductWithImages } from "@/models/product.model";
+import { Card, CardContent, CardFooter } from "@/components/shadcn-ui/card";
+import { Input } from "@/components/shadcn-ui/input";
+import { Label } from "@/components/shadcn-ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/shadcn-ui/select";
+import { useToast } from "@/components/shadcn-ui/use-toast";
+import { db } from "@/firebase/firebase";
 import { getAllCategories } from "@/lib/api/getAllCategories";
+import { Category, ProductWithImages } from "@/models/product.model";
 
 export default function ProductForm() {
   const { toast } = useToast();

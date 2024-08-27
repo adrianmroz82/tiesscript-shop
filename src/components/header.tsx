@@ -1,11 +1,11 @@
 "use client";
 
+import { ShoppingCart } from "lucide-react";
 import localFont from "next/font/local";
 import Link from "next/link";
 
-import { ThemeSwitcher } from "./theme-switcher";
-import { ShoppingCart } from "lucide-react";
 import { CategoryMenuDrawer } from "./category-drawer";
+import { ThemeSwitcher } from "./theme-switcher";
 
 const spaceGroteskFont = localFont({ src: "../../public/fonts/space-grotesk-medium.ttf" });
 

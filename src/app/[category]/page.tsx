@@ -1,7 +1,7 @@
 import { PaginatedProductList } from "@/components/paginated-product-list";
-import { Category } from "@/models/product.model";
-import { getPaginatedProducts } from "@/lib/api/getPaginatedProducts";
 import { getCollectionCount } from "@/lib/api/getCollectionCount";
+import { getPaginatedProducts } from "@/lib/api/getPaginatedProducts";
+import { Category } from "@/models/product.model";
 
 interface Props {
   params: { category: string };
