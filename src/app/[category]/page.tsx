@@ -1,8 +1,8 @@
 import { PaginatedProductList } from "@/components/paginated-product-list";
 import { getCollectionCount } from "@/lib/api/getCollectionCount";
 import { getPaginatedProducts } from "@/lib/api/getPaginatedProducts";
-import { Category } from "@/models/product.model";
 import { OrderByField } from "@/models/order-by-field.model";
+import { Category } from "@/models/product.model";
 
 interface Props {
   params: { category: string };

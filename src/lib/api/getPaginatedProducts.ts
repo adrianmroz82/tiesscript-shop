@@ -2,8 +2,8 @@ import { collection, DocumentData, getDocs, limit, orderBy, Query, query, startA
 
 import { db } from "@/firebase/firebase";
 import { getProductImages } from "@/lib/api/getProductImages";
-import { Category, Product } from "@/models/product.model";
 import { OrderByField } from "@/models/order-by-field.model";
+import { Category, Product } from "@/models/product.model";
 
 export async function getPaginatedProducts(currentPage: number, category: Category, order: OrderByField) {
   const PAGE_SIZE = 4;
