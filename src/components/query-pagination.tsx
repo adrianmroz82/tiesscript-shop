@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 import {
   Pagination,
@@ -18,9 +18,12 @@ interface Props {
 
 export function QueryPagination({ currentPage, onPageChange, totalPages }: Props) {
   const router = useRouter();
+  const searchParams = useSearchParams();
+
 
   const goToPage = (page: number) => () => {
-    router.push(`?page=${page}`);
+    const orderBy = searchParams.get("orderBy") ?? "createdAtDesc"; // Get the current sorting order
+    router.push(`?page=${page}&orderBy=${orderBy}`);
     onPageChange(page);
   };
 
