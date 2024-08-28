@@ -1,8 +1,9 @@
 "use client";
 
-import { sortOptions } from "@/models/order-by-field.model";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/shadcn-ui/select";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/shadcn-ui/select";
+import { sortOptions } from "@/models/order-by-field.model";
 
 export function OrderBySelect() {
   const router = useRouter();

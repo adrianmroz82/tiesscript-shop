@@ -1,10 +1,10 @@
 "use client";
 
 import Image from "next/image";
-
-import { capitalize } from "@/lib/utils/capitalize";
 import { useRouter } from "next/navigation";
+
 import { DrawerClose } from "@/components/shadcn-ui/drawer";
+import { capitalize } from "@/lib/utils/capitalize";
 import { Category } from "@/models/product.model";
 
 export function CategoryMenuItems({ categories }: { categories: Category[] }) {

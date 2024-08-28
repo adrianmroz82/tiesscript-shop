@@ -1,17 +1,17 @@
 "use client";
 
+import { ShoppingCart } from "lucide-react";
 import localFont from "next/font/local";
 import Link from "next/link";
 
-import { ThemeSwitcher } from "./theme-switcher";
-import { ShoppingCart } from "lucide-react";
-import { CategoryMenuDrawer } from "./category-drawer";
+import { CategoryMenuDrawer } from "@/components/category-drawer";
+import { ThemeSwitcher } from "@/components/theme-switcher";
 
 const spaceGroteskFont = localFont({ src: "../../public/fonts/space-grotesk-medium.ttf" });
 
 export function Header() {
   return (
-    <header className="bg-dark-500 p-6 shadow-lg rounded-lg h-[6rem]">
+    <header className="bg-dark-500 p-6 shadow-lg rounded-lg h-[5rem]">
       <nav>
         <div className="flex items-center justify-between">
           <CategoryMenuDrawer />

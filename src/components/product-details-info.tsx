@@ -1,8 +1,9 @@
 import Image from "next/image";
-import { Product } from "../models/product.model";
-import { Button } from "./shadcn-ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./shadcn-ui/card";
-import ShoppingCartIcon from "../assets/cart-icon.svg";
+
+import ShoppingCartIcon from "@/assets/cart-icon.svg";
+import { Button } from "@/components/shadcn-ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/shadcn-ui/card";
+import { Product } from "@/models/product.model";
 
 interface Props {
   product: Product;
@@ -23,13 +24,19 @@ export function ProductDetailsInfo({ product }: Props) {
           <p className="text-md text-gray-500 mt-2">Length: {length} cm</p>
           <p className="text-md text-gray-500 mt-2">Width: {width} cm</p>
           <div className="flex flex-col space-y-1.5">
-            <Button className="mt-8 w-1/4 bg-[#5009DC] text-md font-bold">
+            <Button className="mt-8 w-1/4 text-md font-bold" variant="outline">
               Add to cart
-              <Image className="fill-white" src={ShoppingCartIcon} alt="Add to cart" width={24} height={24} />
+              <Image
+                className="fill-white text-white ml-1"
+                src={ShoppingCartIcon}
+                alt="Add to cart"
+                width={20}
+                height={20}
+              />
             </Button>
-            <Button variant="secondary" className="mt-8 w-1/4  text-md font-bold">
+            {/* <Button variant="secondary" className="mt-8 w-1/4  text-md font-bold">
               Dodaj do ulubionych
-            </Button>
+            </Button> */}
           </div>
         </CardContent>
       </Card>

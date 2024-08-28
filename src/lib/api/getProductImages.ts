@@ -7,8 +7,7 @@ export async function getProductImages(productId: string) {
 
   const imageUrls = await Promise.all(
     listResult.items.map(async (imgRef) => {
-      const imageUrl = await getDownloadURL(imgRef);
-      return { url: imageUrl };
+      return getDownloadURL(imgRef);
     })
   );
 

@@ -1,7 +1,7 @@
-import { forwardRef, ElementRef, ComponentPropsWithoutRef, ReactElement } from "react";
 import * as ToastPrimitives from "@radix-ui/react-toast";
 import { cva, type VariantProps } from "class-variance-authority";
 import { X } from "lucide-react";
+import { ComponentPropsWithoutRef, ElementRef, forwardRef, ReactElement } from "react";
 
 import { cn } from "@/lib/utils";
 
@@ -98,13 +98,13 @@ type ToastProps = ComponentPropsWithoutRef<typeof Toast>;
 type ToastActionElement = ReactElement<typeof ToastAction>;
 
 export {
-  type ToastProps,
-  type ToastActionElement,
-  ToastProvider,
-  ToastViewport,
   Toast,
-  ToastTitle,
-  ToastDescription,
-  ToastClose,
   ToastAction,
+  type ToastActionElement,
+  ToastClose,
+  ToastDescription,
+  type ToastProps,
+  ToastProvider,
+  ToastTitle,
+  ToastViewport,
 };

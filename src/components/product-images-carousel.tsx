@@ -1,5 +1,8 @@
 "use client";
 
+import Image from "next/image";
+import { useEffect, useState } from "react";
+
 import {
   Carousel,
   CarouselApi,
@@ -7,11 +10,8 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from "./shadcn-ui/carousel";
-
-import Image from "next/image";
-import { useEffect, useState } from "react";
-import { ProductThumbnail } from "./thumbnail";
+} from "@/components/shadcn-ui/carousel";
+import { ProductThumbnail } from "@/components/thumbnail";
 import { ProductImageUrl } from "@/models/product.model";
 
 interface Props {
