@@ -4,10 +4,6 @@ import { useTheme } from "next-themes";
 
 import { Switch } from "@/components/shadcn-ui/switch";
 
-// import { Switch } from "./shadcn-ui/switch";
-
-// import { Switch } from "./shadcn-ui/switch";
-
 export function ThemeSwitcher() {
   const { setTheme } = useTheme();
   const currentTheme = useTheme().theme;

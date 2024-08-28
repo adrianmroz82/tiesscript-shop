@@ -2,11 +2,10 @@
 
 import useEmblaCarousel, { type UseEmblaCarouselType } from "embla-carousel-react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import { createContext, forwardRef, KeyboardEvent,useCallback, useContext, useEffect, useState } from "react";
+import { createContext, forwardRef, KeyboardEvent, useCallback, useContext, useEffect, useState } from "react";
 
+import { Button } from "@/components/shadcn-ui/button";
 import { cn } from "@/lib/utils";
-
-import { Button } from "./button";
 
 type CarouselApi = UseEmblaCarouselType[1];
 type UseCarouselParameters = Parameters<typeof useEmblaCarousel>;
@@ -220,4 +219,4 @@ const CarouselNext = forwardRef<HTMLButtonElement, React.ComponentProps<typeof B
 );
 CarouselNext.displayName = "CarouselNext";
 
-export { Carousel, type CarouselApi, CarouselContent, CarouselItem, CarouselNext,CarouselPrevious };
+export { Carousel, type CarouselApi, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious };

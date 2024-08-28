@@ -1,9 +1,9 @@
 import Image from "next/image";
 
-import ShoppingCartIcon from "../assets/cart-icon.svg";
-import { Product } from "../models/product.model";
-import { Button } from "./shadcn-ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "./shadcn-ui/card";
+import ShoppingCartIcon from "@/assets/cart-icon.svg";
+import { Button } from "@/components/shadcn-ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/shadcn-ui/card";
+import { Product } from "@/models/product.model";
 
 interface Props {
   product: Product;

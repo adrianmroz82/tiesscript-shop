@@ -4,8 +4,8 @@ import { ShoppingCart } from "lucide-react";
 import localFont from "next/font/local";
 import Link from "next/link";
 
-import { CategoryMenuDrawer } from "./category-drawer";
-import { ThemeSwitcher } from "./theme-switcher";
+import { CategoryMenuDrawer } from "@/components/category-drawer";
+import { ThemeSwitcher } from "@/components/theme-switcher";
 
 const spaceGroteskFont = localFont({ src: "../../public/fonts/space-grotesk-medium.ttf" });
 
