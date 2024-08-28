@@ -20,9 +20,8 @@ export function QueryPagination({ currentPage, onPageChange, totalPages }: Props
   const router = useRouter();
   const searchParams = useSearchParams();
 
-
   const goToPage = (page: number) => () => {
-    const orderBy = searchParams.get("orderBy") ?? "createdAtDesc"; // Get the current sorting order
+    const orderBy = searchParams.get("orderBy") ?? "createdAtDesc";
     router.push(`?page=${page}&orderBy=${orderBy}`);
     onPageChange(page);
   };
