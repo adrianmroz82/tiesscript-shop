@@ -14,7 +14,7 @@ import { db } from "@/firebase/firebase";
 import { getAllCategories } from "@/lib/api/getAllCategories";
 import { Category, ProductWithImages } from "@/models/product.model";
 
-export default function ProductForm() {
+export default function AddProductForm() {
   const { toast } = useToast();
   const [formData, setFormData] = useState<ProductWithImages>({
     id: "",
