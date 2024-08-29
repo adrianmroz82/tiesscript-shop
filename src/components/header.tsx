@@ -19,8 +19,8 @@ export function Header() {
             <Link className="hover:underline" href="/">
               Home
             </Link>
-            <Link className="hover:underline" href="/product-form">
-              Add new item
+            <Link className="hover:underline" href="/add-product-form">
+              Add new product
             </Link>
             <Link className="hover:underline" href="/contact">
               Contact
