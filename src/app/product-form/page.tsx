@@ -1,6 +1,7 @@
 "use client";
 
-import { addDoc,collection } from "firebase/firestore";
+import imageCompression from "browser-image-compression";
+import { addDoc, collection } from "firebase/firestore";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import Image from "next/image";
 import { ChangeEvent, useEffect, useState } from "react";
@@ -31,6 +32,7 @@ export default function ProductForm() {
   });
   const [category, setCategory] = useState<Category>("" as Category);
   const [categories, setCategories] = useState<Category[]>([]);
+  const [imagesPreview, setImagesPreview] = useState<{ file: File; previewUrl: string }[]>([]);
 
   useEffect(() => {
     async function fetchCategories() {
@@ -46,11 +48,38 @@ export default function ProductForm() {
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
-  const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleAddImage = async (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
-      setImageUpload(e.target.files);
-      const imageUrls = Array.from(e.target.files).map((file) => URL.createObjectURL(file));
-      setFormData((prevData) => ({ ...prevData, images: imageUrls }));
+      const files = Array.from(e.target.files);
+
+      const resizedFiles = await Promise.all(
+        files.map(async (file) => {
+          const options = {
+            maxSizeMB: 2,
+            // maxWidthOrHeight: 800,
+            useWebWorker: true,
+          };
+          try {
+            const compressedFile = await imageCompression(file, options);
+
+            console.log(`Original ${file.name}: ${(file.size / (1024 * 1024)).toFixed(2)} MB`);
+            console.log(`Compressed ${compressedFile.name}: ${(compressedFile.size / (1024 * 1024)).toFixed(2)} MB`);
+
+            return compressedFile;
+          } catch (error) {
+            console.error("Error compressing image:", error);
+            return file;
+          }
+        })
+      );
+
+      const newPreviews = resizedFiles.map((file) => ({
+        file,
+        previewUrl: URL.createObjectURL(file),
+      }));
+
+      setImagesPreview((prev) => [...prev, ...newPreviews]);
+      setImageUpload((prev) => (prev ? [...prev, ...resizedFiles] : resizedFiles));
     }
   };
 
@@ -58,40 +87,54 @@ export default function ProductForm() {
     setCategory(value);
   };
 
+  const handleRemoveImage = (index: number) => {
+    setImagesPreview((prev) => prev.filter((_, i) => i !== index));
+  };
+
   async function uploadImages(productId: string) {
-    if (imagesUpload) {
-      const storage = getStorage();
+    if (!imagesUpload || imagesUpload.length === 0) return [];
 
-      const imageUrls = await Promise.all(
-        Array.from(imagesUpload).map(async (file) => {
-          const storageRef = ref(storage, `products/${productId}/${file.name}`);
-          await uploadBytes(storageRef, file, { customMetadata: { order: "0" } });
-          return getDownloadURL(storageRef);
-        })
-      );
+    const storage = getStorage();
+    const imageUrls = await Promise.all(
+      Array.from(imagesUpload).map(async (file) => {
+        const storageRef = ref(storage, `products/${productId}/${file.name}`);
 
-      setFormData((prevData) => ({ ...prevData, images: [...prevData.images, ...imageUrls] }));
-    }
+        await uploadBytes(storageRef, file);
+        return getDownloadURL(storageRef);
+      })
+    );
+
+    return imageUrls;
   }
 
   async function handleAddDoc(e: any) {
     e.preventDefault();
-    
-    const convertedData = {
-      ...formData,
-      price: Number(formData.price),
-      length: Number(formData.length),
-      width: Number(formData.width),
-      createdAt: new Date().toISOString(),
-    };
 
     try {
       setIsUploading(true);
-      const docRef = await addDoc(collection(db, category), convertedData);
-      await uploadImages(docRef.id);
+
+      const docRef = await addDoc(collection(db, category), {
+        ...formData,
+        price: Number(formData.price),
+        length: Number(formData.length),
+        width: Number(formData.width),
+        images: [],
+        createdAt: new Date().toISOString(),
+      });
+
+      const productId = docRef.id;
+      setFormData((prevData) => ({ ...prevData, id: productId }));
+
+      const imageUrls = await uploadImages(productId);
+
+      await addDoc(collection(db, category), {
+        ...formData,
+        images: imageUrls,
+      });
+
       toast({
         title: "Success",
-        description: `Document written with ID: ${docRef.id}`,
+        description: `Document written with ID: ${productId}`,
       });
     } catch (error) {
       toast({
@@ -160,14 +203,22 @@ export default function ProductForm() {
               </div>
               <div className="space-y-1.5 ">
                 <Label htmlFor="image">Image</Label>
-                <Input id="image" type="file" name="image" multiple onChange={handleImageChange} />
+                <Input id="image" type="file" name="image" multiple onChange={handleAddImage} />
                 <div className="flex space-x-1.5 flex-wrap">
-                  {formData.images.length > 0 &&
-                    formData.images.map((image) => (
-                      <Image width={128} height={500} key={image} src={image} alt="product" />
-                    ))}
+                  {imagesPreview.map((image, index) => (
+                    <div key={index} className="relative">
+                      <Image width={128} height={128} src={image.previewUrl} alt="product" />
+                      <button
+                        type="button"
+                        onClick={() => handleRemoveImage(index)}
+                        className="absolute top-0 right-0 p-1 bg-red-500 text-white rounded-full">
+                        ✕
+                      </button>
+                    </div>
+                  ))}
                 </div>
               </div>
+              {/*  */}
               <CardFooter className="flex gap-4 px-0 py-4">
                 <Button className="w-full" onClick={handleAddDoc}>
                   Add item
