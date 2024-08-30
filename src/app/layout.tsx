@@ -6,6 +6,7 @@ import { ReactNode } from "react";
 import { Header } from "@/components/header";
 import { Toaster } from "@/components/shadcn-ui/toaster";
 import { ThemeProvider } from "@/components/theme-provider";
+import { StoreProvider } from "@/store/store-provider";
 
 const satoshiFont = localFont({ src: "../../public/fonts/satoshi-light.otf" });
 
@@ -18,11 +19,13 @@ export default function RootLayout({ children }: Props) {
       <head />
       <body className="flex">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-          <div className="flex flex-col w-full">
-            <Header />
-            <main className="w-full h-[calc(100vh-6rem)]">{children}</main>
-          </div>
-          <Toaster />
+          <StoreProvider>
+            <div className="flex flex-col w-full">
+              <Header />
+              <main className="w-full h-[calc(100vh-6rem)]">{children}</main>
+            </div>
+            <Toaster />
+          </StoreProvider>
         </ThemeProvider>
       </body>
     </html>
