@@ -8,7 +8,6 @@ import { useAppSelector } from "@/store/utils/redux-hooks";
 export function ShoppingCart() {
   const router = useRouter();
   const cart = useAppSelector((state) => state.cart);
-
   const numOfProductsInCart = cart.reduce((sum, item) => sum + item.quantity, 0);
 
   const handleRedirect = () => {
