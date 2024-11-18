@@ -5,7 +5,7 @@ import { getProductImages } from "@/lib/api/getProductImages";
 import { OrderByField } from "@/models/order-by-field.model";
 import { Category, Product } from "@/models/product.model";
 
-const PAGE_SIZE = 4;
+const PAGE_SIZE = 40;
 
 export async function getPaginatedProducts(currentPage: number, category: Category, order: OrderByField) {
   const productsRef = collection(db, category);

@@ -13,8 +13,8 @@ export function ImageCard({ url }: Props) {
         className="object-contain justify-center align-middle cursor-pointer"
         src={url}
         alt="Product Image"
-        width={400}
-        height={400}
+        width={350}
+        height={350}
       />
     </Card>
   );
