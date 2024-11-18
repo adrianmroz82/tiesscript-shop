@@ -1,14 +1,13 @@
 import { X as RemoveIcon } from "lucide-react";
 import Image from "next/image";
 
-// import { CartItem as CartItemProps } from "@/lib/model";
 import { useCartActions } from "@/lib/hooks/useCartActions";
+import { CartItem as CartItemProps } from "@/store/models/cart.model";
 
 interface Props {
-  cartItem: any;
+  cartItem: CartItemProps;
 }
 
-// TODO: fix types, price.toFixed bug, removeIcon alignment to right doesnt work
 export function CartItem({ cartItem }: Props) {
   const { handleIncrementQuantity, handleDecrementQuantity, handleRemoveItem } = useCartActions();
   const { id, name, images, price, quantity } = cartItem;
@@ -35,14 +34,14 @@ export function CartItem({ cartItem }: Props) {
           </button>
         </div>
       </div>
-      <div className="ml-5 text-right">
+      <div className="ml-5 flex flex-col items-end">
         <RemoveIcon
           data-testid="remove-icon"
           className="cursor-pointer"
           size={24}
           onClick={() => handleRemoveItem(id)}
         />
-        <p>${price?.toFixed(2)} each</p>
+        <p>${price} each</p>
         <p>Total: ${(price * quantity).toFixed(2)}</p>
       </div>
     </li>

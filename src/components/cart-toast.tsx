@@ -15,7 +15,6 @@ export function CartToast() {
   const cart = useAppSelector((state) => state.cart);
 
   const quantity = cart.reduce((acc, item) => acc + item.quantity, 0);
-  console.log(quantity);
 
   useEffect(() => {
     if (quantity > 0) {

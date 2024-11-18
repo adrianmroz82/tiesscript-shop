@@ -6,7 +6,6 @@ import { useAppSelector } from "@/store/utils/redux-hooks";
 
 export default function Cart() {
   const cart = useAppSelector((state) => state.cart);
-  console.log(cart);
 
   const totalPrice = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
