@@ -13,6 +13,7 @@ const satoshiFont = localFont({ src: "../../public/fonts/satoshi-light.otf" });
 interface Props {
   children: ReactNode;
 }
+
 export default function RootLayout({ children }: Props) {
   return (
     <html lang="en" suppressHydrationWarning className={`${satoshiFont.className}`}>
@@ -22,7 +23,7 @@ export default function RootLayout({ children }: Props) {
           <StoreProvider>
             <div className="flex flex-col w-full">
               <Header />
-              <main className="w-full h-[calc(100vh-6rem)]">{children}</main>
+              <main className="mt-[5rem] w-full h-[calc(100vh-6rem)]">{children}</main>
             </div>
             <Toaster />
           </StoreProvider>

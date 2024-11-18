@@ -80,7 +80,6 @@ export default function AddProductForm() {
       });
 
       const productId = docRef.id;
-      setFormData((prevData) => ({ ...prevData, id: productId }));
 
       const imageUrls = await uploadImages(productId);
 

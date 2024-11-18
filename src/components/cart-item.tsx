@@ -42,7 +42,7 @@ export function CartItem({ cartItem }: Props) {
           size={24}
           onClick={() => handleRemoveItem(id)}
         />
-        <p>${price.toFixed(2)} each</p>
+        <p>${price?.toFixed(2)} each</p>
         <p>Total: ${(price * quantity).toFixed(2)}</p>
       </div>
     </li>
