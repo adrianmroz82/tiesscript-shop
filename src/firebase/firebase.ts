@@ -1,8 +1,7 @@
 import { FirebaseOptions, initializeApp } from "firebase/app";
-import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
-const firebaseConfig: FirebaseOptions = {
+export const firebaseClientConfig: FirebaseOptions = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
   authDomain: process.env.NEXT_PUBLIC_AUTH_DOMAIN,
   projectId: process.env.NEXT_PUBLIC_PROJECT_ID,
@@ -11,7 +10,25 @@ const firebaseConfig: FirebaseOptions = {
   appId: process.env.NEXT_PUBLIC_APP_ID,
 };
 
-const app = initializeApp(firebaseConfig);
-export const db = getFirestore(app);
+export const firebaseServerConfig = {
+  cookieName: process.env.AUTH_COOKIE_NAME!,
+  cookieSignatureKeys: [
+    process.env.AUTH_COOKIE_SIGNATURE_KEY_CURRENT!,
+    process.env.AUTH_COOKIE_SIGNATURE_KEY_PREVIOUS!,
+  ],
+  cookieSerializeOptions: {
+    path: "/",
+    httpOnly: true,
+    secure: process.env.USE_SECURE_COOKIES === "true",
+    sameSite: "lax" as const,
+    maxAge: 12 * 60 * 60 * 24,
+  },
+  serviceAccount: {
+    projectId: process.env.NEXT_PUBLIC_PROJECT_ID!,
+    clientEmail: process.env.FIREBASE_ADMIN_CLIENT_EMAIL!,
+    privateKey: process.env.FIREBASE_ADMIN_PRIVATE_KEY?.replace(/\\n/g, "\n")!,
+  },
+};
 
-export const auth = getAuth(app);
+export const app = initializeApp(firebaseClientConfig);
+export const db = getFirestore(app);
