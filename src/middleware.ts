@@ -3,7 +3,9 @@ import { authMiddleware, redirectToHome, redirectToLogin } from "next-firebase-a
 
 import { firebaseClientConfig, firebaseServerConfig } from "@/firebase/firebase";
 
-const PUBLIC_PATHS = ["/register", "/login"];
+// TODO: Add public paths that should be accessible without authentication
+// most preferably by specifying only protected routes
+const PUBLIC_PATHS = ["/login"];
 
 export async function middleware(request: NextRequest) {
   return authMiddleware(request, {
@@ -46,5 +48,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/", "/((?!_next|api|.*\\.).*)", "/api/login", "/api/logout"],
+  matcher: ["/((?!_next|api|.*\\.).*)", "/api/login", "/api/logout"],
 };

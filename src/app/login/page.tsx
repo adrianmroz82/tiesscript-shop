@@ -1,7 +1,7 @@
 "use client";
 
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { FormEvent, useState } from "react";
 
 import { app } from "@/firebase/firebase";
@@ -11,6 +11,7 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault();
@@ -26,7 +27,8 @@ export default function Login() {
         },
       });
 
-      router.push("/auth");
+      const redirectPath = searchParams.get("redirect") || "/";
+      router.push(redirectPath);
     } catch (e) {
       setError((e as Error).message);
     }
