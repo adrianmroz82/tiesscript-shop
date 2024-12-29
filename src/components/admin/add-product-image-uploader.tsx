@@ -9,6 +9,8 @@ interface Props {
   setImagesUpload: (_files: File[]) => void;
 }
 
+// TODO: extract image compression logic to a custom hook
+
 export function AddProductImageUploader({ setImagesUpload }: Props) {
   const [imagesPreview, setImagesPreview] = useState<{ file: File; previewUrl: string }[]>([]);
 
@@ -52,17 +54,17 @@ export function AddProductImageUploader({ setImagesUpload }: Props) {
   };
 
   return (
-    <div className="space-y-1.5 ">
+    <div className="space-y-4">
       <Label htmlFor="image">Image</Label>
       <Input id="image" type="file" name="image" multiple onChange={handleAddImage} />
-      <div className="flex space-x-1.5 flex-wrap">
+      <div className="flex space-x-4 flex-wrap">
         {imagesPreview.map((image, index) => (
           <div key={index} className="relative">
-            <Image width={128} height={128} src={image.previewUrl} alt="product" />
+            <Image width={128} height={128} src={image.previewUrl} alt="product" className="object-cover h-32" />
             <button
               type="button"
               onClick={() => handleRemoveImage(index)}
-              className="absolute top-0 right-0 p-1 bg-red-500 text-white rounded-full">
+              className="absolute top-1 right-1 p-1 bg-red-500 text-white rounded-full">
               ✕
             </button>
           </div>
