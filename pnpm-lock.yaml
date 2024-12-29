@@ -67,6 +67,9 @@ dependencies:
   react-router-dom:
     specifier: ^6.25.0
     version: 6.25.0(react-dom@18.3.1)(react@18.3.1)
+  react-sortable-hoc:
+    specifier: ^2.0.0
+    version: 2.0.0(prop-types@15.8.1)(react-dom@18.3.1)(react@18.3.1)
   sass:
     specifier: ^1.71.1
     version: 1.71.1
@@ -4034,7 +4037,6 @@ packages:
       loose-envify: 1.4.0
       object-assign: 4.1.1
       react-is: 16.13.1
-    dev: true
 
   /protobufjs@7.2.6:
     resolution: {integrity: sha512-dgJaEDDL6x8ASUZ1YqWciTRrdOuYNzoOf27oHNfdyvKqHr5i0FV7FSLU+aIeFjyFgVxrpTOtQUi0BLLBymZaBw==}
@@ -4085,7 +4087,6 @@ packages:
 
   /react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
-    dev: true
 
   /react-redux@9.1.2(@types/react@18.3.2)(react@18.3.1)(redux@5.0.1):
     resolution: {integrity: sha512-0OA4dhM1W48l3uzmv6B7TXPCGmokUU4p1M44DGN2/D9a1FjVPukVjER1PcPX97jIg6aUeLq1XJo1IpfbgULn0w==}
@@ -4181,6 +4182,20 @@ packages:
     dependencies:
       '@remix-run/router': 1.18.0
       react: 18.3.1
+    dev: false
+
+  /react-sortable-hoc@2.0.0(prop-types@15.8.1)(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-JZUw7hBsAHXK7PTyErJyI7SopSBFRcFHDjWW5SWjcugY0i6iH7f+eJkY8cJmGMlZ1C9xz1J3Vjz0plFpavVeRg==}
+    peerDependencies:
+      prop-types: ^15.5.7
+      react: ^16.3.0 || ^17.0.0
+      react-dom: ^16.3.0 || ^17.0.0
+    dependencies:
+      '@babel/runtime': 7.23.9
+      invariant: 2.2.4
+      prop-types: 15.8.1
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
     dev: false
 
   /react-style-singleton@2.2.1(@types/react@18.3.2)(react@18.3.1):
