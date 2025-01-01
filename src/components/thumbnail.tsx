@@ -12,16 +12,16 @@ interface Props {
 
 export function ProductThumbnail({ productImage, api, currentIndex, index }: Props) {
   return (
-    <div className="w-32 flex p-2">
-      <Image
-        src={productImage}
-        alt="Product Image Thumbnail"
-        style={{ objectFit: "contain" }}
-        width={500}
-        height={500}
-        onClick={() => api && api.scrollTo(index)}
-        className={`${index + 1 === currentIndex && "border-2 border-slate-500"}`}
-      />
+    <div className={`w-32 h-32 flex p-2 ${index + 1 === currentIndex ? "border-2 border-slate-200" : ""}`}>
+      <div className="w-full h-full relative">
+        <Image
+          src={productImage}
+          alt="Product Image Thumbnail"
+          layout="fill"
+          objectFit="cover"
+          onClick={() => api && api.scrollTo(index)}
+        />
+      </div>
     </div>
   );
 }

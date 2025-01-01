@@ -55,14 +55,8 @@ export function ProductImagesCarousel({ productImages }: Props) {
           {productImages?.map((productImage, index) => (
             <CarouselItem key={index} tabIndex={2}>
               <div className="p-1">
-                <div className="flex aspect-square items-center justify-center p-6">
-                  <Image
-                    style={{ objectFit: "contain" }}
-                    src={productImage}
-                    alt={`Product Image ${index + 1}`}
-                    width={500}
-                    height={500}
-                  />
+                <div className="flex aspect-square justify-center p-6">
+                  <Image src={productImage} alt={`Product Image ${index + 1}`} width={500} height={500} />
                 </div>
               </div>
             </CarouselItem>

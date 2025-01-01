@@ -15,11 +15,13 @@ export default async function DetailsPage({ params }: Props) {
   const productImages = await getProductImages(id);
 
   return (
-    <CardContent className="shadow-lg">
-      <div className="flex" style={{ border: "1px solid red" }}>
-        <ProductImagesCarousel productImages={productImages!} />
-        <ProductDetailsInfo product={product!} />
-      </div>
-    </CardContent>
+    <div className="px-16 py-8">
+      <CardContent className="shadow-lg">
+        <div className="flex">
+          <ProductImagesCarousel productImages={productImages!} />
+          <ProductDetailsInfo product={product!} />
+        </div>
+      </CardContent>
+    </div>
   );
 }
