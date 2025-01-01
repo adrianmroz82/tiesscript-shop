@@ -39,13 +39,14 @@ export function PaginatedProductList({ products, count, category }: Props) {
   };
 
   return (
-    <div className="flex flex-col h-[calc(100vh-6rem)]">
+    <div className="flex flex-col h-[calc(100vh-6rem)] items-center">
       <div className="flex-grow">
         <OrderBySelect />
+        
 
         <div className="flex flex-wrap">
           {products?.map((product) => (
-            <div key={product.id} className="w-1/4 p-16 flex flex-col items-center justify-between">
+            <div key={product.id} className="w-1/4 p-12 flex flex-col items-center justify-between">
               <div
                 className="flex flex-col items-center justify-center cursor-pointer"
                 onClick={() => goToDetailsPage(product.id)}>
