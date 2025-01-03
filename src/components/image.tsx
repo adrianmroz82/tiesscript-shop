@@ -10,11 +10,11 @@ export function ImageCard({ url }: Props) {
   return (
     <Card className="p-2">
       <Image
-        className="object-contain justify-center align-middle cursor-pointer"
+        className="object-cover justify-center align-middle cursor-pointer h-80"
         src={url}
         alt="Product Image"
-        width={350}
-        height={350}
+        width={320}
+        height={320}
       />
     </Card>
   );
