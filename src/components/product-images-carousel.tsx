@@ -36,7 +36,7 @@ export function ProductImagesCarousel({ productImages }: Props) {
 
   return (
     <>
-      <div className="flex p-5 flex-col">
+      <div className="flex flex-col">
         {productImages?.map((productImage, index) => (
           <div key={index} className="h-[150px] w-auto ">
             <ProductThumbnail
@@ -50,21 +50,33 @@ export function ProductImagesCarousel({ productImages }: Props) {
         ))}
       </div>
 
-      <Carousel className="w-full max-w-xl" setApi={setApi}>
-        <CarouselContent>
-          {productImages?.map((productImage, index) => (
-            <CarouselItem key={index} tabIndex={2}>
-              <div className="p-1">
-                <div className="flex aspect-square justify-center p-6">
-                  <Image src={productImage} alt={`Product Image ${index + 1}`} width={500} height={500} />
+      <div className="relative w-full max-w-xl flex items-center">
+        <Carousel className="w-full" setApi={setApi}>
+          <CarouselContent>
+            {productImages?.map((productImage, index) => (
+              <CarouselItem key={index} tabIndex={2}>
+                <div className="p-1">
+                  <div className="flex aspect-square justify-center">
+                    <Image
+                      src={productImage}
+                      alt={`Product Image ${index + 1}`}
+                      width={500}
+                      height={500}
+                      className="object-contain"
+                    />
+                  </div>
                 </div>
-              </div>
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-        <CarouselPrevious />
-        <CarouselNext />
-      </Carousel>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <div className="absolute left-0 top-1/2">
+            <CarouselPrevious />
+          </div>
+          <div className="absolute right-0 top-1/2">
+            <CarouselNext />
+          </div>
+        </Carousel>
+      </div>
     </>
   );
 }

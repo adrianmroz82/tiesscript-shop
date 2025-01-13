@@ -7,6 +7,7 @@ import { CartToast } from "@/components/cart-toast";
 import { ImageCard } from "@/components/image";
 import { ImagePlaceholder } from "@/components/image-placeholder";
 import { OrderBySelect } from "@/components/order-by-select";
+import { ProductFilterSidebar } from "@/components/product-filter-sidebar";
 import { QueryPagination } from "@/components/query-pagination";
 import { Button } from "@/components/shadcn-ui/button";
 import { Category, Product, ProductWithImages } from "@/models/product.model";
@@ -39,32 +40,33 @@ export function PaginatedProductList({ products, count, category }: Props) {
   };
 
   return (
-    <div className="flex flex-col h-[calc(100vh-6rem)] items-center">
-      <div className="flex-grow">
-        <OrderBySelect />
-        
-
-        <div className="flex flex-wrap">
-          {products?.map((product) => (
-            <div key={product.id} className="w-1/4 p-12 flex flex-col items-center justify-between">
-              <div
-                className="flex flex-col items-center justify-center cursor-pointer"
-                onClick={() => goToDetailsPage(product.id)}>
-                {product.images[0] ? <ImageCard url={product.images[0]} /> : <ImagePlaceholder />}
+    <div className="flex h-[calc(100vh-6rem)]">
+      <ProductFilterSidebar />
+      <div className="flex-1 flex flex-col items-center">
+        <div className="flex-grow w-full">
+          <OrderBySelect />
+          <div className="flex flex-wrap">
+            {products?.map((product) => (
+              <div key={product.id} className="w-1/4 p-12 flex flex-col items-center justify-between">
+                <div
+                  className="flex flex-col items-center justify-center cursor-pointer"
+                  onClick={() => goToDetailsPage(product.id)}>
+                  {product.images[0] ? <ImageCard url={product.images[0]} /> : <ImagePlaceholder />}
+                </div>
+                <div className="flex flex-col items-center mt-2">
+                  <div className="text-sm">{product.name}</div>
+                  <div className="text-sm">${product.price}</div>
+                  <Button className="mt-4" onClick={() => handleAddToCart(product)}>
+                    Add to cart
+                  </Button>
+                </div>
               </div>
-              <div className="flex flex-col items-center mt-2">
-                <div className="text-sm">{product.name}</div>
-                <div className="text-sm">${product.price}</div>
-                <Button className="mt-4" onClick={() => handleAddToCart(product)}>
-                  Add to cart
-                </Button>
-              </div>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
-      <div className="flex-shrink-0">
-        <QueryPagination currentPage={currentPage} onPageChange={handlePageChange} totalPages={TOTAL_PAGES} />
+        <div className="flex-shrink-0">
+          <QueryPagination currentPage={currentPage} onPageChange={handlePageChange} totalPages={TOTAL_PAGES} />
+        </div>
       </div>
       <CartToast />
     </div>
