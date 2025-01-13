@@ -45,7 +45,7 @@ export async function getPaginatedProducts(currentPage: number, category: Catego
   })) as Product[];
 
   const productPromises = products.map(async (product) => {
-    const images = await getProductImages(product.id);
+    const images = await getProductImages(product.id, 1);
     return { ...product, images };
   });
 
