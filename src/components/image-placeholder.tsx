@@ -8,8 +8,8 @@ export function ImagePlaceholder() {
       className="object-contain justify-center align-middle"
       src={IMG_SRC}
       alt="Image Placeholder"
-      width={200}
-      height={200}
+      width={150}
+      height={150}
     />
   );
 }

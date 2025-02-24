@@ -1,6 +1,6 @@
 "use client";
 
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, doc, updateDoc } from "firebase/firestore";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import { ChangeEvent, useEffect, useState } from "react";
 
@@ -83,19 +83,19 @@ export default function AddProductForm() {
 
       const imageUrls = await uploadImages(productId);
 
-      await addDoc(collection(db, category), {
-        ...formData,
+      const productDocRef = doc(db, category, productId);
+      await updateDoc(productDocRef, {
         images: imageUrls,
       });
 
       toast({
         title: "Success",
-        description: `Document written with ID: ${productId}`,
+        description: `Product added with ID: ${productId}`,
       });
     } catch (error) {
       toast({
         title: "Error",
-        description: `Error adding document: ${error}`,
+        description: `Error adding product: ${error}`,
         variant: "destructive",
       });
     } finally {

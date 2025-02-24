@@ -8,7 +8,7 @@ import { Toaster } from "@/components/shadcn-ui/toaster";
 import { ThemeProvider } from "@/components/theme-provider";
 import { StoreProvider } from "@/store/store-provider";
 
-const satoshiFont = localFont({ src: "../../public/fonts/satoshi-light.otf" });
+const satoshiFont = localFont({ src: "../../../public/fonts/satoshi-light.otf" });
 
 interface Props {
   children: ReactNode;
