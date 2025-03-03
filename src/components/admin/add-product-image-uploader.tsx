@@ -2,15 +2,18 @@ import imageCompression from "browser-image-compression";
 import Image from "next/image";
 import { ChangeEvent, useState } from "react";
 import { SortableContainer, SortableElement } from "react-sortable-hoc";
+import { v4 } from "uuid";
 
 import { Input } from "@/components/shadcn-ui/input";
 import { Label } from "@/components/shadcn-ui/label";
+import { createClient } from "@/utils/supabase/client";
 
 interface Props {
   setImagesUpload: (_files: File[]) => void;
+  setFormData: (_data: (_prev: Product) => Product) => void;
 }
 
-export function AddProductImageUploader({ setImagesUpload }: Props) {
+export function AddProductImageUploader({ setImagesUpload, setFormData }: Props) {
   const [imagesPreview, setImagesPreview] = useState<{ file: File; previewUrl: string; id: string }[]>([]);
 
   const handleAddImage = async (e: ChangeEvent<HTMLInputElement>) => {
@@ -46,8 +49,30 @@ export function AddProductImageUploader({ setImagesUpload }: Props) {
 
       setImagesPreview((prev) => [...prev, ...newPreviews]);
       setImagesUpload(resizedFiles);
+
+      const uploadedUrls = await Promise.all(resizedFiles.map(uploadImageToSupabase));
+
+      setFormData((prev) => ({
+        ...prev,
+        images: [...prev.images, ...uploadedUrls],
+      }));
     }
   };
+
+  async function uploadImageToSupabase(file: File) {
+    const filePath = `products/${v4()}-${file.name}`;
+
+    const supabase = createClient();
+
+    const { error } = await supabase.storage.from("images").upload(filePath, file);
+    if (error) {
+      console.error("Error uploading image:", error.message);
+      return "";
+    }
+
+    const { data } = supabase.storage.from("images").getPublicUrl(filePath);
+    return data.publicUrl;
+  }
 
   const handleRemoveImage = (id: string) => {
     // Remove image by Id, map to file objects, and update the state
