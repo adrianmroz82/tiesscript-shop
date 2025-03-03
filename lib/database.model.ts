@@ -32,8 +32,8 @@ export type Database = {
           created_at: string
           description: string | null
           id: number
-          images: string[]
           length: number | null
+          main_image: string
           name: string
           price: number
           width: number | null
@@ -42,8 +42,8 @@ export type Database = {
           created_at?: string
           description?: string | null
           id?: number
-          images: string[]
           length?: number | null
+          main_image: string
           name?: string
           price: number
           width?: number | null
@@ -52,11 +52,29 @@ export type Database = {
           created_at?: string
           description?: string | null
           id?: number
-          images?: string[]
           length?: number | null
+          main_image?: string
           name?: string
           price?: number
           width?: number | null
+        }
+        Relationships: []
+      }
+      resources: {
+        Row: {
+          created_at: string
+          id: number
+          images: string[]
+        }
+        Insert: {
+          created_at?: string
+          id?: number
+          images: string[]
+        }
+        Update: {
+          created_at?: string
+          id?: number
+          images?: string[]
         }
         Relationships: []
       }
