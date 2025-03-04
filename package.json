@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "lint:fix": "next lint --fix"
+    "lint:fix": "next lint --fix",
+    "supabase-gen-types": "npx supabase gen types typescript --project-id juuzskjgczlmyqxijkud > lib/database.model.ts"
   },
   "dependencies": {
     "@radix-ui/react-checkbox": "^1.1.3",
@@ -37,6 +38,7 @@
     "react-firebase-hooks": "^5.1.1",
     "react-redux": "^9.1.2",
     "react-router-dom": "^6.25.0",
+    "react-scan": "^0.2.9",
     "react-sortable-hoc": "^2.0.0",
     "sass": "^1.71.1",
     "tailwind-merge": "^2.2.1",

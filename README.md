@@ -1,6 +1,4 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
-## MVP TODO
+### MVP TODO
 [ ] Products page as main page - query over all products
 [ ] Product page with id
 [ ] Edit product page - entry from both products and product page
@@ -17,8 +15,6 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 ### ideas
 [x] only one image fetched on paginated query (main_image field in products tabl, compressed even more) 
 [ ] for the rest of images, create product_resources (add main_image there as well, but not compressed) -> missing compression on main_image
-
-
 
 
 
