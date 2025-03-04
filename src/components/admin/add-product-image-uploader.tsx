@@ -24,6 +24,7 @@ export async function uploadImageToSupabase(file: File): Promise<string | null> 
   }
 
   // Retrieve the public URL
+  // TODO: is this needed?
   const { data } = supabase.storage.from("images").getPublicUrl(filePath);
   return data?.publicUrl || null;
 }
@@ -39,7 +40,7 @@ export function AddProductImageUploader({ setImagesToUpload }: Props) {
       const resizedFiles = await Promise.all(
         files.map(async (file) => {
           try {
-            return await imageCompression(file, { maxSizeMB: 2, useWebWorker: true });
+            return await imageCompression(file, { maxSizeMB: 1, useWebWorker: true });
           } catch (error) {
             console.error("Error compressing image:", error);
             return file;
