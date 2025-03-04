@@ -1,21 +1,20 @@
 import { Menu, X } from "lucide-react";
 
 import { CategoryMenuItems } from "@/components/category-menu-items";
-import { Button } from "@/components/shadcn-ui/button";
 import {
   Drawer,
   DrawerClose,
   DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/shadcn-ui/drawer";
-import { getAllCategories } from "@/lib/api/getAllCategories";
+import { createClient } from "@/utils/supabase/client";
 
 export async function CategoryMenuDrawer() {
-  const categories = await getAllCategories();
+  // TODO: fetch from server?
+  const supabase = await createClient();
+  const { data: categories } = await supabase.from("categories").select();
 
   return (
     <Drawer direction="left">
@@ -31,18 +30,9 @@ export async function CategoryMenuDrawer() {
             <DrawerTitle>Categories</DrawerTitle>
           </DrawerHeader>
           <div className="flex flex-col gap-2 py-2 pb-2 mb-2">
-            <CategoryMenuItems categories={categories} />
+            {categories && <CategoryMenuItems categories={categories} />}
           </div>
         </div>
-
-        <DrawerFooter>
-          <Button>Log in</Button>
-          <DrawerDescription>
-            <span>
-              {`Don't have an account?`} <a href="/sign-up">Sign up</a>
-            </span>
-          </DrawerDescription>
-        </DrawerFooter>
       </DrawerContent>
     </Drawer>
   );

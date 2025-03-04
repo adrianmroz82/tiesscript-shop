@@ -6,8 +6,8 @@ export default async function DashboardView() {
 
   return (
     <div className="flex flex-wrap items-center justify-center min-h-[50vh] gap-2 m-16">
-      {categories.map((category) => (
-        <CategoryCard key={category} category={category} />
+      {categories?.map((category) => (
+        <CategoryCard key={category.id} category={category.name} />
       ))}
     </div>
   );

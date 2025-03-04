@@ -62,14 +62,17 @@ export default function AddProductForm() {
       };
 
       // TODO: error handling
-      const { data, error } = await supabase.from("products").insert([updatedFormData]).select("id").single();
+      const { data: product, error } = await supabase.from("products").insert([updatedFormData]).select("id").single();
 
       if (error) throw error;
-      console.log("Product added:", data);
 
-      // Save the images to resources table
       if (uploadedUrls.length > 0) {
-        await supabase.from("resources").insert([{ images: uploadedUrls }]);
+        await supabase.from("resources").insert([
+          {
+            id: product.id,
+            images: uploadedUrls,
+          },
+        ]);
       }
 
       // TODO - is this needed?
