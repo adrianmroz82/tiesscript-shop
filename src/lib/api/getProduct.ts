@@ -1,15 +1,14 @@
-import { doc, getDoc } from "firebase/firestore";
+import { createClient } from "@/utils/supabase/server";
 
-import { db } from "@/firebase/firebase";
-import { Category, Product } from "@/models/product.model";
+export async function getProduct(productId: string): Promise<Product | null> {
+  const supabase = await createClient();
+  const { data: product, error } = await supabase.from("products").select("*").eq("id", Number(productId)).single();
+  console.log(product, "product");
 
-export async function getProduct(productId: string, category: Category): Promise<Product | null> {
-  const productRef = doc(db, category, productId);
-  const productSnapshot = await getDoc(productRef);
-
-  if (productSnapshot.exists()) {
-    return { ...(productSnapshot.data() as Product), id: productSnapshot.id };
+  if (error) {
+    console.error("Error fetching product:", error);
+    return null;
   }
 
-  return null;
+  return product;
 }

@@ -5,7 +5,6 @@ import Image from "next/image";
 import ShoppingCartIcon from "@/assets/cart-icon.svg";
 import { Button } from "@/components/shadcn-ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/shadcn-ui/card";
-import { Product } from "@/models/product.model";
 import { addToCart } from "@/store/features/cartSlice";
 import { useAppDispatch } from "@/store/utils/redux-hooks";
 
