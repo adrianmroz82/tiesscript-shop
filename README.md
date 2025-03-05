@@ -14,8 +14,8 @@
 
 ### ideas
 [x] only one image fetched on paginated query (main_image field in products tabl, compressed even more) 
-[ ] for the rest of images, create product_resources (add main_image there as well, but not compressed) -> missing compression on main_image
-
+[ ] for the rest of images, create product_resources (add main_image there as well, but not compressed) 
+[ ]  missing additional compression on main_image
 
 
 ### bugs

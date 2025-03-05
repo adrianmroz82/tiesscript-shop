@@ -1,16 +1,8 @@
-import { getDownloadURL, getStorage, listAll, ref } from "firebase/storage";
+import { createClient } from "@/utils/supabase/server";
 
-export async function getProductImages(productId: string, limit?: number) {
-  const storage = getStorage();
-  const path = `products/${productId}/`;
-  const listResult = await listAll(ref(storage, path));
-
-  // Limit the number of items processed to the specified limit
-  const imageUrls = await Promise.all(
-    listResult.items.slice(0, limit).map(async (imgRef) => {
-      return getDownloadURL(imgRef);
-    })
-  );
-
-  return imageUrls;
+export async function getProductImages(productId: string) {
+  const supabase = await createClient();
+  const { data: resources } = await supabase.from("resources").select("*").eq("id", Number(productId)).single();
+ 
+  return resources?.images;
 }

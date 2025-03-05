@@ -58,6 +58,8 @@ export function ProductImagesCarousel({ productImages }: Props) {
                 <div className="p-1">
                   <div className="flex aspect-square justify-center">
                     <Image
+                      // TODO: main image does not load faster
+                      priority={index === 0}
                       src={productImage}
                       alt={`Product Image ${index + 1}`}
                       width={500}

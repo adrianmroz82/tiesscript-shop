@@ -7,15 +7,14 @@ import { CartToast } from "@/components/cart-toast";
 import { ImageCard } from "@/components/image";
 import { ImagePlaceholder } from "@/components/image-placeholder";
 import { OrderBySelect } from "@/components/order-by-select";
-import { ProductFilterSidebar } from "@/components/product-filter-sidebar";
+// import { ProductFilterSidebar } from "@/components/product-filter-sidebar";
 import { QueryPagination } from "@/components/query-pagination";
 import { Button } from "@/components/shadcn-ui/button";
-import { Category, Product, ProductWithImages } from "@/models/product.model";
 import { addToCart } from "@/store/features/cartSlice";
 import { useAppDispatch } from "@/store/utils/redux-hooks";
 
 interface Props {
-  products: ProductWithImages[];
+  products: Product[];
   count: number;
   category: Category;
 }
@@ -41,7 +40,7 @@ export function PaginatedProductList({ products, count, category }: Props) {
 
   return (
     <div className="flex h-[calc(100vh-6rem)]">
-      <ProductFilterSidebar />
+      {/* <ProductFilterSidebar /> */}
       <div className="flex-1 flex flex-col items-center">
         <div className="flex-grow w-full">
           <OrderBySelect />
@@ -50,8 +49,8 @@ export function PaginatedProductList({ products, count, category }: Props) {
               <div key={product.id} className="w-1/4 p-12 flex flex-col items-center justify-between">
                 <div
                   className="flex flex-col items-center justify-center cursor-pointer"
-                  onClick={() => goToDetailsPage(product.id)}>
-                  {product.images[0] ? <ImageCard url={product.images[0]} /> : <ImagePlaceholder />}
+                  onClick={() => goToDetailsPage(String(product.id))}>
+                  {product.main_image ? <ImageCard url={product.main_image} /> : <ImagePlaceholder />}
                 </div>
                 <div className="flex flex-col items-center mt-2">
                   <div className="text-sm">{product.name}</div>

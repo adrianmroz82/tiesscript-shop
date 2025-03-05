@@ -10,11 +10,11 @@ interface Props {
 
 export function CartItem({ cartItem }: Props) {
   const { handleIncrementQuantity, handleDecrementQuantity, handleRemoveItem } = useCartActions();
-  const { id, name, images, price, quantity } = cartItem;
+  const { id, name, main_image, price, quantity } = cartItem;
 
   return (
     <li className="flex items-center mb-5 pb-5 border-b-2">
-      <Image priority className="rounded max-h-20" src={images[0]} alt={name} width={80} height={80} />
+      <Image priority className="rounded max-h-20" src={main_image} alt={name} width={80} height={80} />
       <div className="flex-1 ml-8">
         <h3 className="mb-2.5">{name}</h3>
         <div className="flex items-center">

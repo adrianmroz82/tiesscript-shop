@@ -1,7 +1,9 @@
-export type Category = "ties" | "blazers" | "shirts" | "pants" | "shoes" | "accessories";
+// export type Category = "ties" | "blazers" | "shirts" | "pants" | "shoes" | "accessories";
 
+// TODO: remove all occurrences
 export type ProductImageUrl = string;
-export type ProductWithImages = Product & { images: ProductImageUrl[] };
+
+// TODO: remove all occurrences
 
 export interface Product {
   id: string;
