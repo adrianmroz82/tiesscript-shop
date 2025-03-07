@@ -1,5 +1,6 @@
 "use client";
 
+import imageCompression from "browser-image-compression";
 import { ChangeEvent, useState } from "react";
 
 import { AddProductCategorySelect } from "@/components/admin/add-product-category-select";
@@ -24,8 +25,10 @@ export default function AddProductForm() {
   } as Product);
   const [category, setCategory] = useState<Category>("ties" as Category);
   const [categories, setCategories] = useState<Category[]>([]);
-  const [imagesToUpload, setImagesToUpload] = useState<File[]>([]);
+  // const [imagesToUpload, setImagesToUpload] = useState<File[]>([]);
   const [isUploading, setIsUploading] = useState(false);
+  const [mainImage, setMainImage] = useState<File | null>(null);
+  const [resourceImages, setResourceImages] = useState<File[]>([]); // Store resource images
 
   // useEffect(() => {
   //   async function fetchCategories() {
@@ -48,47 +51,55 @@ export default function AddProductForm() {
 
   const handleAddProduct = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-
-    const supabase = createClient();
+    setIsUploading(true);
 
     try {
-      setIsUploading(true);
+      const supabase = createClient();
 
-      const uploadedUrls = (await Promise.all(imagesToUpload.map(uploadImageToSupabase))) as string[];
+      // Separate main image (first one)
+      const mainImageFile = resourceImages[0];
 
+      // ✅ Compress main image for products table (0.2MB)
+      const compressedMainImage = await imageCompression(mainImageFile, {
+        maxSizeMB: 0.2,
+        useWebWorker: true,
+      });
+
+      // ✅ Upload main image to Supabase
+      const mainImageUrl = await uploadImageToSupabase(compressedMainImage);
+
+      // ✅ Compress all images (including the main one again) to 1MB for resources table
+      const compressedResourceImages = await Promise.all(
+        resourceImages.map(async (file) => {
+          return await imageCompression(file, {
+            maxSizeMB: 1,
+            useWebWorker: true,
+          });
+        })
+      );
+
+      // ✅ Upload all resource images (including the main one again)
+      const uploadedResourceUrls = await Promise.all(compressedResourceImages.map(uploadImageToSupabase));
+
+      // ✅ Save product to products table with compressed main image
       const updatedFormData = {
         ...formData,
-        main_image: uploadedUrls.length > 0 ? uploadedUrls[0] : "",
+        main_image: mainImageUrl || "",
       };
 
-      // TODO: error handling
       const { data: product, error } = await supabase.from("products").insert([updatedFormData]).select("id").single();
-
       if (error) throw error;
 
-      if (uploadedUrls.length > 0) {
-        await supabase.from("resources").insert([
-          {
-            id: product.id,
-            images: uploadedUrls,
-          },
-        ]);
+      // ✅ Save resources to resources table (including main image again at 1MB)
+      if (uploadedResourceUrls.length > 0) {
+        await supabase.from("resources").insert([{ id: product.id, images: uploadedResourceUrls }]);
       }
 
-      // TODO - is this needed?
       setFormData(updatedFormData);
-
-      toast({
-        title: "Success",
-        description: `Product added successfully!`,
-      });
+      toast({ title: "Success", description: "Product added successfully!" });
     } catch (error: any) {
       console.error("Error adding product:", error.message);
-      toast({
-        title: "Error",
-        description: `Failed to add product: ${error.message}`,
-        variant: "destructive",
-      });
+      toast({ title: "Error", description: `Failed to add product: ${error.message}`, variant: "destructive" });
     } finally {
       setIsUploading(false);
     }
@@ -105,7 +116,11 @@ export default function AddProductForm() {
               <AddProductTextInput label="Length" name="length" value={formData.length!} onChange={handleInputChange} />
               <AddProductTextInput label="Width" name="width" value={formData.width!} onChange={handleInputChange} />
               <AddProductTextInput label="Price" name="price" value={formData.price} onChange={handleInputChange} />
-              <AddProductImageUploader setImagesToUpload={setImagesToUpload} />
+              <AddProductImageUploader
+                // setImagesToUpload={setImagesToUpload}
+                setMainImage={setMainImage}
+                setResourceImages={setResourceImages}
+              />
               <CardFooter className="flex gap-4 px-0 py-4">
                 <Button className="w-full" onClick={handleAddProduct}>
                   Add item

@@ -16,7 +16,7 @@ import { useAppDispatch } from "@/store/utils/redux-hooks";
 interface Props {
   products: Product[];
   count: number;
-  category: Category;
+  category: Category["name"];
 }
 
 export function PaginatedProductList({ products, count, category }: Props) {

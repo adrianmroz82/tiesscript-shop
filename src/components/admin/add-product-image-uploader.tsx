@@ -1,6 +1,6 @@
 import imageCompression from "browser-image-compression";
 import Image from "next/image";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
 import { SortableContainer, SortableElement } from "react-sortable-hoc";
 import { v4 } from "uuid";
 
@@ -9,7 +9,9 @@ import { Label } from "@/components/shadcn-ui/label";
 import { createClient } from "@/utils/supabase/client";
 
 interface Props {
-  setImagesToUpload: (_files: File[]) => void;
+  // setImagesToUpload: (_files: File[]) => void;
+  setMainImage: Dispatch<SetStateAction<File | null>>;
+  setResourceImages: Dispatch<SetStateAction<File[]>>;
 }
 
 export async function uploadImageToSupabase(file: File): Promise<string | null> {
@@ -29,34 +31,19 @@ export async function uploadImageToSupabase(file: File): Promise<string | null> 
   return data?.publicUrl || null;
 }
 
-export function AddProductImageUploader({ setImagesToUpload }: Props) {
+export function AddProductImageUploader({ setMainImage, setResourceImages }: Props) {
   const [imagesPreview, setImagesPreview] = useState<{ file: File; previewUrl: string; id: string }[]>([]);
 
-  const handleAddImage = async (e: ChangeEvent<HTMLInputElement>) => {
+  const handleAddImage = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       const files = Array.from(e.target.files);
-
-      // Compress images
-      const resizedFiles = await Promise.all(
-        files.map(async (file) => {
-          try {
-            return await imageCompression(file, { maxSizeMB: 1, useWebWorker: true });
-          } catch (error) {
-            console.error("Error compressing image:", error);
-            return file;
-          }
-        })
-      );
-
-      // Generate previews
-      const newPreviews = resizedFiles.map((file) => ({
+      const newPreviews = files.map((file) => ({
         file,
         previewUrl: URL.createObjectURL(file),
         id: `${file.name}-${Date.now()}`,
       }));
-
       setImagesPreview((prev) => [...prev, ...newPreviews]);
-      setImagesToUpload(resizedFiles);
+      setResourceImages((prev) => [...prev, ...files]);
     }
   };
 
@@ -66,7 +53,7 @@ export function AddProductImageUploader({ setImagesToUpload }: Props) {
     setImagesPreview(updatedImages);
 
     const updatedFiles = updatedImages.map((image) => image.file);
-    setImagesToUpload(updatedFiles);
+    setResourceImages(updatedFiles);
   };
 
   const onSortEnd = ({ oldIndex, newIndex }: { oldIndex: number; newIndex: number }) => {
@@ -78,7 +65,7 @@ export function AddProductImageUploader({ setImagesToUpload }: Props) {
     setImagesPreview(reorderedImages);
 
     const reorderedFiles = reorderedImages.map((image) => image.file);
-    setImagesToUpload(reorderedFiles);
+    setResourceImages(reorderedFiles);
   };
 
   const SortableItem = SortableElement(
