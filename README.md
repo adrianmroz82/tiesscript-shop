@@ -5,11 +5,11 @@
 [ ] delete product
 [ ] ability to hide/show product
 
+
 ### Add new product page
 [x] show images after they are uploaded
-[ ] images should be shown as seperated cards, which can be reordered
+[x] images should be shown as seperated cards, which can be reordered
 [x] resize images on client side
-
 
 
 ### ideas
@@ -22,9 +22,8 @@
 [x] id of resouces not matching id of product (36 vs 37) +
 
 
-
 ### supabase migration
 [ ] - cart store
 [ ] - sorting
-[ ] - pagination
+[x] - pagination
 [ ] - align admin panel queries 
