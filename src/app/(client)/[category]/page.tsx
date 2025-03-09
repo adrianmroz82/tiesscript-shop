@@ -1,3 +1,4 @@
+import { EmptyState } from "@/components/empty-state";
 import { PaginatedProductList } from "@/components/paginated-product-list";
 import { getPaginatedProducts } from "@/lib/api/getPaginatedProducts";
 import { OrderByField } from "@/models/order-by-field.model";
@@ -23,11 +24,7 @@ export default async function CategoryProducts({ params, searchParams }: Props) 
   const { products, count } = await getPaginatedProducts(category, page, orderByField);
 
   if (!products || products.length === 0) {
-    return (
-      <div className="flex h-2/3 items-center justify-center">
-        <h1 className="text-4xl font-bold text-gray-800">No products related to {category} category have been found</h1>
-      </div>
-    );
+    return <EmptyState text={`No products related to ${category} category have been found`} />;
   }
 
   return <PaginatedProductList products={products} count={count ?? 0} category={category} />;

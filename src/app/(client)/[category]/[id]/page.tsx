@@ -1,3 +1,4 @@
+import { EmptyState } from "@/components/empty-state";
 import { ProductDetailsInfo } from "@/components/product-details-info";
 import { ProductImagesCarousel } from "@/components/product-images-carousel";
 import { CardContent } from "@/components/shadcn-ui/card";
@@ -12,13 +13,17 @@ export default async function DetailsPage({ params }: Props) {
   const product = await getProduct(id);
   const productImages = await getProductImages(id);
 
+  if (!product) {
+    return <EmptyState text="Product not found" />;
+  }
+
   return (
     <div className="flex justify-center min-h-screen">
       <div className="px-16 py-16">
         <CardContent className="shadow-lg">
           <div className="flex">
-            <ProductImagesCarousel productImages={productImages!} />
-            <ProductDetailsInfo product={product!} />
+            {productImages && <ProductImagesCarousel productImages={productImages} />}
+            <ProductDetailsInfo product={product} />
           </div>
         </CardContent>
       </div>
