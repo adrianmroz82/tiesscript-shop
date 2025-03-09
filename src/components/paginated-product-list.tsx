@@ -1,5 +1,6 @@
 "use client";
 
+import localFont from "next/font/local";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -18,6 +19,10 @@ interface Props {
   count: number;
   category: Category["name"];
 }
+
+const font = localFont({
+  src: "../../public/fonts/CooperLtBT-Bold.ttf",
+});
 
 export function PaginatedProductList({ products, count, category }: Props) {
   const [currentPage, setCurrentPage] = useState(1);
@@ -53,8 +58,9 @@ export function PaginatedProductList({ products, count, category }: Props) {
                   {product.main_image ? <ImageCard url={product.main_image} /> : <ImagePlaceholder />}
                 </div>
                 <div className="flex flex-col items-center mt-2">
-                  <div className="text-sm">{product.name}</div>
-                  <div className="text-sm">${product.price}</div>
+                  {/* TODO: extract font */}
+                  <div className={`${font.className} text-xl`}>{product.name}</div>
+                  <div className="text-xl">${product.price}</div>
                   <Button className="mt-4" onClick={() => handleAddToCart(product)}>
                     Add to cart
                   </Button>

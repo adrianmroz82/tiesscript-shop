@@ -10,7 +10,14 @@ export default async function AdminPage() {
   const supabase = await createClient();
   const { data, error } = await supabase.auth.getUser();
 
-  console.log("user", data);
+  if (error) {
+    console.error(error);
+  }
+
+  // TODO: redirect to login page
+  if (!data.user) {
+    return <div>Not logged in</div>;
+  }
 
   return (
     <div>
