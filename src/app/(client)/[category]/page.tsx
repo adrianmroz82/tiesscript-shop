@@ -22,8 +22,12 @@ export default async function CategoryProducts({ params, searchParams }: Props) 
 
   const { products, count } = await getPaginatedProducts(category, page, orderByField);
 
-  if (!products) {
-    return <div>No products found</div>;
+  if (!products || products.length === 0) {
+    return (
+      <div className="flex h-2/3 items-center justify-center">
+        <h1 className="text-4xl font-bold text-gray-800">No products related to {category} category have been found</h1>
+      </div>
+    );
   }
 
   return <PaginatedProductList products={products} count={count ?? 0} category={category} />;
