@@ -27,8 +27,33 @@ export type Database = {
         }
         Relationships: []
       }
+      orders: {
+        Row: {
+          created_at: string
+          id: number
+          paymentAmount: number
+          paymentMethod: string
+          productName: string
+        }
+        Insert: {
+          created_at?: string
+          id?: number
+          paymentAmount: number
+          paymentMethod: string
+          productName: string
+        }
+        Update: {
+          created_at?: string
+          id?: number
+          paymentAmount?: number
+          paymentMethod?: string
+          productName?: string
+        }
+        Relationships: []
+      }
       products: {
         Row: {
+          category: string | null
           created_at: string
           description: string | null
           id: number
@@ -39,6 +64,7 @@ export type Database = {
           width: number | null
         }
         Insert: {
+          category?: string | null
           created_at?: string
           description?: string | null
           id?: number
@@ -49,6 +75,7 @@ export type Database = {
           width?: number | null
         }
         Update: {
+          category?: string | null
           created_at?: string
           description?: string | null
           id?: number

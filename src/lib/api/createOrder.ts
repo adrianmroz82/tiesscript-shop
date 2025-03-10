@@ -1,10 +1,6 @@
-import { addDoc, collection } from "firebase/firestore";
-
-import { db } from "@/firebase/firebase";
-import { Order } from "@/models/order.model";
+import { createClient } from "@/utils/supabase/client";
 
 export async function createOrder(order: Order) {
-  const docRef = await addDoc(collection(db, "orders"), order);
-
-  return docRef;
+  const supabase = await createClient();
+  return supabase.from("orders").insert(order);
 }

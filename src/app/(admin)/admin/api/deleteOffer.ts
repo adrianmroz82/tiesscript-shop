@@ -1,10 +1,14 @@
-import { deleteDoc, doc } from "firebase/firestore";
+import { createClient } from "@/utils/supabase/client";
 
-import { db } from "@/firebase/firebase";
-import { Category } from "@/models/product.model";
+export async function deleteOffer(id: number) {
+  const supabase = await createClient();
 
-export async function deleteOffer(id: string, category: Category) {
-  const productRef = doc(db, category, id);
+  const { data, error } = await supabase.from("products").delete().eq("id", id);
 
-  await deleteDoc(productRef);
+  if (error) {
+    console.error("Error deleting offer:", error);
+    return;
+  }
+
+  console.log("Offer deleted:", data);
 }
