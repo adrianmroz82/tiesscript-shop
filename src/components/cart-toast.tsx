@@ -44,9 +44,9 @@ export function CartToast() {
       <div className="flex w-full items-center gap-2">
         <span data-testid="top-section-title">Item has been added to cart</span>
       </div>
-      {cart.map(({ id, name, images, price }) => (
+      {cart.map(({ id, name, main_image, price }) => (
         <div className="flex items-center gap-4 w-11/12 border border-secondary p-2 rounded-lg" key={id}>
-          <Image src={images[0]} alt={name} width={60} height={60} />
+          <Image src={main_image} alt={name} width={60} height={60} />
           <div className="flex-1">
             <div className="font-bold">{name}</div>
             <p>${price}</p>

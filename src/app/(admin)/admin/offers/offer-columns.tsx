@@ -3,11 +3,9 @@
 import { ColumnDef } from "@tanstack/react-table";
 import Image from "next/image";
 
-import { ProductWithImages } from "@/models/product.model";
-
 import { DataTableRowActions } from "./offers-table-row-actions";
 
-export const offerTableColumns: ColumnDef<ProductWithImages>[] = [
+export const offerTableColumns: ColumnDef<Product>[] = [
   {
     id: "image",
     header: "Image",
@@ -15,7 +13,7 @@ export const offerTableColumns: ColumnDef<ProductWithImages>[] = [
       <Image
         width={50}
         height={50}
-        src={row.original.images && row.original.images[0]}
+        src={row.original.main_image}
         alt={row.original?.name}
         className="w-16 h-16 object-cover rounded-lg"
       />

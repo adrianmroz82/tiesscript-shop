@@ -1,51 +1,49 @@
 import imageCompression from "browser-image-compression";
 import Image from "next/image";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
 import { SortableContainer, SortableElement } from "react-sortable-hoc";
+import { v4 } from "uuid";
 
 import { Input } from "@/components/shadcn-ui/input";
 import { Label } from "@/components/shadcn-ui/label";
+import { createClient } from "@/utils/supabase/client";
 
 interface Props {
-  setImagesUpload: (_files: File[]) => void;
+  // setImagesToUpload: (_files: File[]) => void;
+  setMainImage: Dispatch<SetStateAction<File | null>>;
+  setResourceImages: Dispatch<SetStateAction<File[]>>;
 }
 
-export function AddProductImageUploader({ setImagesUpload }: Props) {
+export async function uploadImageToSupabase(file: File): Promise<string | null> {
+  const supabase = createClient();
+  const filePath = `products/${v4()}-${file.name}`;
+
+  // Upload image to Supabase Storage
+  const { error } = await supabase.storage.from("images").upload(filePath, file);
+  if (error) {
+    console.error("Error uploading image:", error.message);
+    return null;
+  }
+
+  // Retrieve the public URL
+  // TODO: is this needed?
+  const { data } = supabase.storage.from("images").getPublicUrl(filePath);
+  return data?.publicUrl || null;
+}
+
+export function AddProductImageUploader({ setMainImage, setResourceImages }: Props) {
   const [imagesPreview, setImagesPreview] = useState<{ file: File; previewUrl: string; id: string }[]>([]);
 
-  const handleAddImage = async (e: ChangeEvent<HTMLInputElement>) => {
+  const handleAddImage = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
       const files = Array.from(e.target.files);
-
-      const resizedFiles = await Promise.all(
-        files.map(async (file) => {
-          const options = {
-            maxSizeMB: 2,
-            useWebWorker: true,
-          };
-          try {
-            const compressedFile = await imageCompression(file, options);
-
-            console.log(`Original ${file.name}: ${(file.size / (1024 * 1024)).toFixed(2)} MB`);
-            console.log(`Compressed ${compressedFile.name}: ${(compressedFile.size / (1024 * 1024)).toFixed(2)} MB`);
-
-            return compressedFile;
-          } catch (error) {
-            console.error("Error compressing image:", error);
-
-            return file;
-          }
-        })
-      );
-
-      const newPreviews = resizedFiles.map((file) => ({
+      const newPreviews = files.map((file) => ({
         file,
         previewUrl: URL.createObjectURL(file),
         id: `${file.name}-${Date.now()}`,
       }));
-
       setImagesPreview((prev) => [...prev, ...newPreviews]);
-      setImagesUpload(resizedFiles);
+      setResourceImages((prev) => [...prev, ...files]);
     }
   };
 
@@ -55,7 +53,7 @@ export function AddProductImageUploader({ setImagesUpload }: Props) {
     setImagesPreview(updatedImages);
 
     const updatedFiles = updatedImages.map((image) => image.file);
-    setImagesUpload(updatedFiles);
+    setResourceImages(updatedFiles);
   };
 
   const onSortEnd = ({ oldIndex, newIndex }: { oldIndex: number; newIndex: number }) => {
@@ -67,7 +65,7 @@ export function AddProductImageUploader({ setImagesUpload }: Props) {
     setImagesPreview(reorderedImages);
 
     const reorderedFiles = reorderedImages.map((image) => image.file);
-    setImagesUpload(reorderedFiles);
+    setResourceImages(reorderedFiles);
   };
 
   const SortableItem = SortableElement(

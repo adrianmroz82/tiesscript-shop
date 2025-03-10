@@ -1,8 +1,6 @@
-import { OrderByDirection } from "firebase/firestore";
-
 export interface OrderByField {
   field: string;
-  direction: OrderByDirection;
+  direction: any; // TODO: replace any
 }
 
 export const sortOptions: Record<"displayName" | "field", string>[] = [

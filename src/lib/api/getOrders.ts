@@ -1,16 +1,10 @@
-import { collection, getDocs } from "firebase/firestore";
-
-import { db } from "@/firebase/firebase";
-import { Order } from "@/models/order.model";
+import { createClient } from "@/utils/supabase/server";
 
 export async function getOrders() {
-  const ordersRef = collection(db, "orders");
-  const snapshot = await getDocs(ordersRef);
+  // TODO: should it be clinet or server?
 
-  const orders = snapshot.docs.map((doc) => ({
-    ...doc.data(),
-    id: doc.id,
-  })) as Order[];
+  const supabase = await createClient();
+  const { data: orders } = await supabase.from("orders").select();
 
   return orders;
 }

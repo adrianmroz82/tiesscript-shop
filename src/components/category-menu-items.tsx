@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 
 import { DrawerClose } from "@/components/shadcn-ui/drawer";
 import { capitalize } from "@/lib/utils/capitalize";
-import { Category } from "@/models/product.model";
 
 export function CategoryMenuItems({ categories }: { categories: Category[] }) {
   const router = useRouter();
@@ -16,13 +15,13 @@ export function CategoryMenuItems({ categories }: { categories: Category[] }) {
 
   return (
     <>
-      {categories.map((category) => (
-        <DrawerClose key={category}>
+      {categories.map(({ name, id }) => (
+        <DrawerClose key={id}>
           <div
-            onClick={() => handleCategoryClick(category)}
+            onClick={() => handleCategoryClick(name)}
             className="hover:bg-muted cursor-pointer flex items-center rounded-lg h-12">
-            <Image src={`/sidebar-menu-${category}.svg`} className="mx-4" alt={category} width={32} height={32} />
-            <p>{capitalize(category)}</p>
+            <Image src={`/sidebar-menu-${name}.svg`} className="mx-4" alt={name} width={32} height={32} />
+            <p>{capitalize(name)}</p>
           </div>
         </DrawerClose>
       ))}

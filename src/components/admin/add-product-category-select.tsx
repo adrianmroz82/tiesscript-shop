@@ -7,7 +7,11 @@ interface Props {
   onChange: (_value: Category) => void;
 }
 
-export function AddProductCategorySelect({ categories, value, onChange }: Props) {
+
+// TODO: fix categories query
+const categories = ["ties", "blazers", "shirts"];
+
+export function AddProductCategorySelect({ value, onChange }: Props) {
   return (
     <div className="space-y-1.5 ">
       <label htmlFor="category">Category</label>

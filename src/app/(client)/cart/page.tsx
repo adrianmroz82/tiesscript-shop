@@ -12,18 +12,15 @@ export default function Cart() {
   const totalPrice = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
   const handleCreateOrder = async () => {
-    console.log(cart);
-
     const paymentMethod: PaymentMethod = "PayPal";
     const paymentAmount = totalPrice;
 
     // TODO: handle plural number of products
-    const concatenatedIds = cart.map((item) => item.id).join(",");
-    const concatenatedNames = cart.map((item) => item.name).join(", ");
 
     await createOrder({
-      id: concatenatedIds,
-      productName: concatenatedNames,
+      created_at: new Date().toISOString(),
+      id: cart[0].id,
+      productName: cart[0].name,
       paymentAmount,
       paymentMethod,
     });
@@ -43,7 +40,7 @@ export default function Cart() {
         </ul>
       )}
       <Button className="mt-8" variant="outline" onClick={handleCreateOrder}>
-        Mock Order
+        Trigger Mock Order
       </Button>
     </div>
   );

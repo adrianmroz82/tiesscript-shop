@@ -1,8 +1,7 @@
+import { EmptyState } from "@/components/empty-state";
 import { PaginatedProductList } from "@/components/paginated-product-list";
-import { getCollectionCount } from "@/lib/api/getCollectionCount";
 import { getPaginatedProducts } from "@/lib/api/getPaginatedProducts";
 import { OrderByField } from "@/models/order-by-field.model";
-import { Category } from "@/models/product.model";
 
 interface Props {
   params: { category: string };
@@ -10,6 +9,7 @@ interface Props {
 }
 
 export default async function CategoryProducts({ params, searchParams }: Props) {
+  // TODO: fix sorting
   const getOrderByField = (): OrderByField => {
     const field = searchParams["orderBy"] ?? "createdAtDesc";
     return {
@@ -18,12 +18,15 @@ export default async function CategoryProducts({ params, searchParams }: Props) 
     };
   };
 
-  const category = params.category as Category;
+  const category = params.category as Category["name"];
   const orderByField = getOrderByField();
   const page = Number(searchParams["page"] ?? "1");
+ 
+  const { products, count } = await getPaginatedProducts(category, page, orderByField);
 
-  const products = await getPaginatedProducts(page, category, orderByField);
-  const count = await getCollectionCount();
+  if (!products || products.length === 0) {
+    return <EmptyState text={`No products related to ${category} category have been found`} />;
+  }
 
-  return <PaginatedProductList products={products} count={count} category={category} />;
+  return <PaginatedProductList products={products} count={count ?? 0} category={category} />;
 }

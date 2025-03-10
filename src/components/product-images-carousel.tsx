@@ -58,18 +58,25 @@ export function ProductImagesCarousel({ productImages }: Props) {
                 <div className="p-1">
                   <div className="flex aspect-square justify-center">
                     <Image
+                      // TODO: main image does not load faster
+                      // TODO: apply proper img sizes
+                      priority={index === 0}
                       src={productImage}
                       alt={`Product Image ${index + 1}`}
                       width={500}
                       height={500}
                       className="object-contain"
+                      placeholder="blur"
+                      blurDataURL={productImage}
+                      // sizes="500px"
+                      // sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, (max-width: 1920px) 33vw, 500px"
                     />
                   </div>
                 </div>
               </CarouselItem>
             ))}
           </CarouselContent>
-          <div className="absolute left-0 top-1/2">
+          <div className="absolute left-0 top-1/2 shadow">
             <CarouselPrevious />
           </div>
           <div className="absolute right-0 top-1/2">
