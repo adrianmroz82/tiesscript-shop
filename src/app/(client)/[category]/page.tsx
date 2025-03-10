@@ -9,6 +9,7 @@ interface Props {
 }
 
 export default async function CategoryProducts({ params, searchParams }: Props) {
+  // TODO: fix sorting
   const getOrderByField = (): OrderByField => {
     const field = searchParams["orderBy"] ?? "createdAtDesc";
     return {
@@ -20,7 +21,7 @@ export default async function CategoryProducts({ params, searchParams }: Props) 
   const category = params.category as Category["name"];
   const orderByField = getOrderByField();
   const page = Number(searchParams["page"] ?? "1");
-
+ 
   const { products, count } = await getPaginatedProducts(category, page, orderByField);
 
   if (!products || products.length === 0) {

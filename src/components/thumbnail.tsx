@@ -20,6 +20,10 @@ export function ProductThumbnail({ productImage, api, currentIndex, index }: Pro
           layout="fill"
           objectFit="cover"
           onClick={() => api && api.scrollTo(index)}
+          placeholder="blur"
+          blurDataURL={productImage}
+          // TODO: apply proper img sizes
+          sizes="100px"
         />
       </div>
     </div>

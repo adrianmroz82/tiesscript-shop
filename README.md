@@ -10,6 +10,7 @@
 [x] show images after they are uploaded
 [x] images should be shown as seperated cards, which can be reordered
 [x] resize images on client side
+[ ] details page loader
 
 
 ### ideas

@@ -26,16 +26,16 @@ export function ProductDetailsInfo({ product }: Props) {
 
   return (
     <>
-      <Card className="shadow-lg m-6 p-8 w-[600px]">
+      <Card className="shadow-xl m-6 p-8 w-[600px] border-none">
         <CardHeader className="pb-4">
           {/* TODO: extract Copper font */}
-          <CardTitle className={`${font.className} text-3xl`}>{name}</CardTitle>
+          <CardTitle className={`${font.className} text-4xl`}>{name}</CardTitle>
           <CardDescription className="text-xl text-gray-500">{description}</CardDescription>
         </CardHeader>
         <CardContent className="my-4">
-          <h4 className="font-semibold text-2xl">Price: {price} zł</h4>
-          <p className="text-lg text-gray-500 mt-2">Length: {length} cm</p>
-          <p className="text-lg text-gray-500">Width: {width} cm</p>
+          <h4 className="font-semibold text-xl">Price: {price} zł</h4>
+          <p className="text-lg mt-2">Length: {length} cm</p>
+          <p className="text-lg">Width: {width} cm</p>
           <div className="flex flex-col space-y-1.5 mt-8 gap-2">
             <Button
               className="w-3/5 p-[30px] text-lg rounded-[30px] font-helvetica"
