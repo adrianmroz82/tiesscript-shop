@@ -19,10 +19,14 @@ export default async function AdminPage() {
     return <div>Not logged in</div>;
   }
 
+  if (!orders) {
+    return <div>No orders found</div>;
+  }
+
   return (
     <div>
       <h1>Admin Page</h1>
-      <div className="w-[90%] mx-auto my-8">{orders && <DataTable columns={orderTableColumns} data={orders} />}</div>
+      <div className="w-[90%] mx-auto my-8">{<DataTable columns={orderTableColumns} data={orders} />}</div>
     </div>
   );
 }

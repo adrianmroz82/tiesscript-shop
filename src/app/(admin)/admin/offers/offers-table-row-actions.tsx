@@ -21,7 +21,8 @@ interface DataTableRowActionsProps<TData> {
 
 export function DataTableRowActions<TData>({ row }: DataTableRowActionsProps<TData>) {
   const handleDelete = async () => {
-    await deleteOffer(row.original.id, row.original.category);
+    // TODO: fix type
+    await deleteOffer((row.original as { id: number }).id);
   };
 
   return (
