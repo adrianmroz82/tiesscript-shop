@@ -21,12 +21,16 @@ export default async function CategoryProducts({ params, searchParams }: Props) 
   const category = params.category as Category["name"];
   const orderByField = getOrderByField();
   const page = Number(searchParams["page"] ?? "1");
- 
+
   const { products, count } = await getPaginatedProducts(category, page, orderByField);
 
   if (!products || products.length === 0) {
     return <EmptyState text={`No products related to ${category} category have been found`} />;
   }
 
-  return <PaginatedProductList products={products} count={count ?? 0} category={category} />;
+  return (
+    <main className="max-w-7xl mx-auto">
+      <PaginatedProductList products={products} count={count ?? 0} category={category} />
+    </main>
+  );
 }
