@@ -1,14 +1,19 @@
-import { CategoryCard } from "@/components/category-card";
-import { getAllCategories } from "@/lib/api/getAllCategories";
+import { AdCard } from "@/components/ad-card";
+import { CategoryBox } from "@/components/yns/category-box";
+import { storeConfig } from "@/components/yns/store.config";
 
 export default async function DashboardView() {
-  const categories = await getAllCategories();
-
   return (
-    <div className="flex flex-wrap items-center justify-center min-h-[50vh] gap-2 m-16">
-      {categories?.map((category) => (
-        <CategoryCard key={category.id} category={category.name} />
-      ))}
-    </div>
+    <main>
+      <AdCard />
+
+      <section className="w-full py-8">
+        <div className="grid gap-8 lg:grid-cols-3 sm:grid-cols-2">
+          {storeConfig.categories.map(({ slug, image: src }) => (
+            <CategoryBox key={slug} categorySlug={slug} src={src} />
+          ))}
+        </div>
+      </section>
+    </main>
   );
 }

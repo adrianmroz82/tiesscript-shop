@@ -9,12 +9,10 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/shadcn-ui/drawer";
-import { createClient } from "@/utils/supabase/client";
+import { storeConfig } from "@/components/yns/store.config";
 
 export async function CategoryMenuDrawer() {
-  // TODO: fetch from server?
-  const supabase = await createClient();
-  const { data: categories } = await supabase.from("categories").select();
+  const { categories } = storeConfig;
 
   return (
     <Drawer direction="left">
