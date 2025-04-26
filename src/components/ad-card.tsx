@@ -1,8 +1,7 @@
 import Image from "next/image";
 
+import { PrefetchLink } from "@/components/prefetch-link";
 import Ties1 from "@/images/ties1.jpg";
-
-import { PrefetchLink } from "./yns/prefetch-link";
 
 export function AdCard() {
   return (
@@ -26,7 +25,7 @@ export function AdCard() {
           loading="eager"
           priority={true}
           className="rounded"
-          height={450}
+          height={300}
           width={450}
           src={Ties1}
           style={{
