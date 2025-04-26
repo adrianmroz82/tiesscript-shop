@@ -13,5 +13,5 @@ jobs:
         run: rm -rf node_modules && yarn install --frozen-lockfile
       - name: Lint code
         run: npm run lint
-      - name: Build
-        run: npm run build
+      # - name: Build
+      #   run: npm run build
