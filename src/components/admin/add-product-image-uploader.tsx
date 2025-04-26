@@ -1,4 +1,3 @@
-import imageCompression from "browser-image-compression";
 import Image from "next/image";
 import { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
 import { SortableContainer, SortableElement } from "react-sortable-hoc";
@@ -31,7 +30,7 @@ export async function uploadImageToSupabase(file: File): Promise<string | null> 
   return data?.publicUrl || null;
 }
 
-export function AddProductImageUploader({ setMainImage, setResourceImages }: Props) {
+export function AddProductImageUploader({ setResourceImages }: Props) {
   const [imagesPreview, setImagesPreview] = useState<{ file: File; previewUrl: string; id: string }[]>([]);
 
   const handleAddImage = (e: ChangeEvent<HTMLInputElement>) => {
@@ -86,6 +85,7 @@ export function AddProductImageUploader({ setMainImage, setResourceImages }: Pro
     return (
       <div className="flex space-x-4 flex-wrap">
         {images.map((image, index) => (
+          // @ts-ignore
           <SortableItem key={image.id} index={index} image={image} />
         ))}
       </div>
@@ -96,6 +96,7 @@ export function AddProductImageUploader({ setMainImage, setResourceImages }: Pro
     <div className="space-y-4">
       <Label htmlFor="image">Image</Label>
       <Input id="image" type="file" name="image" multiple onChange={handleAddImage} />
+      {/*  @ts-ignore */}
       <SortableList images={imagesPreview} onSortEnd={onSortEnd} axis="xy" />
     </div>
   );

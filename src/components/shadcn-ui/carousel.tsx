@@ -165,8 +165,6 @@ const CarouselItem = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElem
     return (
       <div
         ref={ref}
-        // role="group"
-        // aria-roledescription="slide"
         className={cn("min-w-0 shrink-0 grow-0 basis-full", orientation === "horizontal" ? "pl-4" : "pt-4", className)}
         {...props}
       />
@@ -177,7 +175,7 @@ CarouselItem.displayName = "CarouselItem";
 
 const CarouselPrevious = forwardRef<HTMLButtonElement, React.ComponentProps<typeof Button>>(
   ({ className, variant = "outline", size = "icon", ...props }, ref) => {
-    const { orientation, scrollPrev, canScrollPrev } = useCarousel();
+    const { orientation, scrollPrev } = useCarousel();
 
     return (
       <Button
@@ -191,7 +189,6 @@ const CarouselPrevious = forwardRef<HTMLButtonElement, React.ComponentProps<type
             : "top-12 left-1/2 -translate-x-1/2 rotate-90",
           className
         )}
-        // disabled={!canScrollPrev}
         onClick={scrollPrev}
         {...props}>
         <ArrowLeft className="h-4 w-4" />
@@ -204,7 +201,7 @@ CarouselPrevious.displayName = "CarouselPrevious";
 
 const CarouselNext = forwardRef<HTMLButtonElement, React.ComponentProps<typeof Button>>(
   ({ className, variant = "outline", size = "icon", ...props }, ref) => {
-    const { orientation, scrollNext, canScrollNext } = useCarousel();
+    const { orientation, scrollNext } = useCarousel();
 
     return (
       <Button
@@ -218,7 +215,6 @@ const CarouselNext = forwardRef<HTMLButtonElement, React.ComponentProps<typeof B
             : "bottom-12 left-1/2 -translate-x-1/2 rotate-90",
           className
         )}
-        // disabled={!canScrollNext}
         onClick={scrollNext}
         {...props}>
         <ArrowRight className="h-4 w-4" />

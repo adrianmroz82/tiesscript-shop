@@ -7,11 +7,11 @@ import { SimilarProducts } from "@/components/similar-products";
 import { getProduct } from "@/lib/api/getProduct";
 import { getProductImages } from "@/lib/api/getProductImages";
 interface Props {
-  params: { id: string };
+  params: { id: string; category: string };
 }
 
 export default async function DetailsPage({ params }: Props) {
-  const { id } = params;
+  const { category, id } = params;
   const product = await getProduct(id);
   const productImages = await getProductImages(id);
 
@@ -32,7 +32,7 @@ export default async function DetailsPage({ params }: Props) {
           </CardContent>
         </div>
       </div>
-      <SimilarProducts />
+      <SimilarProducts category={category} />
     </>
   );
 }

@@ -9,7 +9,7 @@ import { AddProductTextInput } from "@/components/admin/add-product-text-input";
 import { Button } from "@/components/shadcn-ui/button";
 import { Card, CardContent, CardFooter } from "@/components/shadcn-ui/card";
 import { useToast } from "@/components/shadcn-ui/use-toast";
-// import { Category } from "@/models/product.model";
+import { storeConfig } from "@/components/yns/store.config";
 import { createClient } from "@/utils/supabase/client";
 
 export default function AddProductForm() {
@@ -23,28 +23,18 @@ export default function AddProductForm() {
     main_image: "",
     created_at: new Date().toISOString(),
   } as Product);
-  const [category, setCategory] = useState<Category>("ties" as Category);
-  const [categories, setCategories] = useState<Category[]>([]);
-  // const [imagesToUpload, setImagesToUpload] = useState<File[]>([]);
+  const [category, setCategory] = useState<Category["name"]>("ties");
   const [isUploading, setIsUploading] = useState(false);
-  const [mainImage, setMainImage] = useState<File | null>(null);
+  const [_mainImage, setMainImage] = useState<File | null>(null);
   const [resourceImages, setResourceImages] = useState<File[]>([]); // Store resource images
-
-  // useEffect(() => {
-  //   async function fetchCategories() {
-  //     const categoriesData = await getAllCategories();
-  //     setCategories(categoriesData);
-  //   }
-
-  //   fetchCategories();
-  // }, []);
+  const categories = storeConfig.categories;
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value }));
   };
 
-  const handleSelectChange = (value: Category) => {
+  const handleSelectChange = (value: Category["name"]) => {
     setCategory(value);
     setFormData((prevData) => ({ ...prevData, category: value }));
   };
@@ -92,6 +82,7 @@ export default function AddProductForm() {
 
       // ✅ Save resources to resources table (including main image again at 1MB)
       if (uploadedResourceUrls.length > 0) {
+        // @ts-ignore
         await supabase.from("resources").insert([{ id: product.id, images: uploadedResourceUrls }]);
       }
 

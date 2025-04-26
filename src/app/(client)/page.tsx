@@ -1,5 +1,5 @@
 import { AdCard } from "@/components/ad-card";
-import { CategoryBox } from "@/components/yns/category-box";
+import { CategoryCard } from "@/components/category-card";
 import { storeConfig } from "@/components/yns/store.config";
 
 export default async function DashboardView() {
@@ -9,7 +9,7 @@ export default async function DashboardView() {
       <section className="w-full py-8">
         <div className="grid gap-8 lg:grid-cols-3 sm:grid-cols-2">
           {storeConfig.categories.map(({ slug, image: src }) => (
-            <CategoryBox key={slug} categorySlug={slug} src={src} />
+            <CategoryCard key={slug} slug={slug} src={src} />
           ))}
         </div>
       </section>

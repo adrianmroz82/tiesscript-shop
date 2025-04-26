@@ -1,32 +1,29 @@
-"use client";
+import Image, { type ImageProps } from "next/image";
 
-import localFont from "next/font/local";
-import { useRouter } from "next/navigation";
-
-import { Card, CardContent } from "@/components/shadcn-ui/card";
-import { Category } from "@/models/product.model";
+import { PrefetchLink } from "@/components/prefetch-link";
+import { capitalize } from "@/lib/utils/capitalize";
 
 interface Props {
-  category: Category;
+  slug: string;
+  src: ImageProps["src"];
 }
 
-// todo: absolute path
-const spaceGroteskFont = localFont({ src: "../../public/fonts/space-grotesk-medium.ttf" });
 
-export function CategoryCard({ category }: Props) {
-  const router = useRouter();
-
-  const goToCategory = (category: Category) => {
-    router.push(`/${category}`);
-  };
-
+export async function CategoryCard({ slug, src }: Props) {
   return (
-    <Card
-      onClick={() => goToCategory(category)}
-      className="flex min-w-[20rem] h-[30rem] rounded-none bg-stone-800 hover:bg-stone-700 text-white cursor-pointer items-center justify-center">
-      <CardContent className={`${spaceGroteskFont.className} text-center text-xl`}>
-        {category.toUpperCase()}
-      </CardContent>
-    </Card>
+    <PrefetchLink href={`${slug}`} className="group relative">
+      <div className="relative overflow-hidden rounded-lg bg-neutral-50/50 p-4">
+        <Image
+          alt="Cover image"
+          className="scale-105 object-cover transition-all group-hover:scale-100 group-hover:opacity-75"
+          sizes="(max-width: 1024x) 100vw, (max-width: 1280px) 50vw, 392px"
+          src={src}
+        />
+      </div>
+      <div className="justify-end gap-4 p-4 text-neutral-600 text-center">
+        <h3 className="text-xl font-bold tracking-tight">{capitalize(slug)}</h3>
+        <p>{"Shop Now"}</p>
+      </div>
+    </PrefetchLink>
   );
 }
