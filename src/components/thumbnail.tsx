@@ -23,7 +23,7 @@ export function ProductThumbnail({ productImage, api, currentIndex, index }: Pro
           placeholder="blur"
           blurDataURL={productImage}
           // TODO: apply proper img sizes
-          sizes="100px"
+          sizes="112px"
         />
       </div>
     </div>
