@@ -13,8 +13,12 @@ export function CartItem({ cartItem }: Props) {
   const { id, name, main_image, price, quantity } = cartItem;
 
   return (
-    <li className="flex items-center mb-5 pb-5 border-b-2">
-      <Image priority className="rounded max-h-20" src={main_image} alt={name} width={80} height={80} />
+    <li className="flex items-center mb-5 pb-5">
+      <div className="w-20 h-20 flex m-1 border rounded">
+        <div className="w-full h-full relative">
+          <Image priority src={main_image} alt="Product Image Thumbnail" layout="fill" objectFit="cover" sizes="80px" />
+        </div>
+      </div>
       <div className="flex-1 ml-8">
         <h3 className="mb-2.5">{name}</h3>
         <div className="flex items-center">

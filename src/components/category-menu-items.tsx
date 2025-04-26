@@ -20,10 +20,10 @@ export function CategoryMenuItems({ categories }: Props) {
   };
 
   return (
-    <>
+    <ul className="flex flex-col">
       {categories.map(({ name, slug }) => (
         <DrawerClose key={name}>
-          <div
+          <li
             onClick={() => handleCategoryClick(slug)}
             className="hover:bg-muted cursor-pointer flex items-center rounded-lg h-12">
             <Image
@@ -34,9 +34,9 @@ export function CategoryMenuItems({ categories }: Props) {
               height={32}
             />
             <p>{capitalize(name)}</p>
-          </div>
+          </li>
         </DrawerClose>
       ))}
-    </>
+    </ul>
   );
 }

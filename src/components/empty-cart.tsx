@@ -6,7 +6,7 @@ export function EmptyCart() {
   const router = useRouter();
 
   const handleRedirect = () => {
-    router.back();
+    router.push("/");
   };
 
   return (

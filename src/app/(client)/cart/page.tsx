@@ -27,7 +27,7 @@ export default function Cart() {
   };
 
   return (
-    <div className="p-8 mx-auto bg-white mt-8 rounded-xl">
+    <div className="max-w-2xl w-full p-8 mx-auto bg-white mt-8 rounded-xl">
       <h3>Cart</h3>
       {cart.length === 0 ? (
         <EmptyCart />
