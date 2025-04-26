@@ -12,7 +12,9 @@ interface Props {
 
 export function ProductThumbnail({ productImage, api, currentIndex, index }: Props) {
   return (
-    <div className={`w-32 h-32 flex p-2 ${index + 1 === currentIndex ? "border-2 border-slate-200" : ""}`}>
+    <div
+      className={`w-32 h-32 flex m-1 border rounded-md
+        ${index + 1 === currentIndex && "border-2 border-slate-400"}`}>
       <div className="w-full h-full relative">
         <Image
           src={productImage}
@@ -20,9 +22,7 @@ export function ProductThumbnail({ productImage, api, currentIndex, index }: Pro
           layout="fill"
           objectFit="cover"
           onClick={() => api && api.scrollTo(index)}
-          placeholder="blur"
-          blurDataURL={productImage}
-          // TODO: apply proper img sizes
+          className="border rounded"
           sizes="112px"
         />
       </div>

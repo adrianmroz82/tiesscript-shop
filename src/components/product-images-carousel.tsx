@@ -38,7 +38,7 @@ export function ProductImagesCarousel({ productImages }: Props) {
     <>
       <div className="flex flex-col">
         {productImages?.map((productImage, index) => (
-          <div key={index} className="h-[150px] w-auto ">
+          <div key={index} className=" w-auto ">
             <ProductThumbnail
               key={index}
               productImage={productImage}
@@ -56,20 +56,17 @@ export function ProductImagesCarousel({ productImages }: Props) {
             {productImages?.map((productImage, index) => (
               <CarouselItem key={index} tabIndex={2}>
                 <div className="p-2">
-                  <div className="flex relative aspect-square justify-center ">
+                  <div className="flex relative aspect-square justify-center">
                     <Image
-                      // TODO: main image does not load faster
+                      // TODO: RWD design
                       // TODO: apply proper img sizes
                       priority={index === 0}
                       src={productImage}
                       alt={`Product Image ${index + 1}`}
-                      width={500}
-                      height={500}
-                      className="object-contain w-full"
-                      placeholder="blur"
-                      blurDataURL={productImage}
-                      // sizes="500px"
-                      // sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, (max-width: 1920px) 33vw, 500px"
+                      width={560}
+                      height={560}
+                      className="object-contain"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, (max-width: 1920px) 33vw, 560px"
                     />
                   </div>
                 </div>
