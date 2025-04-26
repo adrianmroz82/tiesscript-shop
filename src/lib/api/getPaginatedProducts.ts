@@ -1,7 +1,7 @@
 import { OrderByField } from "@/models/order-by-field.model";
 import { createClient } from "@/utils/supabase/server";
 
-const PAGE_SIZE = 6;
+const PAGE_SIZE = 8;
 
 export async function getPaginatedProducts(category: any, page: number, _orderByField: OrderByField) {
   const supabase = await createClient();

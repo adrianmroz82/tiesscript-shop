@@ -25,13 +25,13 @@ export function ProductCard({ product, category, index }: Props) {
         <PrefetchLink className="group" href={`/${category}/${id}`}>
           {main_image && (
             <Image
-              className="group-hover:rotate hover-perspective w-full bg-neutral-100 object-contain transition-opacity group-hover:opacity-75"
+              className="group-hover:rotate hover-perspective bg-neutral-100 object-contain transition-opacity group-hover:opacity-75"
               src={main_image}
-              width={768}
-              height={768}
+              width={300}
+              height={415}
               loading={index < 3 ? "eager" : "lazy"}
               priority={index < 3}
-              sizes="(max-width: 1024x) 100vw, (max-width: 1280px) 50vw, 700px"
+              sizes="(max-width: 1024x) 100vw, (max-width: 1280px) 50vw, 300px"
               alt=""
             />
           )}
