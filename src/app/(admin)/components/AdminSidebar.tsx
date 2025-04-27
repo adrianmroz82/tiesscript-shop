@@ -1,4 +1,5 @@
 import { BarChart2, Database, DollarSign, PlusCircle, Send } from "lucide-react";
+import Link from "next/link";
 
 import {
   Sidebar,
@@ -12,7 +13,6 @@ import {
   SidebarMenuItem,
 } from "@/components/shadcn-ui/sidebar";
 import { ThemeSwitcher } from "@/components/theme-switcher";
-import Link from "next/link";
 
 const items = [
   {

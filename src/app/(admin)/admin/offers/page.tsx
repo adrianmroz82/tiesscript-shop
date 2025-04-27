@@ -1,8 +1,4 @@
-"use client";
-
-import { useEffect, useState } from "react";
-
-import { createClient } from "@/utils/supabase/client";
+import { createClient } from "@/utils/supabase/server";
 
 import { DataTable } from "../../components/DataTable/DataTable";
 import { offerTableColumns } from "./offer-columns";

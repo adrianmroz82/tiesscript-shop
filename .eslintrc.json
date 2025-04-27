@@ -1,5 +1,5 @@
 {
-  "extends": ["next/core-web-vitals", "plugin:@next/next/recommended"],
+  "extends": ["next/core-web-vitals"],
   "plugins": ["simple-import-sort", "unused-imports"],
   "rules": {
     "simple-import-sort/imports": "error",
@@ -12,8 +12,7 @@
         "argsIgnorePattern": "^_",
         "varsIgnorePattern": "^_"
       }
-    ],
-    "@next/next/no-html-link-for-pages": "off"
+    ]
   },
   "ignorePatterns": ["lib/**"]
 }
