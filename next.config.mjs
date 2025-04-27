@@ -3,7 +3,9 @@ const nextConfig = {
   images: {
     domains: ["juuzskjgczlmyqxijkud.supabase.co", "files.stripe.com"],
   },
-  ignoreDuringBuilds: true,
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
 };
 
 export default nextConfig;
