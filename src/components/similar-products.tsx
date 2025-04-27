@@ -1,25 +1,13 @@
 import Image from "next/image";
 
-import { createClient } from "@/utils/supabase/server";
-
 interface Props {
-  category: string;
+  products: Product[] | null;
 }
 
-export async function SimilarProducts({ category }: Props) {
-  const supabase = await createClient();
-  const { data: products } = await supabase
-    .from("products")
-    .select("*")
-    .eq("category", category)
-    .limit(5)
-    .order("created_at", { ascending: true });
-
-  if (!products) {
-    return;
+export function SimilarProducts({ products }: Props) {
+  if (!products || products.length === 0) {
+    return <></>;
   }
-
-  // TODO: fetch about 10 products and add next prev next to h2
 
   return (
     <section className="py-12 mx-auto">

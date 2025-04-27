@@ -27,7 +27,7 @@ export default function AddProductForm() {
   const [isUploading, setIsUploading] = useState(false);
   const [_mainImage, setMainImage] = useState<File | null>(null);
   const [resourceImages, setResourceImages] = useState<File[]>([]); // Store resource images
-  const categories = storeConfig.categories;
+  const { categories } = storeConfig;
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;

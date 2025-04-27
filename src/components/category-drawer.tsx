@@ -11,7 +11,7 @@ import {
 } from "@/components/shadcn-ui/drawer";
 import { storeConfig } from "@/components/yns/store.config";
 
-export async function CategoryMenuDrawer() {
+export function CategoryMenuDrawer() {
   const { categories } = storeConfig;
 
   return (

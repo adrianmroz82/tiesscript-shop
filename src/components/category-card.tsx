@@ -8,8 +8,7 @@ interface Props {
   src: ImageProps["src"];
 }
 
-
-export async function CategoryCard({ slug, src }: Props) {
+export function CategoryCard({ slug, src }: Props) {
   return (
     <PrefetchLink href={`${slug}`} className="group relative">
       <div className="relative overflow-hidden rounded-lg bg-neutral-50/50 p-4">
