@@ -9,6 +9,8 @@ export function SimilarProducts({ products }: Props) {
     return <></>;
   }
 
+  // TODO: add redirect, RWD, prefetchlink, proper image sizes, 
+
   return (
     <section className="py-12 mx-auto">
       <h2 className="text-2xl font-bold tracking-tight mt-16 mb-8">Similar products</h2>
@@ -17,7 +19,6 @@ export function SimilarProducts({ products }: Props) {
           return (
             <div key={id} className="bg-card rounded overflow-hidden shadow-sm group">
               {main_image && (
-                // <PrefetchLink href={`${publicUrl}${product.link}`} className="block" prefetch={false}>
                 <Image
                   className={
                     "w-full rounded-lg bg-neutral-100 object-cover object-center group-hover:opacity-80 transition-opacity"
@@ -26,9 +27,8 @@ export function SimilarProducts({ products }: Props) {
                   width={300}
                   height={300}
                   sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 300px"
-                  alt=""
+                  alt="Product image"
                 />
-                // </PrefetchLink>
               )}
               <div className="p-4">
                 <h3 className="text-lg font-semibold mb-2">{name}</h3>

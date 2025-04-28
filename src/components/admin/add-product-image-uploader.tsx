@@ -85,6 +85,7 @@ export function AddProductImageUploader({ setResourceImages }: Props) {
     return (
       <div className="flex space-x-4 flex-wrap">
         {images.map((image, index) => (
+          // TODO: fix this type error
           // @ts-ignore
           <SortableItem key={image.id} index={index} image={image} />
         ))}
@@ -96,6 +97,7 @@ export function AddProductImageUploader({ setResourceImages }: Props) {
     <div className="space-y-4">
       <Label htmlFor="image">Image</Label>
       <Input id="image" type="file" name="image" multiple onChange={handleAddImage} />
+      {/* TODO: fix this type error */}
       {/*  @ts-ignore */}
       <SortableList images={imagesPreview} onSortEnd={onSortEnd} axis="xy" />
     </div>

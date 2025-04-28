@@ -69,7 +69,7 @@ export default function AddProductForm() {
       );
 
       // ✅ Upload all resource images (including the main one again)
-      const uploadedResourceUrls = await Promise.all(compressedResourceImages.map(uploadImageToSupabase));
+      const uploadedResourceUrls = (await Promise.all(compressedResourceImages.map(uploadImageToSupabase))) as string[];
 
       // ✅ Save product to products table with compressed main image
       const updatedFormData = {
@@ -82,7 +82,6 @@ export default function AddProductForm() {
 
       // ✅ Save resources to resources table (including main image again at 1MB)
       if (uploadedResourceUrls.length > 0) {
-        // @ts-ignore
         await supabase.from("resources").insert([{ id: product.id, images: uploadedResourceUrls }]);
       }
 
