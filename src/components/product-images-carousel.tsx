@@ -38,7 +38,7 @@ export function ProductImagesCarousel({ productImages }: Props) {
     <>
       <div className="flex flex-col">
         {productImages?.map((productImage, index) => (
-          <div key={index} className="h-[150px] w-auto ">
+          <div key={index} className=" w-auto ">
             <ProductThumbnail
               key={index}
               productImage={productImage}
@@ -50,36 +50,33 @@ export function ProductImagesCarousel({ productImages }: Props) {
         ))}
       </div>
 
-      <div className="relative w-full max-w-xl flex items-center">
+      <div className="max-w-xl flex items-center">
         <Carousel className="w-full" setApi={setApi}>
           <CarouselContent>
             {productImages?.map((productImage, index) => (
               <CarouselItem key={index} tabIndex={2}>
-                <div className="p-1">
-                  <div className="flex aspect-square justify-center">
+                <div className="p-2">
+                  <div className="flex relative aspect-square justify-center">
                     <Image
-                      // TODO: main image does not load faster
+                      // TODO: RWD design
                       // TODO: apply proper img sizes
                       priority={index === 0}
                       src={productImage}
                       alt={`Product Image ${index + 1}`}
-                      width={500}
-                      height={500}
+                      width={560}
+                      height={560}
                       className="object-contain"
-                      placeholder="blur"
-                      blurDataURL={productImage}
-                      // sizes="500px"
-                      // sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, (max-width: 1920px) 33vw, 500px"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, (max-width: 1920px) 33vw, 560px"
                     />
                   </div>
                 </div>
               </CarouselItem>
             ))}
           </CarouselContent>
-          <div className="absolute left-0 top-1/2 shadow">
+          <div className="absolute right-72 bottom-10 rounded-full bg-white/80 hover:bg-white backdrop-blur shadow">
             <CarouselPrevious />
           </div>
-          <div className="absolute right-0 top-1/2">
+          <div className="absolute right-20 bottom-10 rounded-full bg-white/80 hover:bg-white backdrop-blur shadow">
             <CarouselNext />
           </div>
         </Carousel>

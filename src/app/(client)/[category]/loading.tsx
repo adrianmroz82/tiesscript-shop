@@ -1,21 +1,24 @@
 import { Skeleton } from "@/components/shadcn-ui/skeleton";
 
-export function SkeletonCard() {
-  return (
-    <div className="w-1/4 p-4 flex items-center justify-center ">
-      <div className="flex flex-col items-center justify-center p-2">
-        <Skeleton className="h-[600px] w-[400px] rounded-xl" />
-      </div>
-    </div>
-  );
-}
-
 export default function Loading() {
   return (
-    <div className="flex flex-wrap">
-      {[...Array(4)].map((_, i) => (
-        <SkeletonCard key={i} />
-      ))}
-    </div>
+    <main className="max-w-7xl mx-auto">
+      <ul className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {Array.from({ length: 8 }).map((_, index) => (
+          <li key={index}>
+            <article className="h-full flex flex-col rounded border bg-white">
+              <Skeleton className="w-[300px] h-[415px] bg-neutral-100" />
+              <div className="p-4 space-y-2">
+                <Skeleton className=" h-7 w-3/4" />
+                <Skeleton className="mt-1 h-5 w-1/2" />
+              </div>
+              <div className="pt-3">
+                <Skeleton className="h-10 w-full rounded-lg" />
+              </div>
+            </article>
+          </li>
+        ))}
+      </ul>
+    </main>
   );
 }

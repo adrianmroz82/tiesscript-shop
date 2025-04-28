@@ -1,0 +1,17 @@
+name: test
+on:
+  pull_request:
+    branches:
+      - main
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+      - name: Install dependencies
+        run: rm -rf node_modules && npm install --legacy-peer-deps --frozen-lockfile
+      - name: Lint code
+        run: npm run lint
+      # - name: Build
+      #   run: npm run build

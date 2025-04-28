@@ -1,17 +1,16 @@
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/shadcn-ui/select";
-import { Category } from "@/models/product.model";
+
+import { type StoreConfig, storeConfig } from "../yns/store.config";
 
 interface Props {
-  categories: Category[];
-  value: Category;
-  onChange: (_value: Category) => void;
+  categories: StoreConfig["categories"];
+  value: Category["name"];
+  onChange: (_value: Category["name"]) => void;
 }
 
-
-// TODO: fix categories query
-const categories = ["ties", "blazers", "shirts"];
-
 export function AddProductCategorySelect({ value, onChange }: Props) {
+  const { categories } = storeConfig;
+
   return (
     <div className="space-y-1.5 ">
       <label htmlFor="category">Category</label>
@@ -20,9 +19,9 @@ export function AddProductCategorySelect({ value, onChange }: Props) {
           <SelectValue placeholder="Select a category" />
         </SelectTrigger>
         <SelectContent>
-          {categories.map((category) => (
-            <SelectItem key={category} value={category}>
-              {category}
+          {categories.map(({ name }) => (
+            <SelectItem key={name} value={name}>
+              {name}
             </SelectItem>
           ))}
         </SelectContent>

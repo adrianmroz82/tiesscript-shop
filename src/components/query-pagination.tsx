@@ -26,33 +26,55 @@ export function QueryPagination({ currentPage, onPageChange, totalPages }: Props
     onPageChange(page);
   };
 
+  function renderPages() {
+    if (totalPages <= 7) {
+      return Array.from({ length: totalPages }, (_, i) => i + 1);
+    }
+
+    const range = [];
+    range.push(1);
+
+    if (currentPage > 4) {
+      range.push("ellipsis");
+    }
+
+    for (let i = Math.max(2, currentPage - 2); i <= Math.min(totalPages - 1, currentPage + 2); i++) {
+      range.push(i);
+    }
+
+    if (currentPage < totalPages - 3) {
+      range.push("ellipsis");
+    }
+
+    range.push(totalPages);
+
+    return range;
+  }
+
   return (
     <Pagination>
       <PaginationContent>
         <PaginationItem>
           <PaginationPrevious
-            onClick={goToPage(currentPage - 1)}
-            // disabled={currentPage === 1}
-            className={currentPage === 1 ? "cursor-not-allowed" : ""}
+            onClick={goToPage(Math.max(1, currentPage - 1))}
+            className={currentPage === 1 ? "pointer-events-none opacity-50" : ""}
           />
         </PaginationItem>
-        {[...Array(totalPages)].map((_, index) => {
-          const page = index + 1;
-          return (
-            <PaginationItem key={page}>
-              <PaginationLink onClick={goToPage(page)} isActive={page === currentPage}>
+        {renderPages().map((page, idx) => (
+          <PaginationItem key={idx}>
+            {page === "ellipsis" ? (
+              <PaginationEllipsis />
+            ) : (
+              <PaginationLink onClick={goToPage(page as number)} isActive={page === currentPage}>
                 {page}
               </PaginationLink>
-            </PaginationItem>
-          );
-        })}
-        <PaginationItem>
-          <PaginationEllipsis />
-        </PaginationItem>
-        <PaginationItem>
+            )}
+          </PaginationItem>
+        ))}
+        <PaginationItem className="">
           <PaginationNext
-            onClick={goToPage(currentPage + 1)}
-            className={currentPage === totalPages ? "cursor-not-allowed" : ""}
+            onClick={goToPage(Math.min(totalPages, currentPage + 1))}
+            className={currentPage === totalPages ? "pointer-events-none opacity-50" : ""}
           />
         </PaginationItem>
       </PaginationContent>

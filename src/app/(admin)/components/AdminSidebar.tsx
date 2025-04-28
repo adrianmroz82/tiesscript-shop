@@ -1,4 +1,5 @@
 import { BarChart2, Database, DollarSign, PlusCircle, Send } from "lucide-react";
+import Link from "next/link";
 
 import {
   Sidebar,
@@ -52,10 +53,10 @@ export function AdminSidebar() {
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild size="lg">
-                    <a href={item.url}>
+                    <Link href={item.url}>
                       <item.icon />
                       <span>{item.title}</span>
-                    </a>
+                    </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}

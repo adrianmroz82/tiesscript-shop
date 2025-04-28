@@ -1,7 +1,5 @@
 import { ColumnDef } from "@tanstack/react-table";
 
-import { Order } from "@/models/order.model";
-
 export const orderTableColumns: ColumnDef<Order>[] = [
   {
     accessorKey: "id",
