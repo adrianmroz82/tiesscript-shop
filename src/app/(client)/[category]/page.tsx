@@ -1,6 +1,7 @@
 import { EmptyState } from "@/components/empty-state";
 import { PaginatedProductList } from "@/components/paginated-product-list";
 import { getPaginatedProducts } from "@/lib/api/getPaginatedProducts";
+import { capitalize } from "@/lib/utils/capitalize";
 import { OrderByField } from "@/models/order-by-field.model";
 
 interface Props {
@@ -30,6 +31,11 @@ export default async function CategoryProducts({ params, searchParams }: Props) 
 
   return (
     <main className="max-w-7xl mx-auto">
+      <div className="">
+        <div className="pt-8">
+          <h2 className="text-2xl font-semibold">{capitalize(category)}</h2>
+        </div>
+      </div>
       <PaginatedProductList products={products} count={count ?? 0} category={category} />
     </main>
   );

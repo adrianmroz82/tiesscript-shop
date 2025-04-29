@@ -1,6 +1,6 @@
 import "@/styles/globals.css";
 
-import localFont from "next/font/local";
+import { Raleway } from "next/font/google";
 import { ReactNode } from "react";
 
 import { Header } from "@/components/header";
@@ -8,7 +8,10 @@ import { Toaster } from "@/components/shadcn-ui/toaster";
 import { ThemeProvider } from "@/components/theme-provider";
 import { StoreProvider } from "@/store/store-provider";
 
-const satoshiFont = localFont({ src: "../../../public/fonts/satoshi-light.otf" });
+const raleway = Raleway({
+  weight: ["400", "500", "600", "700"],
+  subsets: ["latin"],
+});
 
 interface Props {
   children: ReactNode;
@@ -16,7 +19,7 @@ interface Props {
 
 export default function RootLayout({ children }: Props) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${satoshiFont.className}`}>
+    <html lang="en" suppressHydrationWarning className={raleway.className}>
       <head />
       <body className="flex">
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>

@@ -16,10 +16,7 @@ export function Header() {
               Home
             </PrefetchLink>
             <PrefetchLink href="/add-product-form" className="hover:underline">
-              Add new product
-            </PrefetchLink>
-            <PrefetchLink href="/contact" className="hover:underline">
-              Contact
+              +
             </PrefetchLink>
           </div>
           <div className="flex space-x-8">

@@ -36,7 +36,7 @@ export function ProductCard({ product, category, index }: Props) {
             />
           )}
           <div className="p-4">
-            <h2 className="text-lg font-semibold text-neutral-700">{name}</h2>
+            <h2 className="text-lg font-medium text-neutral-700">{name}</h2>
             <p className="mt-1 text-sm text-neutral-500">{price}</p>
           </div>
         </PrefetchLink>
