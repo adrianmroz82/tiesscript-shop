@@ -1,4 +1,5 @@
 import { EmptyState } from "@/components/empty-state";
+import { OrderBySelect } from "@/components/order-by-select";
 import { PaginatedProductList } from "@/components/paginated-product-list";
 import { getPaginatedProducts } from "@/lib/api/getPaginatedProducts";
 import { OrderByField } from "@/models/order-by-field.model";
@@ -9,12 +10,11 @@ interface Props {
 }
 
 export default async function CategoryProducts({ params, searchParams }: Props) {
-  // TODO: fix sorting
   const getOrderByField = (): OrderByField => {
-    const field = searchParams["orderBy"] ?? "createdAtDesc";
+    const field = searchParams["orderBy"] ?? "created_at_desc";
     return {
-      field: field.replace("Desc", ""),
-      direction: field.includes("Desc") ? "desc" : "asc",
+      field: field.replace("_desc", ""),
+      ascending: !field.includes("desc"),
     };
   };
 
@@ -30,6 +30,7 @@ export default async function CategoryProducts({ params, searchParams }: Props) 
 
   return (
     <main className="max-w-7xl mx-auto">
+      <OrderBySelect />
       <PaginatedProductList products={products} count={count ?? 0} category={category} />
     </main>
   );
