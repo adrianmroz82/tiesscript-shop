@@ -10,7 +10,7 @@ export async function getPaginatedProducts(category: any, page: number, _orderBy
     .from("products")
     .select("*", { count: "exact" })
     .eq("category", category)
-    // TODO: apply sorting
+    .order(_orderByField.field, { ascending: _orderByField.ascending })
     .range((page - 1) * PAGE_SIZE, page * PAGE_SIZE - 1);
 
   return { products, count };

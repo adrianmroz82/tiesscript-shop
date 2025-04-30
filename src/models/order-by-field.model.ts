@@ -1,20 +1,20 @@
 export interface OrderByField {
   field: string;
-  direction: any; // TODO: replace any
+  ascending: boolean;
 }
 
 export const sortOptions: Record<"displayName" | "field", string>[] = [
   {
     displayName: "Latest",
-    field: "createdAtDesc",
+    field: "created_at_desc",
   },
   {
     displayName: "Oldest",
-    field: "createdAt",
+    field: "created_at",
   },
   {
     displayName: "Highest price",
-    field: "priceDesc",
+    field: "price_desc",
   },
   {
     displayName: "Lowest price",
