@@ -11,7 +11,7 @@ import { Separator } from "@/components/shadcn-ui/separator";
 import { Sheet, SheetContent } from "@/components/shadcn-ui/sheet";
 import { Skeleton } from "@/components/shadcn-ui/skeleton";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/shadcn-ui/tooltip";
-import { useIsMobile } from "@/lib/hooks/use-mobile";
+import { useBreakpoint } from "@/lib/hooks/use-mobile";
 import { cn } from "@/lib/utils";
 
 const SIDEBAR_COOKIE_NAME = "sidebar:state";
@@ -50,7 +50,7 @@ const SidebarProvider = React.forwardRef<
     onOpenChange?: (_open: boolean) => void;
   }
 >(({ defaultOpen = true, open: openProp, onOpenChange: setOpenProp, className, style, children, ...props }, ref) => {
-  const isMobile = useIsMobile();
+  const { isMobile } = useBreakpoint();
   const [openMobile, setOpenMobile] = React.useState(false);
 
   // This is the internal state of the sidebar.
@@ -285,10 +285,7 @@ const SidebarInput = React.forwardRef<React.ElementRef<typeof Input>, React.Comp
       <Input
         ref={ref}
         data-sidebar="input"
-        className={cn(
-          "h-8 w-full bg-background shadow-none",
-          className
-        )}
+        className={cn("h-8 w-full bg-background shadow-none", className)}
         {...props}
       />
     );
