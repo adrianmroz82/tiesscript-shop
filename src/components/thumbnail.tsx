@@ -13,8 +13,8 @@ interface Props {
 export function ProductThumbnail({ productImage, api, currentIndex, index }: Props) {
   return (
     <div
-      className={`w-24 h-24 lg:w-28 lg:h-28 flex m-1 border rounded-md
-        ${index + 1 === currentIndex&& "border-2 border-slate-400"}`}>
+      className={`w-20 h-20 lg:w-28 lg:h-28 flex m-1 border rounded-md
+        ${index + 1 === currentIndex && "border-2 border-slate-400"}`}>
       <div className="w-full h-full relative">
         <Image
           src={productImage}
