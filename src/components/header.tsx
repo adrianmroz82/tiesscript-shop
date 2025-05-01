@@ -1,7 +1,7 @@
 import { ShoppingCart } from "@/components/cart/shopping-cart";
 import { CategoryMenuDrawer } from "@/components/category-drawer";
 import { PrefetchLink } from "@/components/prefetch-link";
-import { ThemeSwitcher } from "@/components/theme-switcher";
+// import { ThemeSwitcher } from "@/components/theme-switcher";
 
 // TODO: move header data to storeConfig
 
@@ -21,7 +21,7 @@ export function Header() {
           </div>
           <div className="flex space-x-8">
             <ShoppingCart />
-            <ThemeSwitcher />
+            {/* <ThemeSwitcher /> */}
           </div>
         </div>
       </nav>

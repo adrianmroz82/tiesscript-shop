@@ -16,7 +16,7 @@ export function ShoppingCart() {
 
   return (
     <div data-testid="shopping-cart" onClick={handleRedirect} className="relative inline-block cursor-pointer">
-      <ShoppingCartIcon size={24} className="cursor-pointer" />
+      <ShoppingCartIcon size={28} className="cursor-pointer" />
       {numOfProductsInCart > 0 && (
         <div className="absolute -top-2 -right-2 rounded-full py-1 px-2 text-xs bg-blue-600 text-white">
           {numOfProductsInCart}

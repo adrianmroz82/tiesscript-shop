@@ -1,8 +1,17 @@
 "use client";
 
 import useEmblaCarousel, { type UseEmblaCarouselType } from "embla-carousel-react";
-import { ArrowLeft, ArrowRight } from "lucide-react";
-import { createContext, forwardRef, KeyboardEvent, useCallback, useContext, useEffect, useState } from "react";
+import { ArrowLeft, ArrowRight, ChevronDown, ChevronLeft, ChevronRight, ChevronUp } from "lucide-react";
+import {
+  ComponentProps,
+  createContext,
+  forwardRef,
+  KeyboardEvent,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 
 import { Button } from "@/components/shadcn-ui/button";
 import { cn } from "@/lib/utils";
@@ -12,10 +21,12 @@ type UseCarouselParameters = Parameters<typeof useEmblaCarousel>;
 type CarouselOptions = UseCarouselParameters[0];
 type CarouselPlugin = UseCarouselParameters[1];
 
+type Orientation = "horizontal" | "vertical";
+
 type CarouselProps = {
   opts?: CarouselOptions;
   plugins?: CarouselPlugin;
-  orientation?: "horizontal" | "vertical";
+  orientation?: Orientation;
   setApi?: (_api: CarouselApi) => void;
 };
 
@@ -27,6 +38,10 @@ type CarouselContextProps = {
   canScrollPrev: boolean;
   canScrollNext: boolean;
 } & CarouselProps;
+
+type CarouselNavProps = {
+  orientation: Orientation;
+} & ComponentProps<typeof Button>;
 
 const CarouselContext = createContext<CarouselContextProps | null>(null);
 
@@ -225,4 +240,53 @@ const CarouselNext = forwardRef<HTMLButtonElement, React.ComponentProps<typeof B
 );
 CarouselNext.displayName = "CarouselNext";
 
-export { Carousel, type CarouselApi, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious };
+const CarouselUp = forwardRef<HTMLButtonElement, CarouselNavProps>(
+  ({ className, variant = "outline", size = "icon", orientation = "vertical", ...props }, ref) => {
+    const { scrollPrev } = useCarousel();
+
+    return (
+      <Button
+        ref={ref}
+        variant={variant}
+        size={size}
+        className={cn("border-none hover:bg-transparent", className)}
+        onClick={scrollPrev}
+        {...props}>
+        {orientation === "horizontal" ? <ChevronLeft size={20} /> : <ChevronUp size={20} />}
+        <span className="sr-only">Previous slide</span>
+      </Button>
+    );
+  }
+);
+CarouselUp.displayName = "CarouselUp";
+
+const CarouselDown = forwardRef<HTMLButtonElement, CarouselNavProps>(
+  ({ className, variant = "outline", size = "icon", orientation = "vertical", ...props }, ref) => {
+    const { scrollNext } = useCarousel();
+
+    return (
+      <Button
+        ref={ref}
+        variant={variant}
+        size={size}
+        className={cn("border-none hover:bg-transparent", className)}
+        onClick={scrollNext}
+        {...props}>
+        {orientation === "horizontal" ? <ChevronRight size={20} /> : <ChevronDown size={20} />}
+        <span className="sr-only">Next slide</span>
+      </Button>
+    );
+  }
+);
+CarouselDown.displayName = "CarouselDown";
+
+export {
+  Carousel,
+  type CarouselApi,
+  CarouselContent,
+  CarouselDown,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+  CarouselUp,
+};

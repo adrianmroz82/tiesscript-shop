@@ -36,8 +36,8 @@ export function ProductCard({ product, category, index }: Props) {
             />
           )}
           <div className="p-4">
-            <h2 className="text-lg font-medium text-neutral-700">{name}</h2>
-            <p className="mt-1 text-sm text-neutral-500">{price}</p>
+            <h2 className="font-medium text-neutral-700">{name}</h2>
+            <p className="mt-1 text-sm text-neutral-700">{price}</p>
           </div>
         </PrefetchLink>
         <Button className="mt-4" onClick={() => handleAddToCart(product)}>
