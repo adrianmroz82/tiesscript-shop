@@ -1,6 +1,9 @@
+import { Suspense } from "react";
+
 import { EmptyState } from "@/components/empty-state";
 import { ProductDetailsBreadcrumbs } from "@/components/product-details-breadcrumbs";
 import { ProductDetailsInfo } from "@/components/product-details-info";
+import { ProductImageModal } from "@/components/product-image-modal";
 import { ProductImagesCarousel } from "@/components/product-images-carousel";
 import { CardContent } from "@/components/shadcn-ui/card";
 import { SimilarProducts } from "@/components/similar-products";
@@ -8,7 +11,7 @@ import { getProduct } from "@/lib/api/getProduct";
 import { getProductImages } from "@/lib/api/getProductImages";
 import { getSimilarProducts } from "@/lib/api/getSimilarProducts";
 interface Props {
-  params: { id: string; category: string };
+  params: { id: string; category: Category["name"] };
 }
 
 export default async function DetailsPage({ params }: Props) {
@@ -28,13 +31,23 @@ export default async function DetailsPage({ params }: Props) {
           <div className="py-8">
             <ProductDetailsBreadcrumbs product={product} />
           </div>
-          <CardContent className="shadow-lg flex">
+          <CardContent className="shadow-lg flex flex-col lg:flex-row lg:p-6">
             {productImages && <ProductImagesCarousel productImages={productImages} />}
             <ProductDetailsInfo product={product} />
           </CardContent>
         </div>
       </div>
-      <SimilarProducts products={similarProducts} />
+      <Suspense>
+        <SimilarProducts products={similarProducts} category={category} />
+      </Suspense>
+      <Suspense>
+        <ProductImageModal images={productImages!} />
+      </Suspense>
     </>
   );
 }
+
+// TODO
+// dostosowac skeleton
+// components groups folders - seperate pr
+//bug - first page needs query params as well

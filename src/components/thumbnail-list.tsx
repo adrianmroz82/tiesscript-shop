@@ -16,7 +16,7 @@ export function ThumbnailList({ productImages, api, currentIndex }: Props) {
   const { isMobile, isTablet } = useBreakpoint();
   const isHorizontal = isMobile || isTablet;
 
-  const visibleCount = isMobile ? 3 : 4;
+  const visibleCount = isMobile ? 2 : 4;
   const visibleImages = productImages.slice(scrollIndex, scrollIndex + visibleCount);
 
   useEffect(() => {

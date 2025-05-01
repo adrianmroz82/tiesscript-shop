@@ -26,7 +26,7 @@ export default function RootLayout({ children }: Props) {
           <StoreProvider>
             <div className="flex flex-col w-full">
               <Header />
-              <main className="flex w-full flex-1 flex-col px-4 pb-6 pt-2 sm:px-6 ">{children}</main>
+              <main className="flex w-full flex-1 flex-col px-4 pb-6 pt-2 xs:px-6 ">{children}</main>
             </div>
             <Toaster />
           </StoreProvider>
