@@ -11,19 +11,19 @@ import {
 } from "@/components/shadcn-ui/pagination";
 
 interface Props {
-  currentPage: number;
-  onPageChange: (_page: number) => void;
   totalPages: number;
 }
 
-export function QueryPagination({ currentPage, onPageChange, totalPages }: Props) {
+export function QueryPagination({ totalPages }: Props) {
   const router = useRouter();
   const searchParams = useSearchParams();
+
+  const pageParam = searchParams.get("page");
+  const currentPage = pageParam ? parseInt(pageParam) : 1;
 
   const goToPage = (page: number) => () => {
     const orderBy = searchParams.get("orderBy") ?? "createdAtDesc";
     router.push(`?page=${page}&orderBy=${orderBy}`);
-    onPageChange(page);
   };
 
   function renderPages() {

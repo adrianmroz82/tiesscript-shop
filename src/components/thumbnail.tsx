@@ -13,17 +13,16 @@ interface Props {
 export function ProductThumbnail({ productImage, api, currentIndex, index }: Props) {
   return (
     <div
-      className={`w-20 h-20 lg:w-28 lg:h-28 flex m-1 border rounded-md
+      className={`w-20 h-20 lg:w-24 lg:h-24 flex m-1 border rounded-md
         ${index + 1 === currentIndex && "border-2 border-slate-400"}`}>
-      <div className="w-full h-full relative">
+      <div className="w-full h-full relative cursor:pointer">
         <Image
           src={productImage}
           alt="Product Image Thumbnail"
           layout="fill"
-          objectFit="cover"
           onClick={() => api && api.scrollTo(index)}
-          className="border rounded"
-          sizes="112px"
+          className="border rounded object-cover "
+          sizes="95px"
         />
       </div>
     </div>
