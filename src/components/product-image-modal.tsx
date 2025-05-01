@@ -5,11 +5,10 @@ import Image from "next/image";
 import { useSearchParams } from "next/navigation";
 import { Fragment, startTransition, useEffect, useState } from "react";
 
+import { PrefetchLink } from "@/components/prefetch-link";
 import { useBreakpoint } from "@/lib/hooks/use-mobile";
 import { cn } from "@/lib/utils";
 import { useRouterNoRender } from "@/lib/utils/use-router-no-render";
-
-import { PrefetchLink } from "@/components/prefetch-link";
 
 interface Props {
   images: string[];
