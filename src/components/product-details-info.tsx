@@ -20,24 +20,22 @@ export function ProductDetailsInfo({ product }: Props) {
   };
 
   return (
-    <Card className="shadow-xl m-6 p-8 w-[600px] border-none">
+    <Card className="shadow-xl lg:m-6 lg:p-8 sm:w-full lg:w-[600px] border-none">
       <CardHeader className="pb-4">
-        <CardTitle className="text-4xl">{name}</CardTitle>
+        <CardTitle className="sm:text-2xl md:text-3xl lg:text-4xl font-medium">{name}</CardTitle>
         <CardDescription className="text-xl text-gray-500">{description}</CardDescription>
       </CardHeader>
-      <CardContent className="my-4">
-        <h4 className="font-semibold text-xl">Price: {price} zł</h4>
+      <CardContent className="my-4 px-6">
+        <h4 className="font-medium text-xl">Price: {price} zł</h4>
         <p className="text-lg mt-2">Length: {length} cm</p>
         <p className="text-lg">Width: {width} cm</p>
         <div className="flex flex-col space-y-1.5 mt-8 gap-2">
-          <Button
-            className="w-3/5 p-[30px] text-lg rounded-[30px] font-helvetica"
-            onClick={() => handleAddToCart(product)}>
+          <Button className="w-full lg:w-3/5 p-[30px] text-lg rounded-[30px]" onClick={() => handleAddToCart(product)}>
             Add to cart
           </Button>
           <Button
             variant="outline"
-            className="w-3/5 p-[30px] text-lg rounded-[30px] font-helvetica"
+            className="w-full lg:w-3/5 p-[30px] text-lg rounded-[30px]"
             onClick={() => handleAddToCart(product)}>
             Favorite
             <Heart className="w-4 h-4 ml-2" />

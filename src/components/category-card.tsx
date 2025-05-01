@@ -20,7 +20,7 @@ export function CategoryCard({ slug, src }: Props) {
         />
       </div>
       <div className="justify-end gap-4 p-4 text-neutral-600 text-center">
-        <h3 className="text-xl font-bold tracking-tight">{capitalize(slug)}</h3>
+        <h3 className="text-xl font-semibold tracking-tight">{capitalize(slug)}</h3>
         <p>Shop Now</p>
       </div>
     </PrefetchLink>

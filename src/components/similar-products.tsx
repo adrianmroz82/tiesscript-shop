@@ -1,15 +1,16 @@
 import Image from "next/image";
 
+import { PrefetchLink } from "@/components/prefetch-link";
+
 interface Props {
   products: Product[] | null;
+  category: Category["name"];
 }
 
-export function SimilarProducts({ products }: Props) {
+export function SimilarProducts({ products, category }: Props) {
   if (!products || products.length === 0) {
     return <></>;
   }
-
-  // TODO: add redirect, RWD, prefetchlink, proper image sizes, 
 
   return (
     <section className="py-12 mx-auto">
@@ -17,7 +18,10 @@ export function SimilarProducts({ products }: Props) {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
         {products.map(({ id, main_image, name, price }) => {
           return (
-            <div key={id} className="bg-card rounded overflow-hidden shadow-sm group">
+            <PrefetchLink
+              href={`/${category}/${id}`}
+              key={id}
+              className="bg-card rounded overflow-hidden shadow-sm group">
               {main_image && (
                 <Image
                   className={
@@ -36,7 +40,7 @@ export function SimilarProducts({ products }: Props) {
                   <span>{price} currency</span>
                 </div>
               </div>
-            </div>
+            </PrefetchLink>
           );
         })}
       </div>

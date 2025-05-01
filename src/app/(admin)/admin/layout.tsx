@@ -16,7 +16,7 @@ export default function DashboardLayout({ children }: Props) {
     <html lang="en" suppressHydrationWarning={true}>
       <body>
         <SidebarProvider>
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+          <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
             <AdminSidebar />
             <main className="w-full">{children}</main>
           </ThemeProvider>

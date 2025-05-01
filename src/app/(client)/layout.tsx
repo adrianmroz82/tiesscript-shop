@@ -22,7 +22,7 @@ export default function RootLayout({ children }: Props) {
     <html lang="en" suppressHydrationWarning className={raleway.className}>
       <head />
       <body className="flex">
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
           <StoreProvider>
             <div className="flex flex-col w-full">
               <Header />
