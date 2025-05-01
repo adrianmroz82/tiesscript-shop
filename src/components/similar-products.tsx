@@ -4,7 +4,7 @@ import { PrefetchLink } from "@/components/prefetch-link";
 
 interface Props {
   products: Product[] | null;
-  category: Category["name"];
+  category: string;
 }
 
 export function SimilarProducts({ products, category }: Props) {
