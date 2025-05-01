@@ -1,3 +1,4 @@
+import { PrefetchLink } from "@/components/prefetch-link";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -19,11 +20,15 @@ export function ProductDetailsBreadcrumbs({ product }: Props) {
     <Breadcrumb>
       <BreadcrumbList>
         <BreadcrumbItem>
-          <BreadcrumbLink href="/">All products</BreadcrumbLink>
+          <BreadcrumbLink asChild>
+            <PrefetchLink href="/">All products</PrefetchLink>
+          </BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem>
-          <BreadcrumbLink href={`/${category}`}>{capitalize(category!)}</BreadcrumbLink>
+          <BreadcrumbLink asChild>
+            <PrefetchLink href={`/${category}`}>{capitalize(category!)}</PrefetchLink>
+          </BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator />
         <BreadcrumbItem>
