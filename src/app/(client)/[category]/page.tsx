@@ -1,4 +1,5 @@
 import { EmptyState } from "@/components/empty-state";
+import { OrderBySelect } from "@/components/order-by-select";
 import { PaginatedProductList } from "@/components/paginated-product-list";
 import { getPaginatedProducts } from "@/lib/api/getPaginatedProducts";
 import { capitalize } from "@/lib/utils/capitalize";
@@ -10,12 +11,11 @@ interface Props {
 }
 
 export default async function CategoryProducts({ params, searchParams }: Props) {
-  // TODO: fix sorting
   const getOrderByField = (): OrderByField => {
-    const field = searchParams["orderBy"] ?? "createdAtDesc";
+    const field = searchParams["orderBy"] ?? "created_at_desc";
     return {
-      field: field.replace("Desc", ""),
-      direction: field.includes("Desc") ? "desc" : "asc",
+      field: field.replace("_desc", ""),
+      ascending: !field.includes("desc"),
     };
   };
 
@@ -31,6 +31,7 @@ export default async function CategoryProducts({ params, searchParams }: Props) 
 
   return (
     <main className="max-w-7xl mx-auto">
+      <OrderBySelect />
       <div className="">
         <div className="pt-8">
           <h2 className="text-2xl font-semibold">{capitalize(category)}</h2>

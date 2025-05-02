@@ -10,7 +10,7 @@ export function OrderBySelect() {
   const searchParams = useSearchParams();
   const pathName = usePathname();
 
-  const defaultOrderBy = searchParams.get("orderBy") ?? "createdAtDesc";
+  const defaultOrderBy = searchParams.get("orderBy") ?? "created_at_desc";
 
   const handleOrderChange = (fieldName: string) => {
     const page = searchParams.get("page") ?? "1";

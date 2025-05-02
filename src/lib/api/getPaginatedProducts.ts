@@ -3,14 +3,14 @@ import { createClient } from "@/utils/supabase/server";
 
 const PAGE_SIZE = 8;
 
-export async function getPaginatedProducts(category: any, page: number, _orderByField: OrderByField) {
+export async function getPaginatedProducts(category: any, page: number, orderByField: OrderByField) {
   const supabase = await createClient();
 
   const { data: products, count } = await supabase
     .from("products")
     .select("*", { count: "exact" })
     .eq("category", category)
-    // TODO: apply sorting
+    .order(orderByField.field, { ascending: orderByField.ascending })
     .range((page - 1) * PAGE_SIZE, page * PAGE_SIZE - 1);
 
   return { products, count };
