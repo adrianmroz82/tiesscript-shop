@@ -8,9 +8,7 @@ import { Label } from "@/components/shadcn-ui/label";
 import { createClient } from "@/utils/supabase/client";
 
 interface Props {
-  // setImagesToUpload: (_files: File[]) => void;
-  setMainImage: Dispatch<SetStateAction<File | null>>;
-  setResourceImages: Dispatch<SetStateAction<File[]>>;
+  setResourceImages: (_files: File[]) => void;
 }
 
 export async function uploadImageToSupabase(file: File): Promise<string | null> {
@@ -42,7 +40,8 @@ export function AddProductImageUploader({ setResourceImages }: Props) {
         id: `${file.name}-${Date.now()}`,
       }));
       setImagesPreview((prev) => [...prev, ...newPreviews]);
-      setResourceImages((prev) => [...prev, ...files]);
+      // @ts-ignore
+      setResourceImages((prev: File[]) => [...prev, ...files]);
     }
   };
 
