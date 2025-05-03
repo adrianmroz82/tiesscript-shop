@@ -10,12 +10,14 @@ import { SimilarProducts } from "@/components/similar-products";
 import { getProduct } from "@/lib/api/getProduct";
 import { getProductImages } from "@/lib/api/getProductImages";
 import { getSimilarProducts } from "@/lib/api/getSimilarProducts";
+
 interface Props {
   params: { id: string; category: Category["name"] };
 }
 
 export default async function DetailsPage({ params }: Props) {
   const { category, id } = params;
+
   const product = await getProduct(id);
   const productImages = await getProductImages(id);
   const similarProducts = await getSimilarProducts(category);

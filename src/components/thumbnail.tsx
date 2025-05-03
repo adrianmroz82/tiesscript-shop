@@ -1,10 +1,9 @@
 import Image from "next/image";
 
 import { CarouselApi } from "@/components/shadcn-ui/carousel";
-import { ProductImageUrl } from "@/models/product.model";
 
 interface Props {
-  productImage: ProductImageUrl;
+  productImage: ResourceImageUrl;
   api: CarouselApi | undefined;
   currentIndex: number | undefined;
   index: number;

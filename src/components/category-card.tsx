@@ -10,7 +10,7 @@ interface Props {
 
 export function CategoryCard({ slug, src }: Props) {
   return (
-    <PrefetchLink href={slug} className="group relative">
+    <PrefetchLink href={`/category/${slug}`} className="group relative">
       <div className="relative overflow-hidden rounded-lg bg-neutral-50/50 p-4">
         <Image
           alt="Cover image"

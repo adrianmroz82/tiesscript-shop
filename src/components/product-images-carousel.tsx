@@ -16,10 +16,9 @@ import {
 } from "@/components/shadcn-ui/carousel";
 import { ThumbnailList } from "@/components/thumbnail-list";
 import { useBreakpoint } from "@/lib/hooks/use-mobile";
-import { ProductImageUrl } from "@/models/product.model";
 
 interface Props {
-  productImages: ProductImageUrl[];
+  productImages: ResourceImageUrl[];
 }
 
 export function ProductImagesCarousel({ productImages }: Props) {

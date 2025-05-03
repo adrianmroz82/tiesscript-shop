@@ -19,7 +19,7 @@ export function SimilarProducts({ products, category }: Props) {
         {products.map(({ id, main_image, name, price }) => {
           return (
             <PrefetchLink
-              href={`/${category}/${id}`}
+              href={`/category/${category}/${id}`}
               key={id}
               className="bg-card rounded overflow-hidden shadow-sm group">
               {main_image && (

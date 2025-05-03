@@ -3,12 +3,11 @@ import { useEffect, useState } from "react";
 import { CarouselApi, CarouselDown, CarouselUp } from "@/components/shadcn-ui/carousel";
 import { ProductThumbnail } from "@/components/thumbnail";
 import { useBreakpoint } from "@/lib/hooks/use-mobile";
-import { ProductImageUrl } from "@/models/product.model";
 
 interface Props {
   api: CarouselApi | undefined;
   currentIndex: number | undefined;
-  productImages: ProductImageUrl[];
+  productImages: Resource["images"];
 }
 
 export function ThumbnailList({ productImages, api, currentIndex }: Props) {

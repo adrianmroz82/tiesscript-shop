@@ -22,7 +22,7 @@ export function QueryPagination({ totalPages }: Props) {
   const currentPage = pageParam ? parseInt(pageParam) : 1;
 
   const goToPage = (page: number) => () => {
-    const orderBy = searchParams.get("orderBy") ?? "createdAtDesc";
+    const orderBy = searchParams.get("orderBy") ?? "created_at_desc";
     router.push(`?page=${page}&orderBy=${orderBy}`);
   };
 

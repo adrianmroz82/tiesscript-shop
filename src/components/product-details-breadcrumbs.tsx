@@ -27,7 +27,7 @@ export function ProductDetailsBreadcrumbs({ product }: Props) {
         <BreadcrumbSeparator />
         <BreadcrumbItem>
           <BreadcrumbLink asChild>
-            <PrefetchLink href={`/${category}`}>{capitalize(category!)}</PrefetchLink>
+            <PrefetchLink href={`/category/${category}`}>{capitalize(category!)}</PrefetchLink>
           </BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbSeparator />

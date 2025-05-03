@@ -22,7 +22,7 @@ export function ProductCard({ product, category, index }: Props) {
   return (
     <li key={id}>
       <article className="h-full flex flex-col rounded border bg-white">
-        <PrefetchLink className="group" href={`/${category}/${id}`}>
+        <PrefetchLink className="group" href={`/category/${category}/${id}`}>
           {main_image && (
             <Image
               className="group-hover:rotate hover-perspective bg-neutral-100 object-contain transition-opacity group-hover:opacity-75"

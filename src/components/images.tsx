@@ -1,10 +1,9 @@
 import Image from "next/image";
 
 import { Card, CardContent } from "@/components/shadcn-ui/card";
-import { ProductImageUrl } from "@/models/product.model";
 
 interface Props {
-  images: ProductImageUrl[];
+  images: Resource["images"];
 }
 
 export function Images({ images }: Props) {

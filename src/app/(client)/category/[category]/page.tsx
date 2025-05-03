@@ -11,6 +11,8 @@ interface Props {
 }
 
 export default async function CategoryProducts({ params, searchParams }: Props) {
+  console.log("CategoryProducts", params, searchParams);
+
   const getOrderByField = (): OrderByField => {
     const field = searchParams["orderBy"] ?? "created_at_desc";
     return {

@@ -2,7 +2,15 @@
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/shadcn-ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/shadcn-ui/select";
 import { sortOptions } from "@/models/order-by-field.model";
 
 export function OrderBySelect() {
@@ -24,11 +32,14 @@ export function OrderBySelect() {
           <SelectValue placeholder="Order By" />
         </SelectTrigger>
         <SelectContent>
-          {sortOptions.map((o) => (
-            <SelectItem key={o.field} value={o.field}>
-              {o.displayName}
-            </SelectItem>
-          ))}
+          <SelectGroup>
+            <SelectLabel>Order By</SelectLabel>
+            {sortOptions.map((o) => (
+              <SelectItem key={o.field} value={o.field}>
+                {o.displayName}
+              </SelectItem>
+            ))}
+          </SelectGroup>
         </SelectContent>
       </Select>
     </>

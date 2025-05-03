@@ -14,11 +14,6 @@ export default async function AdminPage() {
     console.error(error);
   }
 
-  // TODO: redirect to login page
-  if (!data.user) {
-    return <div>Not logged in</div>;
-  }
-
   if (!orders) {
     return <div>No orders found</div>;
   }
