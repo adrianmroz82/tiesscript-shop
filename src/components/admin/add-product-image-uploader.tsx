@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { SortableContainer, SortableElement } from "react-sortable-hoc";
 import { v4 } from "uuid";
 
