@@ -1,10 +1,4 @@
-### MVP TODO
-[ ] Products page as main page - query over all products
-[ ] Product page with id
-[ ] Edit product page - entry from both products and product page
-[ ] delete product
-[ ] ability to hide/show product
-
+## MVP TODO
 
 ### Add new product page
 [x] show images after they are uploaded
@@ -25,6 +19,26 @@
 
 ### supabase migration
 [ ] - cart store
-[ ] - sorting
+[x] - sorting
 [x] - pagination
 [ ] - align admin panel queries 
+
+
+[ ] - zod validation on login form / add new product form
+
+/admin
+[ ] - logout ability
+
+/admin/add-new-offer
+[ ] - discrimation union types based on category
+[ ] - loading state on Add Item button
+[ ] - Save as draft - create drafts page
+[ ] - category based inputs - show specific inputs after category is selected
+
+/admin/offers
+[ ] - pagination
+[ ] - search 
+[ ] - filter by category
+[ ] - edit product page - entry from both products and product page
+[ ] - delete product
+[ ] - ability to hide/show product
