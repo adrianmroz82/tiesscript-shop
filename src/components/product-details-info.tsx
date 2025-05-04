@@ -6,6 +6,7 @@ import { Button } from "@/components/shadcn-ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/shadcn-ui/card";
 import { addToCart } from "@/store/features/cartSlice";
 import { useAppDispatch } from "@/store/utils/redux-hooks";
+
 interface Props {
   product: Product;
 }
