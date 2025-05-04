@@ -14,7 +14,7 @@ export function AdCard() {
           <p className="text-pretty text-neutral-600">Explore our carefully selected products for your lifestyle.</p>
           <PrefetchLink
             className="inline-flex h-12 items-center justify-center rounded-full bg-neutral-900 px-6 font-medium text-neutral-50 transition-colors hover:bg-neutral-900/90 focus:outline-hidden focus:ring-1 focus:ring-neutral-950"
-            href="/ties">
+            href="/category/ties">
             Shop now
           </PrefetchLink>
         </div>
@@ -26,7 +26,7 @@ export function AdCard() {
           width={350}
           src={Ties1}
           objectFit="cover"
-          sizes="(max-width: 640px) 70vw, 350px"
+          sizes="350px"
         />
       </div>
     </section>
