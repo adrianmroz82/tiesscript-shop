@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, memo, useState } from "react";
 import { SortableContainer, SortableElement } from "react-sortable-hoc";
 import { v4 } from "uuid";
 
@@ -28,7 +28,7 @@ export async function uploadImageToSupabase(file: File): Promise<string | null> 
   return data?.publicUrl || null;
 }
 
-export function AddProductImageUploader({ setResourceImages }: Props) {
+export const AddProductImageUploader = memo(function AddProductImageUploader({ setResourceImages }: Props) {
   const [imagesPreview, setImagesPreview] = useState<{ file: File; previewUrl: string; id: string }[]>([]);
 
   const handleAddImage = (e: ChangeEvent<HTMLInputElement>) => {
@@ -101,4 +101,4 @@ export function AddProductImageUploader({ setResourceImages }: Props) {
       <SortableList images={imagesPreview} onSortEnd={onSortEnd} axis="xy" />
     </div>
   );
-}
+});
