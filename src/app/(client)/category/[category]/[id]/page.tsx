@@ -33,7 +33,7 @@ export default async function DetailsPage({ params }: Props) {
           <div className="py-8">
             <ProductDetailsBreadcrumbs product={product} />
           </div>
-          <CardContent className="shadow-lg flex flex-col lg:flex-row lg:p-6">
+          <CardContent className="shadow-md flex flex-col xl:flex-row lg:p-6">
             {productImages && <ProductImagesCarousel productImages={productImages} />}
             <ProductDetailsInfo product={product} />
           </CardContent>

@@ -20,10 +20,10 @@ export function ProductDetailsInfo({ product }: Props) {
   };
 
   return (
-    <Card className="shadow-xl lg:m-6 lg:p-8 sm:w-full lg:w-[600px] border-none">
+    <Card className="lg:m-6 xl:p-8 sm:w-full xl:w-[600px] border-none lg:mx-auto shadow-transparent">
       <CardHeader className="pb-4">
-        <CardTitle className="sm:text-xl md:text-3xl font-medium">{name}</CardTitle>
-        <p className="font-medium text-xl">Price: {price} zł</p>
+        <CardTitle className="sm:text-xl md:text-2xl lg:text-3xl font-medium">{name}</CardTitle>
+        <p className="font-medium text-lg lg:text-xl">Price: {price} zł</p>
       </CardHeader>
       <CardContent className="my-4 px-6">
         <CardDescription className="text-xl text-gray-500">{description}</CardDescription>
