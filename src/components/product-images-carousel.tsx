@@ -15,8 +15,6 @@ import {
   CarouselPrevious,
 } from '@/components/shadcn-ui/carousel';
 import { ThumbnailList } from '@/components/thumbnail-list';
-import { useBreakpoint } from '@/lib/hooks/use-mobile';
-import { useMediaQuery } from '@/lib/hooks/use-media-query';
 
 interface Props {
   productImages: ResourceImageUrl[];
@@ -25,15 +23,6 @@ interface Props {
 export function ProductImagesCarousel({ productImages }: Props) {
   const [api, setApi] = useState<CarouselApi>();
   const [currentIndex, setCurrentIndex] = useState(0);
-
-  const { isMobile, isTablet } = useBreakpoint();
-  const isMobileQuery = useMediaQuery('(max-width: 640px)');
-
-  console.log('isMobileQuery:', isMobileQuery);
-  console.log('isMobile:', isMobile);
-
-  const showHorizontalThumbnails = !isMobile && !isTablet;
-  const showVerticalThumbnails = isMobile || isTablet;
 
   useEffect(() => {
     if (!api) {
