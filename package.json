@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
+    "format": "npx prettier --write .",
     "supabase-login": "npx supabase login",
     "supabase-gen-types": "npx supabase gen types typescript --project-id juuzskjgczlmyqxijkud > lib/database.model.ts"
   },
@@ -41,6 +42,7 @@
     "react-scan": "^0.2.9",
     "react-sortable-hoc": "^2.0.0",
     "sass": "^1.71.1",
+    "sharp": "^0.34.1",
     "tailwind-merge": "^2.2.1",
     "tailwindcss-animate": "^1.0.7",
     "uuid": "^11.1.0",
@@ -60,6 +62,8 @@
     "eslint-plugin-simple-import-sort": "^12.1.1",
     "eslint-plugin-unused-imports": "^4.1.3",
     "postcss": "^8.4.35",
+    "prettier": "^3.5.3",
+    "prettier-plugin-tailwindcss": "^0.6.11",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
   }

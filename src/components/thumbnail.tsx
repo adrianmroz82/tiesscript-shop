@@ -1,10 +1,9 @@
-import Image from "next/image";
+import Image from 'next/image';
 
-import { CarouselApi } from "@/components/shadcn-ui/carousel";
-import { ProductImageUrl } from "@/models/product.model";
+import { CarouselApi } from '@/components/shadcn-ui/carousel';
 
 interface Props {
-  productImage: ProductImageUrl;
+  productImage: ResourceImageUrl;
   api: CarouselApi | undefined;
   currentIndex: number | undefined;
   index: number;
@@ -13,17 +12,16 @@ interface Props {
 export function ProductThumbnail({ productImage, api, currentIndex, index }: Props) {
   return (
     <div
-      className={`w-32 h-32 flex m-1 border rounded-md
-        ${index + 1 === currentIndex && "border-2 border-slate-400"}`}>
-      <div className="w-full h-full relative">
+      className={`m-1 flex h-20 w-20 rounded-md border lg:h-24 lg:w-24 ${index + 1 === currentIndex && 'border-2 border-slate-400'}`}
+    >
+      <div className="cursor:pointer relative h-full w-full">
         <Image
           src={productImage}
           alt="Product Image Thumbnail"
           layout="fill"
-          objectFit="cover"
           onClick={() => api && api.scrollTo(index)}
-          className="border rounded"
-          sizes="112px"
+          className="rounded border object-cover"
+          sizes="95px"
         />
       </div>
     </div>

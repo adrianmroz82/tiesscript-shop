@@ -1,16 +1,14 @@
-import Image from "next/image";
-import { ChangeEvent, Dispatch, SetStateAction, useState } from "react";
-import { SortableContainer, SortableElement } from "react-sortable-hoc";
-import { v4 } from "uuid";
+import Image from 'next/image';
+import { ChangeEvent, memo, useState } from 'react';
+import { SortableContainer, SortableElement } from 'react-sortable-hoc';
+import { v4 } from 'uuid';
 
-import { Input } from "@/components/shadcn-ui/input";
-import { Label } from "@/components/shadcn-ui/label";
-import { createClient } from "@/utils/supabase/client";
+import { Input } from '@/components/shadcn-ui/input';
+import { Label } from '@/components/shadcn-ui/label';
+import { createClient } from '@/utils/supabase/client';
 
 interface Props {
-  // setImagesToUpload: (_files: File[]) => void;
-  setMainImage: Dispatch<SetStateAction<File | null>>;
-  setResourceImages: Dispatch<SetStateAction<File[]>>;
+  setResourceImages: (_files: File[]) => void;
 }
 
 export async function uploadImageToSupabase(file: File): Promise<string | null> {
@@ -18,19 +16,19 @@ export async function uploadImageToSupabase(file: File): Promise<string | null> 
   const filePath = `products/${v4()}-${file.name}`;
 
   // Upload image to Supabase Storage
-  const { error } = await supabase.storage.from("images").upload(filePath, file);
+  const { error } = await supabase.storage.from('images').upload(filePath, file);
   if (error) {
-    console.error("Error uploading image:", error.message);
+    console.error('Error uploading image:', error.message);
     return null;
   }
 
   // Retrieve the public URL
   // TODO: is this needed?
-  const { data } = supabase.storage.from("images").getPublicUrl(filePath);
+  const { data } = supabase.storage.from('images').getPublicUrl(filePath);
   return data?.publicUrl || null;
 }
 
-export function AddProductImageUploader({ setResourceImages }: Props) {
+export const AddProductImageUploader = memo(function AddProductImageUploader({ setResourceImages }: Props) {
   const [imagesPreview, setImagesPreview] = useState<{ file: File; previewUrl: string; id: string }[]>([]);
 
   const handleAddImage = (e: ChangeEvent<HTMLInputElement>) => {
@@ -42,7 +40,8 @@ export function AddProductImageUploader({ setResourceImages }: Props) {
         id: `${file.name}-${Date.now()}`,
       }));
       setImagesPreview((prev) => [...prev, ...newPreviews]);
-      setResourceImages((prev) => [...prev, ...files]);
+      // @ts-ignore
+      setResourceImages((prev: File[]) => [...prev, ...files]);
     }
   };
 
@@ -70,11 +69,12 @@ export function AddProductImageUploader({ setResourceImages }: Props) {
   const SortableItem = SortableElement(
     ({ image, index }: { image: { previewUrl: string; id: string }; index: number }) => (
       <div key={index} className="relative">
-        <Image width={128} height={128} src={image.previewUrl} alt="product" className="object-cover h-32" />
+        <Image width={128} height={128} src={image.previewUrl} alt="product" className="h-32 object-cover" />
         <button
           type="button"
           onClick={() => handleRemoveImage(image.id)} // Remove by unique ID
-          className="absolute top-1 right-1 p-1 bg-red-500 text-white rounded-full">
+          className="absolute right-1 top-1 rounded-full bg-red-500 p-1 text-white"
+        >
           ✕
         </button>
       </div>
@@ -83,7 +83,7 @@ export function AddProductImageUploader({ setResourceImages }: Props) {
 
   const SortableList = SortableContainer(({ images }: { images: { previewUrl: string; id: string }[] }) => {
     return (
-      <div className="flex space-x-4 flex-wrap">
+      <div className="flex flex-wrap space-x-4">
         {images.map((image, index) => (
           // TODO: fix this type error
           // @ts-ignore
@@ -102,4 +102,4 @@ export function AddProductImageUploader({ setResourceImages }: Props) {
       <SortableList images={imagesPreview} onSortEnd={onSortEnd} axis="xy" />
     </div>
   );
-}
+});

@@ -1,1 +1,1 @@
-export type PaymentMethod = "PayU" | "PayPal" | "Przelewy24";
+export type PaymentMethod = 'PayU' | 'PayPal' | 'Przelewy24';

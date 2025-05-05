@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { Row } from "@tanstack/react-table";
-import { MoreHorizontal, Trash2 } from "lucide-react";
+import { Row } from '@tanstack/react-table';
+import { MoreHorizontal, Trash2 } from 'lucide-react';
 
-import { Button } from "@/components/shadcn-ui/button";
+import { Button } from '@/components/shadcn-ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -11,9 +11,9 @@ import {
   DropdownMenuSeparator,
   DropdownMenuShortcut,
   DropdownMenuTrigger,
-} from "@/components/shadcn-ui/dropdown-menu";
+} from '@/components/shadcn-ui/dropdown-menu';
 
-import { deleteOffer } from "../api/deleteOffer";
+import { deleteOffer } from '../api/deleteOffer';
 
 interface DataTableRowActionsProps<TData> {
   row: Row<TData>;

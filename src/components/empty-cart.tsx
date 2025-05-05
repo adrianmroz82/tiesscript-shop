@@ -1,12 +1,12 @@
-import { useRouter } from "next/navigation";
+import { useRouter } from 'next/navigation';
 
-import { Button } from "@/components/shadcn-ui/button";
+import { Button } from '@/components/shadcn-ui/button';
 
 export function EmptyCart() {
   const router = useRouter();
 
   const handleRedirect = () => {
-    router.push("/");
+    router.push('/');
   };
 
   return (

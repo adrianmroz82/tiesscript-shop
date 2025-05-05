@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import { X as CloseIcon } from "lucide-react";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { X as CloseIcon } from 'lucide-react';
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 
-import { Button } from "@/components/shadcn-ui/button";
-import { useAppSelector } from "@/store/utils/redux-hooks";
+import { Button } from '@/components/shadcn-ui/button';
+import { useAppSelector } from '@/store/utils/redux-hooks';
 
 export function CartToast() {
   const [visible, setVisible] = useState(false);
@@ -28,7 +28,7 @@ export function CartToast() {
   }, [quantity]);
 
   const handleRedirect = () => {
-    router.push("/cart");
+    router.push('/cart');
   };
 
   const handleVisibility = () => {
@@ -40,12 +40,12 @@ export function CartToast() {
   }
 
   return (
-    <div className="fixed top-16 right-8 bg-white border border-secondary rounded-lg shadow-lg p-4 flex flex-col items-start z-50 gap-4 w-96">
+    <div className="fixed right-8 top-16 z-50 flex w-96 flex-col items-start gap-4 rounded-lg border border-secondary bg-white p-4 shadow-lg">
       <div className="flex w-full items-center gap-2">
         <span data-testid="top-section-title">Item has been added to cart</span>
       </div>
       {cart.map(({ id, name, main_image, price }) => (
-        <div className="flex items-center gap-4 w-11/12 border border-secondary p-2 rounded-lg" key={id}>
+        <div className="flex w-11/12 items-center gap-4 rounded-lg border border-secondary p-2" key={id}>
           <Image src={main_image} alt={name} width={60} height={60} />
           <div className="flex-1">
             <div className="font-bold">{name}</div>
@@ -55,7 +55,7 @@ export function CartToast() {
       ))}
       <CloseIcon
         data-testid="close-icon"
-        className="cursor-pointer absolute top-4 right-4"
+        className="absolute right-4 top-4 cursor-pointer"
         size={20}
         onClick={handleVisibility}
       />

@@ -1,5 +1,5 @@
-import { BarChart2, Database, DollarSign, PlusCircle, Send } from "lucide-react";
-import Link from "next/link";
+import { BarChart2, Database, DollarSign, PlusCircle, Send } from 'lucide-react';
+import Link from 'next/link';
 
 import {
   Sidebar,
@@ -11,33 +11,33 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@/components/shadcn-ui/sidebar";
-import { ThemeSwitcher } from "@/components/theme-switcher";
+} from '@/components/shadcn-ui/sidebar';
+import { ThemeSwitcher } from '@/components/theme-switcher';
 
 const items = [
   {
-    title: "Manage offers",
-    url: "/admin/offers",
+    title: 'Manage offers',
+    url: '/admin/offers',
     icon: Database,
   },
   {
-    title: "Add new offer",
-    url: "/admin/add-new-offer",
+    title: 'Add new offer',
+    url: '/admin/add-new-offer',
     icon: PlusCircle,
   },
   {
-    title: "Orders",
-    url: "/admin/orders",
+    title: 'Orders',
+    url: '/admin/orders',
     icon: Send,
   },
   {
-    title: "Finances",
-    url: "/admin/finances",
+    title: 'Finances',
+    url: '/admin/finances',
     icon: DollarSign,
   },
   {
-    title: "Analytics",
-    url: "/admin/analytics",
+    title: 'Analytics',
+    url: '/admin/analytics',
     icon: BarChart2,
   },
 ];

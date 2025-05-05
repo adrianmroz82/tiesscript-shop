@@ -1,8 +1,11 @@
-"use client";
+'use client';
 
-import Image from "next/image";
-import { useEffect, useState } from "react";
+import { Maximize2 } from 'lucide-react';
+import Image from 'next/image';
+import { useEffect, useState } from 'react';
 
+import { PrefetchLink } from '@/components/prefetch-link';
+import { Button } from '@/components/shadcn-ui/button';
 import {
   Carousel,
   CarouselApi,
@@ -10,12 +13,11 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from "@/components/shadcn-ui/carousel";
-import { ProductThumbnail } from "@/components/thumbnail";
-import { ProductImageUrl } from "@/models/product.model";
+} from '@/components/shadcn-ui/carousel';
+import { ThumbnailList } from '@/components/thumbnail-list';
 
 interface Props {
-  productImages: ProductImageUrl[];
+  productImages: ResourceImageUrl[];
 }
 
 export function ProductImagesCarousel({ productImages }: Props) {
@@ -29,58 +31,56 @@ export function ProductImagesCarousel({ productImages }: Props) {
 
     setCurrentIndex(api.selectedScrollSnap() + 1);
 
-    api.on("select", () => {
+    api.on('select', () => {
       setCurrentIndex(api.selectedScrollSnap() + 1);
     });
   }, [api]);
 
   return (
-    <>
-      <div className="flex flex-col">
-        {productImages?.map((productImage, index) => (
-          <div key={index} className=" w-auto ">
-            <ProductThumbnail
-              key={index}
-              productImage={productImage}
-              api={api}
-              currentIndex={currentIndex}
-              index={index}
-            />
-          </div>
-        ))}
+    <Carousel className="flex flex-col gap-4 lg:flex-row" setApi={setApi}>
+      <div className="hidden lg:block">
+        <ThumbnailList productImages={productImages} api={api} currentIndex={currentIndex} />
       </div>
 
-      <div className="max-w-xl flex items-center">
-        <Carousel className="w-full" setApi={setApi}>
-          <CarouselContent>
-            {productImages?.map((productImage, index) => (
-              <CarouselItem key={index} tabIndex={2}>
-                <div className="p-2">
-                  <div className="flex relative aspect-square justify-center">
-                    <Image
-                      // TODO: RWD design
-                      // TODO: apply proper img sizes
-                      priority={index === 0}
-                      src={productImage}
-                      alt={`Product Image ${index + 1}`}
-                      width={560}
-                      height={560}
-                      className="object-contain"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, (max-width: 1920px) 33vw, 560px"
-                    />
-                  </div>
-                </div>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-          <div className="absolute right-72 bottom-10 rounded-full bg-white/80 hover:bg-white backdrop-blur shadow">
-            <CarouselPrevious />
-          </div>
-          <div className="absolute right-20 bottom-10 rounded-full bg-white/80 hover:bg-white backdrop-blur shadow">
-            <CarouselNext />
-          </div>
-        </Carousel>
+      <div className="relative flex w-full items-center md:max-w-xl">
+        <CarouselContent>
+          {productImages.map((productImage, index) => (
+            <CarouselItem key={index} tabIndex={2}>
+              <div className="relative flex aspect-square justify-center">
+                <Image
+                  priority={index === 0}
+                  src={productImage}
+                  alt={`Product Image ${index + 1}`}
+                  width={560}
+                  height={560}
+                  className="w-full rounded-lg bg-neutral-100 object-cover object-center transition-opacity group-hover:opacity-80"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, (max-width: 1920px) 33vw, 560px"
+                />
+              </div>
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+
+        <div className="absolute right-4 top-4 cursor-pointer rounded-full bg-white/80 shadow backdrop-blur hover:bg-white">
+          <PrefetchLink href={`?image=0`} scroll={false}>
+            <Button variant="outline" className="h-12 w-12 rounded-full">
+              <Maximize2 className="h-4 w-4" />
+              <span className="sr-only">Fullscreen</span>
+            </Button>
+          </PrefetchLink>
+        </div>
+
+        <div className="absolute bottom-10 right-72 rounded-full bg-white/80 shadow backdrop-blur hover:bg-white">
+          <CarouselPrevious />
+        </div>
+        <div className="absolute bottom-10 right-20 rounded-full bg-white/80 shadow backdrop-blur hover:bg-white">
+          <CarouselNext />
+        </div>
       </div>
-    </>
+
+      <div className="block lg:hidden">
+        <ThumbnailList productImages={productImages} api={api} currentIndex={currentIndex} />
+      </div>
+    </Carousel>
   );
 }

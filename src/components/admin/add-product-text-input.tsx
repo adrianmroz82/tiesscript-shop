@@ -1,6 +1,6 @@
-import { ChangeEvent } from "react";
+import { ChangeEvent } from 'react';
 
-import { Input } from "@/components/shadcn-ui/input";
+import { Input } from '@/components/shadcn-ui/input';
 
 interface Props {
   label: string;

@@ -1,13 +1,15 @@
-import { login } from "@/app/login/actions";
-import { Button } from "@/components/shadcn-ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/shadcn-ui/card";
-import { Input } from "@/components/shadcn-ui/input";
-import { Label } from "@/components/shadcn-ui/label";
-import { cn } from "@/lib/utils";
+import { ComponentPropsWithoutRef } from 'react';
 
-export function LoginForm({ className, ...props }: React.ComponentPropsWithoutRef<"div">) {
+import { login } from '@/app/(client)/login/actions';
+import { Button } from '@/components/shadcn-ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/shadcn-ui/card';
+import { Input } from '@/components/shadcn-ui/input';
+import { Label } from '@/components/shadcn-ui/label';
+import { cn } from '@/lib/utils';
+
+export function LoginForm({ className, ...props }: ComponentPropsWithoutRef<'div'>) {
   return (
-    <div className={cn("flex flex-col gap-6", className)} {...props}>
+    <div className={cn('flex flex-col gap-6 lg:px-6', className)} {...props}>
       <Card>
         <CardHeader>
           <CardTitle className="text-2xl">Login</CardTitle>
