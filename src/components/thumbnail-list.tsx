@@ -1,13 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
-import { CarouselApi, CarouselDown, CarouselUp } from "@/components/shadcn-ui/carousel";
-import { ProductThumbnail } from "@/components/thumbnail";
-import { useBreakpoint } from "@/lib/hooks/use-mobile";
+import { CarouselApi, CarouselDown, CarouselUp } from '@/components/shadcn-ui/carousel';
+import { ProductThumbnail } from '@/components/thumbnail';
+import { useBreakpoint } from '@/lib/hooks/use-mobile';
 
 interface Props {
   api: CarouselApi | undefined;
   currentIndex: number | undefined;
-  productImages: Resource["images"];
+  productImages: Resource['images'];
 }
 
 export function ThumbnailList({ productImages, api, currentIndex }: Props) {
@@ -19,7 +19,7 @@ export function ThumbnailList({ productImages, api, currentIndex }: Props) {
   const visibleImages = productImages.slice(scrollIndex, scrollIndex + visibleCount);
 
   useEffect(() => {
-    if (typeof currentIndex !== "number") {
+    if (typeof currentIndex !== 'number') {
       return;
     }
 
@@ -33,12 +33,14 @@ export function ThumbnailList({ productImages, api, currentIndex }: Props) {
 
   return (
     <div
-      className={`flex justify-center ${isHorizontal ? "flex-row items-center gap-2" : "flex-col items-center gap-2"}`}>
-      <CarouselUp orientation={isMobile || isTablet ? "horizontal" : "vertical"} />
+      className={`flex justify-center ${isHorizontal ? 'flex-row items-center gap-2' : 'flex-col items-center gap-2'}`}
+    >
+      <CarouselUp orientation={isMobile || isTablet ? 'horizontal' : 'vertical'} />
       <div
         className={`overflow-hidden transition-transform duration-300 ease-in-out ${
-          isHorizontal ? "flex flex-row gap-2" : "flex flex-col gap-2"
-        }`}>
+          isHorizontal ? 'flex flex-row gap-2' : 'flex flex-col gap-2'
+        }`}
+      >
         {visibleImages.map((productImage, index) => {
           const realIndex = scrollIndex + index;
           return (
@@ -52,7 +54,7 @@ export function ThumbnailList({ productImages, api, currentIndex }: Props) {
           );
         })}
       </div>
-      <CarouselDown orientation={isHorizontal ? "horizontal" : "vertical"} />
+      <CarouselDown orientation={isHorizontal ? 'horizontal' : 'vertical'} />
     </div>
   );
 }

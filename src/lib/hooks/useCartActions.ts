@@ -1,7 +1,7 @@
-import { useCallback } from "react";
+import { useCallback } from 'react';
 
-import { decrementCartQuantity, incrementCartQuantity, removeFromCart } from "@/store/features/cartSlice";
-import { useAppDispatch } from "@/store/utils/redux-hooks";
+import { decrementCartQuantity, incrementCartQuantity, removeFromCart } from '@/store/features/cartSlice';
+import { useAppDispatch } from '@/store/utils/redux-hooks';
 
 export function useCartActions() {
   const dispatch = useAppDispatch();

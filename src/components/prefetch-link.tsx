@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import type { ComponentPropsWithRef } from "react";
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import type { ComponentPropsWithRef } from 'react';
 
 export function PrefetchLink(props: ComponentPropsWithRef<typeof Link>) {
   const router = useRouter();
-  const strHref = typeof props.href === "string" ? props.href : props.href.href;
+  const strHref = typeof props.href === 'string' ? props.href : props.href.href;
 
   const conditionalPrefetch = () => {
     if (strHref) {

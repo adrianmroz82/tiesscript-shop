@@ -1,11 +1,11 @@
-import Image from "next/image";
-import { ChangeEvent, memo, useState } from "react";
-import { SortableContainer, SortableElement } from "react-sortable-hoc";
-import { v4 } from "uuid";
+import Image from 'next/image';
+import { ChangeEvent, memo, useState } from 'react';
+import { SortableContainer, SortableElement } from 'react-sortable-hoc';
+import { v4 } from 'uuid';
 
-import { Input } from "@/components/shadcn-ui/input";
-import { Label } from "@/components/shadcn-ui/label";
-import { createClient } from "@/utils/supabase/client";
+import { Input } from '@/components/shadcn-ui/input';
+import { Label } from '@/components/shadcn-ui/label';
+import { createClient } from '@/utils/supabase/client';
 
 interface Props {
   setResourceImages: (_files: File[]) => void;
@@ -16,15 +16,15 @@ export async function uploadImageToSupabase(file: File): Promise<string | null> 
   const filePath = `products/${v4()}-${file.name}`;
 
   // Upload image to Supabase Storage
-  const { error } = await supabase.storage.from("images").upload(filePath, file);
+  const { error } = await supabase.storage.from('images').upload(filePath, file);
   if (error) {
-    console.error("Error uploading image:", error.message);
+    console.error('Error uploading image:', error.message);
     return null;
   }
 
   // Retrieve the public URL
   // TODO: is this needed?
-  const { data } = supabase.storage.from("images").getPublicUrl(filePath);
+  const { data } = supabase.storage.from('images').getPublicUrl(filePath);
   return data?.publicUrl || null;
 }
 
@@ -69,11 +69,12 @@ export const AddProductImageUploader = memo(function AddProductImageUploader({ s
   const SortableItem = SortableElement(
     ({ image, index }: { image: { previewUrl: string; id: string }; index: number }) => (
       <div key={index} className="relative">
-        <Image width={128} height={128} src={image.previewUrl} alt="product" className="object-cover h-32" />
+        <Image width={128} height={128} src={image.previewUrl} alt="product" className="h-32 object-cover" />
         <button
           type="button"
           onClick={() => handleRemoveImage(image.id)} // Remove by unique ID
-          className="absolute top-1 right-1 p-1 bg-red-500 text-white rounded-full">
+          className="absolute right-1 top-1 rounded-full bg-red-500 p-1 text-white"
+        >
           ✕
         </button>
       </div>
@@ -82,7 +83,7 @@ export const AddProductImageUploader = memo(function AddProductImageUploader({ s
 
   const SortableList = SortableContainer(({ images }: { images: { previewUrl: string; id: string }[] }) => {
     return (
-      <div className="flex space-x-4 flex-wrap">
+      <div className="flex flex-wrap space-x-4">
         {images.map((image, index) => (
           // TODO: fix this type error
           // @ts-ignore

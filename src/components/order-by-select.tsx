@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 import {
   Select,
@@ -10,18 +10,18 @@ import {
   SelectLabel,
   SelectTrigger,
   SelectValue,
-} from "@/components/shadcn-ui/select";
-import { sortOptions } from "@/models/order-by-field.model";
+} from '@/components/shadcn-ui/select';
+import { sortOptions } from '@/models/order-by-field.model';
 
 export function OrderBySelect() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const pathName = usePathname();
 
-  const defaultOrderBy = searchParams.get("orderBy") ?? "created_at_desc";
+  const defaultOrderBy = searchParams.get('orderBy') ?? 'created_at_desc';
 
   const handleOrderChange = (fieldName: string) => {
-    const page = searchParams.get("page") ?? "1";
+    const page = searchParams.get('page') ?? '1';
     router.push(`${pathName}?page=${page}&orderBy=${fieldName}`);
   };
 

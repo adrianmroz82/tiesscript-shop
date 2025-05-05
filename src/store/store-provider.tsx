@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { ReactNode, useRef } from "react";
-import { Provider } from "react-redux";
+import { ReactNode, useRef } from 'react';
+import { Provider } from 'react-redux';
 
-import { AppStore, makeStore } from "@/store/utils/store";
+import { AppStore, makeStore } from '@/store/utils/store';
 
 interface Props {
   children: ReactNode;

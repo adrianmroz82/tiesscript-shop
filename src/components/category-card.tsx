@@ -1,11 +1,11 @@
-import Image, { type ImageProps } from "next/image";
+import Image, { type ImageProps } from 'next/image';
 
-import { PrefetchLink } from "@/components/prefetch-link";
-import { capitalize } from "@/lib/utils/capitalize";
+import { PrefetchLink } from '@/components/prefetch-link';
+import { capitalize } from '@/lib/utils/capitalize';
 
 interface Props {
   slug: string;
-  src: ImageProps["src"];
+  src: ImageProps['src'];
 }
 
 export function CategoryCard({ slug, src }: Props) {
@@ -19,7 +19,7 @@ export function CategoryCard({ slug, src }: Props) {
           src={src}
         />
       </div>
-      <div className="justify-end gap-4 p-4 text-neutral-600 text-center">
+      <div className="justify-end gap-4 p-4 text-center text-neutral-600">
         <h3 className="text-xl font-semibold tracking-tight">{capitalize(slug)}</h3>
         <p>Shop Now</p>
       </div>

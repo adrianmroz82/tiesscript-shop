@@ -1,15 +1,15 @@
-"use client";
+'use client';
 
-import Image from "next/image";
-import { useRouter } from "next/navigation";
+import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
-import { DrawerClose } from "@/components/shadcn-ui/drawer";
-import { capitalize } from "@/lib/utils/capitalize";
+import { DrawerClose } from '@/components/shadcn-ui/drawer';
+import { capitalize } from '@/lib/utils/capitalize';
 
-import { StoreConfig } from "./yns/store.config";
+import { StoreConfig } from './yns/store.config';
 
 interface Props {
-  categories: StoreConfig["categories"];
+  categories: StoreConfig['categories'];
 }
 
 export function CategoryMenuItems({ categories }: Props) {
@@ -25,7 +25,8 @@ export function CategoryMenuItems({ categories }: Props) {
         <DrawerClose key={name}>
           <li
             onClick={() => handleCategoryClick(slug)}
-            className="hover:bg-muted cursor-pointer flex items-center rounded-lg h-12">
+            className="flex h-12 cursor-pointer items-center rounded-lg hover:bg-muted"
+          >
             <Image
               src={`/sidebar-menu-${name.toLocaleLowerCase()}.svg`}
               className="mx-4"

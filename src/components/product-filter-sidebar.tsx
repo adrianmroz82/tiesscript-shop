@@ -1,10 +1,10 @@
-import { Button } from "@/components/shadcn-ui/button";
-import { Checkbox } from "@/components/shadcn-ui/checkbox";
+import { Button } from '@/components/shadcn-ui/button';
+import { Checkbox } from '@/components/shadcn-ui/checkbox';
 
 export function ProductFilterSidebar() {
   return (
     <div className="w-1/6 bg-gray-100 p-4">
-      <h2 className="text-lg font-semibold mb-4">Filters</h2>
+      <h2 className="mb-4 text-lg font-semibold">Filters</h2>
       <div className="mb-4">
         <label htmlFor="price-range" className="block text-sm font-medium text-gray-700">
           Price Range
@@ -16,7 +16,7 @@ export function ProductFilterSidebar() {
           Categories
         </label>
         <Checkbox />
-        <select id="categories" className="w-full border-gray-300 rounded-md">
+        <select id="categories" className="w-full rounded-md border-gray-300">
           <option>All Categories</option>
         </select>
       </div>

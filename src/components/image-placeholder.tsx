@@ -1,11 +1,11 @@
-import Image from "next/image";
+import Image from 'next/image';
 
 export function ImagePlaceholder() {
-  const IMG_SRC = "/no-image-placeholder.svg";
+  const IMG_SRC = '/no-image-placeholder.svg';
 
   return (
     <Image
-      className="object-contain justify-center align-middle"
+      className="justify-center object-contain align-middle"
       src={IMG_SRC}
       alt="Image Placeholder"
       width={150}

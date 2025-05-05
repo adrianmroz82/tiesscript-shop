@@ -1,15 +1,15 @@
-"use client";
+'use client';
 
-import { useTheme } from "next-themes";
+import { useTheme } from 'next-themes';
 
-import { Switch } from "@/components/shadcn-ui/switch";
+import { Switch } from '@/components/shadcn-ui/switch';
 
 export function ThemeSwitcher() {
   const { setTheme } = useTheme();
   const currentTheme = useTheme().theme;
 
   const handleTheme = () => {
-    setTheme(currentTheme === "light" ? "dark" : "light");
+    setTheme(currentTheme === 'light' ? 'dark' : 'light');
   };
 
   return (

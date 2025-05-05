@@ -1,14 +1,14 @@
-"use client";
+'use client';
 
-import { ChevronLeftIcon, ChevronRightIcon, XIcon } from "lucide-react";
-import Image from "next/image";
-import { useSearchParams } from "next/navigation";
-import { Fragment, startTransition, useEffect, useState } from "react";
+import { ChevronLeftIcon, ChevronRightIcon, XIcon } from 'lucide-react';
+import Image from 'next/image';
+import { useSearchParams } from 'next/navigation';
+import { Fragment, startTransition, useEffect, useState } from 'react';
 
-import { PrefetchLink } from "@/components/prefetch-link";
-import { useBreakpoint } from "@/lib/hooks/use-mobile";
-import { cn } from "@/lib/utils";
-import { useRouterNoRender } from "@/lib/utils/use-router-no-render";
+import { PrefetchLink } from '@/components/prefetch-link';
+import { useBreakpoint } from '@/lib/hooks/use-mobile';
+import { cn } from '@/lib/utils';
+import { useRouterNoRender } from '@/lib/utils/use-router-no-render';
 
 interface Props {
   images: string[];
@@ -18,7 +18,7 @@ export function ProductImageModal({ images }: Props) {
   const searchParams = useSearchParams();
   const routerNoRender = useRouterNoRender();
 
-  const searchParamsImageIndex = Number.parseInt(searchParams.get("image") ?? "", 10);
+  const searchParamsImageIndex = Number.parseInt(searchParams.get('image') ?? '', 10);
   const initialImageIndex = Number.isNaN(searchParamsImageIndex) ? null : searchParamsImageIndex;
   const [imageIndex, setImageIndex] = useState<null | number>(initialImageIndex);
 
@@ -34,9 +34,9 @@ export function ProductImageModal({ images }: Props) {
       const params = new URLSearchParams(searchParams);
 
       if (index !== null) {
-        params.set("image", index.toString());
+        params.set('image', index.toString());
       } else {
-        params.delete("image");
+        params.delete('image');
       }
       routerNoRender.replace(`?${params}`);
     });
@@ -54,12 +54,12 @@ export function ProductImageModal({ images }: Props) {
 
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
+      if (e.key === 'Escape') {
         onDismiss();
       }
     };
-    document.addEventListener("keydown", onKeyDown);
-    return () => document.removeEventListener("keydown", onKeyDown);
+    document.addEventListener('keydown', onKeyDown);
+    return () => document.removeEventListener('keydown', onKeyDown);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -84,31 +84,33 @@ export function ProductImageModal({ images }: Props) {
   };
 
   function ImageElement({ src, className }: { src: string; className?: string }) {
-    return <Image src={src} alt="" fill className={cn(className, "object-contain")} sizes="100vh" />;
+    return <Image src={src} alt="" fill className={cn(className, 'object-contain')} sizes="100vh" />;
   }
 
   return (
-    <div className="fixed inset-0 bg-neutral-100 z-50 flex flex-col animate-in fade-in">
-      <button type="button" onClick={() => onDismiss()} className="ml-auto text-neutral-500 hover:text-neutral-700 p-2">
-        <XIcon className="w-6 h-6" />
+    <div className="fixed inset-0 z-50 flex flex-col bg-neutral-100 animate-in fade-in">
+      <button type="button" onClick={() => onDismiss()} className="ml-auto p-2 text-neutral-500 hover:text-neutral-700">
+        <XIcon className="h-6 w-6" />
       </button>
 
-      <div className="grow flex items-center justify-center overflow-hidden">
-        <div key={src} className="relative w-full h-full animate-in fade-in">
+      <div className="flex grow items-center justify-center overflow-hidden">
+        <div key={src} className="relative h-full w-full animate-in fade-in">
           <ImageElement src={src} />
         </div>
 
         <button
           type="button"
           onClick={() => handlePrevious()}
-          className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 rounded-full p-2 hover:bg-gray-100 transition-colors">
-          <ChevronLeftIcon className="w-6 h-6" />
+          className="absolute left-4 top-1/2 -translate-y-1/2 rounded-full bg-white/90 p-2 transition-colors hover:bg-gray-100"
+        >
+          <ChevronLeftIcon className="h-6 w-6" />
         </button>
         <button
           type="button"
           onClick={() => handleNext()}
-          className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 rounded-full p-2 hover:bg-gray-100 transition-colors">
-          <ChevronRightIcon className="w-6 h-6" />
+          className="absolute right-4 top-1/2 -translate-y-1/2 rounded-full bg-white/90 p-2 transition-colors hover:bg-gray-100"
+        >
+          <ChevronRightIcon className="h-6 w-6" />
         </button>
       </div>
       {!isMobile && images.length < 6 && (
@@ -116,7 +118,7 @@ export function ProductImageModal({ images }: Props) {
           {images.map((image, idx) => (
             <Fragment key={idx}>
               <PrefetchLink
-                className={cn("border-transparent border rounded-lg overflow-hidden", src === image && "border-black")}
+                className={cn('overflow-hidden rounded-lg border border-transparent', src === image && 'border-black')}
                 onClick={(e) => {
                   e.preventDefault();
                   changeImageIndex(idx);
@@ -124,10 +126,11 @@ export function ProductImageModal({ images }: Props) {
                 key={idx}
                 prefetch={true}
                 href={`?image=${idx}`}
-                scroll={false}>
-                <Image src={image} alt={""} width={80} height={80} className="object-cover" sizes="80px" />
+                scroll={false}
+              >
+                <Image src={image} alt={''} width={80} height={80} className="object-cover" sizes="80px" />
               </PrefetchLink>
-              <div className="relative pointer-events-none opacity-0">
+              <div className="pointer-events-none relative opacity-0">
                 <ImageElement src={src} />
               </div>
             </Fragment>

@@ -1,4 +1,4 @@
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from 'next/navigation';
 
 import {
   Pagination,
@@ -8,7 +8,7 @@ import {
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
-} from "@/components/shadcn-ui/pagination";
+} from '@/components/shadcn-ui/pagination';
 
 interface Props {
   totalPages: number;
@@ -18,11 +18,11 @@ export function QueryPagination({ totalPages }: Props) {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const pageParam = searchParams.get("page");
+  const pageParam = searchParams.get('page');
   const currentPage = pageParam ? parseInt(pageParam) : 1;
 
   const goToPage = (page: number) => () => {
-    const orderBy = searchParams.get("orderBy") ?? "created_at_desc";
+    const orderBy = searchParams.get('orderBy') ?? 'created_at_desc';
     router.push(`?page=${page}&orderBy=${orderBy}`);
   };
 
@@ -35,7 +35,7 @@ export function QueryPagination({ totalPages }: Props) {
     range.push(1);
 
     if (currentPage > 4) {
-      range.push("ellipsis");
+      range.push('ellipsis');
     }
 
     for (let i = Math.max(2, currentPage - 2); i <= Math.min(totalPages - 1, currentPage + 2); i++) {
@@ -43,7 +43,7 @@ export function QueryPagination({ totalPages }: Props) {
     }
 
     if (currentPage < totalPages - 3) {
-      range.push("ellipsis");
+      range.push('ellipsis');
     }
 
     range.push(totalPages);
@@ -57,12 +57,12 @@ export function QueryPagination({ totalPages }: Props) {
         <PaginationItem>
           <PaginationPrevious
             onClick={goToPage(Math.max(1, currentPage - 1))}
-            className={currentPage === 1 ? "pointer-events-none opacity-50" : ""}
+            className={currentPage === 1 ? 'pointer-events-none opacity-50' : ''}
           />
         </PaginationItem>
         {renderPages().map((page, idx) => (
           <PaginationItem key={idx}>
-            {page === "ellipsis" ? (
+            {page === 'ellipsis' ? (
               <PaginationEllipsis />
             ) : (
               <PaginationLink onClick={goToPage(page as number)} isActive={page === currentPage}>
@@ -74,7 +74,7 @@ export function QueryPagination({ totalPages }: Props) {
         <PaginationItem className="">
           <PaginationNext
             onClick={goToPage(Math.min(totalPages, currentPage + 1))}
-            className={currentPage === totalPages ? "pointer-events-none opacity-50" : ""}
+            className={currentPage === totalPages ? 'pointer-events-none opacity-50' : ''}
           />
         </PaginationItem>
       </PaginationContent>

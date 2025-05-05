@@ -1,11 +1,11 @@
-import { createServerClient } from "@supabase/ssr";
-import { type NextRequest, NextResponse } from "next/server";
+import { createServerClient } from '@supabase/ssr';
+import { type NextRequest, NextResponse } from 'next/server';
 
 export async function updateSession(request: NextRequest) {
   let supabaseResponse = NextResponse.next({ request });
 
   const pathname = request.nextUrl.pathname;
-  const isProtectedRoute = pathname.startsWith("/admin");
+  const isProtectedRoute = pathname.startsWith('/admin');
 
   if (!isProtectedRoute) {
     return supabaseResponse;
@@ -32,7 +32,7 @@ export async function updateSession(request: NextRequest) {
 
   if (!user) {
     const loginUrl = request.nextUrl.clone();
-    loginUrl.pathname = "/login";
+    loginUrl.pathname = '/login';
     return NextResponse.redirect(loginUrl);
   }
 

@@ -1,11 +1,11 @@
-import "@/styles/globals.css";
+import '@/styles/globals.css';
 
-import { ReactNode } from "react";
+import { ReactNode } from 'react';
 
-import { SidebarProvider } from "@/components/shadcn-ui/sidebar";
-import { ThemeProvider } from "@/components/theme-provider";
+import { SidebarProvider } from '@/components/shadcn-ui/sidebar';
+import { ThemeProvider } from '@/components/theme-provider';
 
-import { AdminSidebar } from "../components/AdminSidebar";
+import { AdminSidebar } from '../components/AdminSidebar';
 
 interface Props {
   children: ReactNode;

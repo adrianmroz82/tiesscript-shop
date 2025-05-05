@@ -1,4 +1,4 @@
-export type Category = "electronics" | "jewelery" | "men's clothing" | "women's clothing";
+export type Category = 'electronics' | 'jewelery' | "men's clothing" | "women's clothing";
 
 export interface Product {
   id: number;

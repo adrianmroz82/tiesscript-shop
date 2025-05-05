@@ -1,18 +1,18 @@
-import { Suspense } from "react";
+import { Suspense } from 'react';
 
-import { EmptyState } from "@/components/empty-state";
-import { ProductDetailsBreadcrumbs } from "@/components/product-details-breadcrumbs";
-import { ProductDetailsInfo } from "@/components/product-details-info";
-import { ProductImageModal } from "@/components/product-image-modal";
-import { ProductImagesCarousel } from "@/components/product-images-carousel";
-import { CardContent } from "@/components/shadcn-ui/card";
-import { SimilarProducts } from "@/components/similar-products";
-import { getProduct } from "@/lib/api/getProduct";
-import { getProductImages } from "@/lib/api/getProductImages";
-import { getSimilarProducts } from "@/lib/api/getSimilarProducts";
+import { EmptyState } from '@/components/empty-state';
+import { ProductDetailsBreadcrumbs } from '@/components/product-details-breadcrumbs';
+import { ProductDetailsInfo } from '@/components/product-details-info';
+import { ProductImageModal } from '@/components/product-image-modal';
+import { ProductImagesCarousel } from '@/components/product-images-carousel';
+import { CardContent } from '@/components/shadcn-ui/card';
+import { SimilarProducts } from '@/components/similar-products';
+import { getProduct } from '@/lib/api/getProduct';
+import { getProductImages } from '@/lib/api/getProductImages';
+import { getSimilarProducts } from '@/lib/api/getSimilarProducts';
 
 interface Props {
-  params: { id: string; category: Category["name"] };
+  params: { id: string; category: Category['name'] };
 }
 
 export default async function DetailsPage({ params }: Props) {
@@ -33,7 +33,7 @@ export default async function DetailsPage({ params }: Props) {
           <div className="py-8">
             <ProductDetailsBreadcrumbs product={product} />
           </div>
-          <CardContent className="shadow-md flex flex-col xl:flex-row lg:p-6">
+          <CardContent className="flex flex-col shadow-md lg:p-6 xl:flex-row">
             {productImages && <ProductImagesCarousel productImages={productImages} />}
             <ProductDetailsInfo product={product} />
           </CardContent>

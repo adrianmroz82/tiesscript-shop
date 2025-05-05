@@ -1,28 +1,28 @@
-"use client";
+'use client';
 
-import imageCompression from "browser-image-compression";
-import { ChangeEvent, useCallback, useState } from "react";
+import imageCompression from 'browser-image-compression';
+import { ChangeEvent, useCallback, useState } from 'react';
 
-import { AddProductCategorySelect } from "@/components/admin/add-product-category-select";
-import { AddProductImageUploader, uploadImageToSupabase } from "@/components/admin/add-product-image-uploader";
-import { AddProductTextInput } from "@/components/admin/add-product-text-input";
-import { Button } from "@/components/shadcn-ui/button";
-import { Card, CardContent, CardFooter } from "@/components/shadcn-ui/card";
-import { useToast } from "@/components/shadcn-ui/use-toast";
-import { storeConfig } from "@/components/yns/store.config";
-import { createClient } from "@/utils/supabase/client";
+import { AddProductCategorySelect } from '@/components/admin/add-product-category-select';
+import { AddProductImageUploader, uploadImageToSupabase } from '@/components/admin/add-product-image-uploader';
+import { AddProductTextInput } from '@/components/admin/add-product-text-input';
+import { Button } from '@/components/shadcn-ui/button';
+import { Card, CardContent, CardFooter } from '@/components/shadcn-ui/card';
+import { useToast } from '@/components/shadcn-ui/use-toast';
+import { storeConfig } from '@/components/yns/store.config';
+import { createClient } from '@/utils/supabase/client';
 
 export default function AddProductForm() {
   const { toast } = useToast();
   const [formData, setFormData] = useState<Product>({
-    name: "",
-    description: "",
+    name: '',
+    description: '',
     price: 0,
     length: 0,
     width: 0,
-    main_image: "",
+    main_image: '',
     created_at: new Date().toISOString(),
-    category: "ties",
+    category: 'ties',
   } as Product);
   const [isUploading, setIsUploading] = useState(false);
   const [resourceImages, setResourceImages] = useState<File[]>([]);
@@ -37,8 +37,8 @@ export default function AddProductForm() {
     setResourceImages(files);
   }, []);
 
-  const handleSelectChange = (value: Category["name"]) => {
-    const lowerCaseValue = value.toLowerCase() as Category["name"];
+  const handleSelectChange = (value: Category['name']) => {
+    const lowerCaseValue = value.toLowerCase() as Category['name'];
     setFormData((prevData) => ({ ...prevData, category: lowerCaseValue }));
   };
 
@@ -77,48 +77,56 @@ export default function AddProductForm() {
       // ✅ Save product to products table with compressed main image
       const updatedFormData = {
         ...formData,
-        main_image: mainImageUrl || "",
+        main_image: mainImageUrl || '',
       };
 
-      const { data: product, error } = await supabase.from("products").insert([updatedFormData]).select("id").single();
+      const { data: product, error } = await supabase.from('products').insert([updatedFormData]).select('id').single();
       if (error) {
-        if (error.code === "42501") {
-          toast({ title: "Error", description: "You don't have permission to add a product.", variant: "destructive" });
+        if (error.code === '42501') {
+          toast({
+            title: 'Error',
+            description: "You don't have permission to add a product.",
+            variant: 'destructive',
+          });
         }
         throw new Error(error.message);
       }
 
       // ✅ Save resources to resources table (including main image again at 1MB)
       if (uploadedResourceUrls.length > 0) {
-        console.log("Uploaded resource URLs:", uploadedResourceUrls);
+        console.log('Uploaded resource URLs:', uploadedResourceUrls);
 
-        await supabase.from("resources").insert([{ id: product.id, images: uploadedResourceUrls }]);
+        await supabase.from('resources').insert([{ id: product.id, images: uploadedResourceUrls }]);
       }
 
       setFormData(updatedFormData);
-      toast({ title: "Success", description: "Product added successfully!" });
+      toast({ title: 'Success', description: 'Product added successfully!' });
     } catch (error: any) {
-      console.error("Error adding product:", error.message);
-      toast({ title: "Error", description: `Failed to add product: ${error.message}`, variant: "destructive" });
+      console.error('Error adding product:', error.message);
+      toast({
+        title: 'Error',
+        description: `Failed to add product: ${error.message}`,
+        variant: 'destructive',
+      });
     } finally {
       setIsUploading(false);
       setFormData({
-        name: "",
-        description: "",
+        name: '',
+        description: '',
         price: 0,
         length: 0,
         width: 0,
-        main_image: "",
+        main_image: '',
         created_at: new Date().toISOString(),
-        category: "ties",
+        category: 'ties',
       } as Product);
       setResourceImages([]);
     }
   };
 
   return (
-    <main className="flex items-center justify-center h-screen">
-      <Card className="w-[64rem] pt-8 px-2">
+    <main className="flex h-screen items-center justify-center">
+      <Card className="w-[64rem] px-2 pt-8">
         <CardContent>
           <form className="flex flex-col items-center">
             <div className="grid w-full items-center gap-4">
