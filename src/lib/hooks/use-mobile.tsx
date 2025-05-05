@@ -24,5 +24,7 @@ export function useBreakpoint() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  console.log('Breakpoint:', breakpoint);
+
   return breakpoint;
 }

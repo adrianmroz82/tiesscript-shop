@@ -26,10 +26,12 @@ export default async function DetailsPage({ params }: Props) {
     return <EmptyState text="Product not found" />;
   }
 
+  // await fakeDelay(2000);
+
   return (
     <>
       <div className="flex justify-center">
-        <div className="pt-8">
+        <div className="max-w-full px-2">
           <div className="py-8">
             <ProductDetailsBreadcrumbs product={product} />
           </div>
@@ -48,8 +50,3 @@ export default async function DetailsPage({ params }: Props) {
     </>
   );
 }
-
-// TODO
-// dostosowac skeleton
-// components groups folders - seperate pr
-//bug - first page needs query params as well

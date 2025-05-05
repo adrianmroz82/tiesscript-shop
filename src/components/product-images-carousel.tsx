@@ -16,6 +16,7 @@ import {
 } from '@/components/shadcn-ui/carousel';
 import { ThumbnailList } from '@/components/thumbnail-list';
 import { useBreakpoint } from '@/lib/hooks/use-mobile';
+import { useMediaQuery } from '@/lib/hooks/use-media-query';
 
 interface Props {
   productImages: ResourceImageUrl[];
@@ -26,6 +27,10 @@ export function ProductImagesCarousel({ productImages }: Props) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const { isMobile, isTablet } = useBreakpoint();
+  const isMobileQuery = useMediaQuery('(max-width: 640px)');
+
+  console.log('isMobileQuery:', isMobileQuery);
+  console.log('isMobile:', isMobile);
 
   const showHorizontalThumbnails = !isMobile && !isTablet;
   const showVerticalThumbnails = isMobile || isTablet;
@@ -44,11 +49,11 @@ export function ProductImagesCarousel({ productImages }: Props) {
 
   return (
     <Carousel className="flex flex-col gap-4 lg:flex-row" setApi={setApi}>
-      {showHorizontalThumbnails && (
+      <div className="hidden lg:block">
         <ThumbnailList productImages={productImages} api={api} currentIndex={currentIndex} />
-      )}
+      </div>
 
-      <div className="relative flex max-w-xl items-center">
+      <div className="relative flex w-full items-center md:max-w-xl">
         <CarouselContent>
           {productImages.map((productImage, index) => (
             <CarouselItem key={index} tabIndex={2}>
@@ -84,7 +89,9 @@ export function ProductImagesCarousel({ productImages }: Props) {
         </div>
       </div>
 
-      {showVerticalThumbnails && <ThumbnailList productImages={productImages} api={api} currentIndex={currentIndex} />}
+      <div className="block lg:hidden">
+        <ThumbnailList productImages={productImages} api={api} currentIndex={currentIndex} />
+      </div>
     </Carousel>
   );
 }

@@ -12,8 +12,7 @@ interface Props {
 
 export function ThumbnailList({ productImages, api, currentIndex }: Props) {
   const [scrollIndex, setScrollIndex] = useState(0);
-  const { isMobile, isTablet } = useBreakpoint();
-  const isHorizontal = isMobile || isTablet;
+  const { isMobile } = useBreakpoint();
 
   const visibleCount = isMobile ? 2 : 4;
   const visibleImages = productImages.slice(scrollIndex, scrollIndex + visibleCount);
@@ -32,15 +31,10 @@ export function ThumbnailList({ productImages, api, currentIndex }: Props) {
   }, [currentIndex, visibleCount, scrollIndex, productImages.length]);
 
   return (
-    <div
-      className={`flex justify-center ${isHorizontal ? 'flex-row items-center gap-2' : 'flex-col items-center gap-2'}`}
-    >
-      <CarouselUp orientation={isMobile || isTablet ? 'horizontal' : 'vertical'} />
-      <div
-        className={`overflow-hidden transition-transform duration-300 ease-in-out ${
-          isHorizontal ? 'flex flex-row gap-2' : 'flex flex-col gap-2'
-        }`}
-      >
+    <div className="flex items-center justify-center gap-2 xs:flex-row lg:flex-col">
+      <CarouselUp className="lg:hidden" orientation="horizontal" />
+      <CarouselUp className="xs:hidden lg:flex" orientation="vertical" />
+      <div className="flex gap-2 overflow-hidden transition-transform duration-300 ease-in-out xs:flex-row lg:flex-col">
         {visibleImages.map((productImage, index) => {
           const realIndex = scrollIndex + index;
           return (
@@ -54,7 +48,8 @@ export function ThumbnailList({ productImages, api, currentIndex }: Props) {
           );
         })}
       </div>
-      <CarouselDown orientation={isHorizontal ? 'horizontal' : 'vertical'} />
+      <CarouselDown className="lg:hidden" orientation="horizontal" />
+      <CarouselDown className="xs:hidden lg:flex" orientation="vertical" />
     </div>
   );
 }
