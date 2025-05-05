@@ -14,7 +14,7 @@ export function PaginatedProductList({ products, count, category }: Props) {
 
   return (
     <>
-      <ul className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <ul className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
         {products.map((product, index) => (
           <ProductCard key={product.id} product={product} index={index} category={category} />
         ))}
