@@ -24,7 +24,7 @@ export function ProductDetailsInfo({ product }: Props) {
     <Card className="border-none shadow-transparent sm:w-full lg:m-6 lg:mx-auto xl:w-[600px] xl:p-8">
       <CardHeader className="pb-4">
         <CardTitle className="font-medium sm:text-xl md:text-2xl lg:text-3xl">{name}</CardTitle>
-        <p className="text-lg font-medium lg:text-xl">Price: {price} zł</p>
+        <p className="text-lg font-medium lg:text-xl">Price: {price}$</p>
       </CardHeader>
       <CardContent className="my-4 px-6">
         <CardDescription className="text-xl text-gray-500">{description}</CardDescription>

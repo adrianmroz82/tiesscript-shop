@@ -18,7 +18,7 @@ A modern, full-featured eCommerce web application built with **Next.js**, **Supa
 
 ## 📸 Demo
 
-[Live Demo](#) <!-- Replace with your deployed link -->
+[Live Demo](https://tiesscript-shop.vercel.app/)
 
 ## 🧱 Tech Stack
 
