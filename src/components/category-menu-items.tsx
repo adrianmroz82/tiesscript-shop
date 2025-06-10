@@ -16,7 +16,7 @@ export function CategoryMenuItems({ categories }: Props) {
   const router = useRouter();
 
   const handleCategoryClick = (slug: string) => {
-    router.push(`/${slug}`);
+    router.push(`/category/${slug}`);
   };
 
   return (

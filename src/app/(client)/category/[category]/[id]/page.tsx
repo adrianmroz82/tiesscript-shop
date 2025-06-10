@@ -26,7 +26,6 @@ export default async function DetailsPage({ params }: Props) {
     return <EmptyState text="Product not found" />;
   }
 
-  // await fakeDelay(2000);
 
   return (
     <>

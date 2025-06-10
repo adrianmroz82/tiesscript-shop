@@ -46,12 +46,12 @@ export function ProductImagesCarousel({ productImages }: Props) {
         <CarouselContent>
           {productImages.map((productImage, index) => (
             <CarouselItem key={index} tabIndex={2}>
-              <div className="relative flex aspect-square w-[576px]">
+              <div className="relative mx-auto aspect-square xs:w-[250px] sm:w-[400px] md:w-[576px]">
                 <Image
-                  fill
                   src={productImage}
                   alt={`Product Image ${index + 1}`}
-                  className="w-full rounded-lg bg-neutral-100 object-cover object-center transition-opacity group-hover:opacity-80"
+                  fill
+                  className="w-full rounded-lg bg-neutral-100 object-cover object-center"
                 />
               </div>
             </CarouselItem>
