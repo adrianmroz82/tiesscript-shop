@@ -23,22 +23,29 @@
 [x] - sorting
 [x] - pagination
 [ ] - align admin panel queries
-
 [ ] - zod validation on login form / add new product form
 
-/admin
+### /admin
 [ ] - logout ability
 
-/admin/add-new-offer
+### /admin/add-new-offer
 [ ] - discrimation union types based on category
 [ ] - loading state on Add Item button
 [ ] - Save as draft - create drafts page
 [ ] - category based inputs - show specific inputs after category is selected
 
-/admin/offers
+### /admin/offers
 [ ] - pagination
 [ ] - search
 [ ] - filter by category
 [ ] - edit product page - entry from both products and product page
 [ ] - delete product
 [ ] - ability to hide/show product
+
+### QA
+[ ] - localstorage cart
+[ ] - quantity when something is already added
+[ ] - wrong path to /category somewhere  
+[ ] - favourite (hide)
+[ ] - simiar products, exclude product from details
+[ ] - mobile view, products list, clicking on select propagates to below -> opens offers details
