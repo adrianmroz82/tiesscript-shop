@@ -16,9 +16,6 @@ A modern, full-featured eCommerce web application built with **Next.js**, **Supa
 - 💳 **Stripe** integration for real payments
 - 🚚 **Inpost** packages integration
 
-## 📸 Demo
-
-[Live Demo](https://tiesscript-shop.vercel.app/)
 
 ## 🧱 Tech Stack
 
